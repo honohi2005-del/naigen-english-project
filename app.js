@@ -32,6 +32,14 @@
     for (let i = copy.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [copy[i], copy[j]] = [copy[j], copy[i]]; }
     return copy;
   }
+  function shuffledAfter(list, previousId) {
+    const queue = shuffled(list);
+    if (queue.length > 1 && queue[0].id === previousId) {
+      const swapIndex = queue.findIndex((item, index) => index > 0 && item.id !== previousId);
+      if (swapIndex > 0) [queue[0], queue[swapIndex]] = [queue[swapIndex], queue[0]];
+    }
+    return queue;
+  }
   function topicItems() { return items.filter(item => item.topic === ui.topic.value); }
   function renderItem(item) {
     if (!item) return;
@@ -75,6 +83,17 @@
   function chooseRandom(list = items) { if (!list.length) return null; return list[Math.floor(Math.random() * list.length)]; }
   function startSeries(type, list) {
     if (!list.length) { ui.speechStatus.textContent = 'このモードに再生できる一文がありません。'; return; }
+    if (type === 'model') {
+      const pool = [...new Map(list.map(item => [item.id, item])).values()];
+      if (pool.length < 2) { ui.speechStatus.textContent = '別の一文がないため、連続再生できません。'; return; }
+      stopSeries();
+      const first = pool.find(item => item.id === current?.id);
+      const queue = first ? [first, ...shuffled(pool.filter(item => item.id !== first.id))] : shuffled(pool);
+      series = { type, pool, queue, pos: 0 };
+      ui.series.hidden = false;
+      advanceSeries();
+      return;
+    }
     stopSeries();
     series = { type, queue: type === 'random' ? shuffled(list) : [...list], pos: 0 };
     ui.series.hidden = false;
@@ -92,14 +111,14 @@
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
     if (series.pos >= series.queue.length) {
-      if (series.type === 'random') { series.queue = shuffled(items); series.pos = 0; }
-      else if (series.type === 'repeat') series.pos = 0;
+      if (series.type === 'random') { series.queue = shuffledAfter(items, current?.id); series.pos = 0; }
+      else if (series.type === 'model') { series.queue = shuffledAfter(series.pool, current?.id); series.pos = 0; }
       else { stopSeries(); return; }
     }
     current = series.queue[series.pos++];
     renderItem(current);
-    ui.seriesStatus.textContent = series.type === 'repeat'
-      ? 'モデル音声を連続再生中 · この一文を繰り返しています'
+    ui.seriesStatus.textContent = series.type === 'model'
+      ? `モデル音声を連続再生中 · ${series.pos} / ${series.queue.length}`
       : `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生 · ${series.pos} / ${series.queue.length}`;
     const activeSeries = series;
     speakCurrent(() => scheduleNext(activeSeries));
@@ -214,7 +233,7 @@
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
-  ui.modelLoop.addEventListener('click', () => { if (current) startSeries('repeat', [current]); });
+  ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
   ui.speak.addEventListener('click', () => {
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
@@ -227,7 +246,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=26').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=27').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   const counts = new Map();
