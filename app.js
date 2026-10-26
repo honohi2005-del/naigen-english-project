@@ -4,7 +4,7 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     total: $('total-count'), heroCount: $('hero-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), speechStatus: $('speech-status'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
@@ -93,11 +93,14 @@
     seriesTimer = null;
     if (series.pos >= series.queue.length) {
       if (series.type === 'random') { series.queue = shuffled(items); series.pos = 0; }
+      else if (series.type === 'repeat') series.pos = 0;
       else { stopSeries(); return; }
     }
     current = series.queue[series.pos++];
     renderItem(current);
-    ui.seriesStatus.textContent = `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生 · ${series.pos} / ${series.queue.length}`;
+    ui.seriesStatus.textContent = series.type === 'repeat'
+      ? 'モデル音声を連続再生中 · この一文を繰り返しています'
+      : `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生 · ${series.pos} / ${series.queue.length}`;
     const activeSeries = series;
     speakCurrent(() => scheduleNext(activeSeries));
   }
@@ -211,6 +214,7 @@
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
+  ui.modelLoop.addEventListener('click', () => { if (current) startSeries('repeat', [current]); });
   ui.speak.addEventListener('click', () => {
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
@@ -223,7 +227,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=21').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=22').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   ui.heroCount.textContent = `${items.length} SENTENCES`;
