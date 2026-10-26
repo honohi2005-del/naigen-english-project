@@ -222,5 +222,11 @@ window.MAXIMS = [
   {id:221,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:214,ja:'「でたらめでもとにかくまずやってみてそこから教訓を得る」という行動原理を信じるようになった。',en:'I came to believe in trying something first, even without a clear plan, and learning from the result.'},
   {id:222,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:215,ja:'実際に体験することではじめて本に書かれていることが自分なりの仕方で肚落ちする',en:'Only through direct experience does what you read in a book truly make sense to you in your own way.'},
   {id:223,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:216,ja:'たくさん読みさえすれば必ず上手くなるというものではない',en:'Simply reading a great deal does not necessarily make you better.'},
-  {id:224,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:216,ja:'よく準備してからゆっくり正確に丁寧に少しの文章を読むほうがいい',en:'It is better to prepare well and read a short passage slowly, accurately, and carefully.'}
+  {id:224,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:216,ja:'よく準備してからゆっくり正確に丁寧に少しの文章を読むほうがいい',en:'It is better to prepare well and read a short passage slowly, accurately, and carefully.'},
+  {id:225,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:218,ja:'芸事において無駄なことを一切しない',en:'In the arts, never do anything unnecessary.'},
+  {id:226,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:218,ja:'急いては事を仕損ずる',en:'Rushing makes you fail at what you are trying to do.'},
+  {id:227,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:219,ja:'自分を意図的に良く見せようとするのは端的につまらないからやめよう',en:'Trying to make myself look good on purpose is simply boring, so I should stop.'},
+  {id:228,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:220,ja:'英語の母語話者がオンライン会議で話すときの間には私が模倣すべき特徴がある',en:'The pauses native English speakers make in online meetings have qualities I should learn to copy.'},
+  {id:229,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:224,ja:'落語は間が命である。',en:'In rakugo, timing is everything.'},
+  {id:230,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:224,ja:'緊張していると自覚したら、呼気の後のポーズの長さに介入しよう',en:'When you notice that you are tense, adjust the length of the pause after you breathe out.'}
 ];
