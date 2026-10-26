@@ -4,10 +4,10 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     total: $('total-count'), heroCount: $('hero-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), ja: $('japanese-quote'), source: $('source-page'), enWrap: $('english-wrap'), en: $('english-quote'), reveal: $('reveal-button'), speak: $('speak-button'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), speechStatus: $('speech-status'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
-  let mode = 'random', current = null, series = null, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
+  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
   let dbPromise;
 
   function shuffled(list) {
@@ -21,44 +21,59 @@
     current = item;
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
-    ui.ja.textContent = item.ja;
     ui.source.textContent = `出典画像 ${item.sourceImage} / 600（ZIP内のファイル名順）`;
     ui.en.textContent = item.en;
-    ui.enWrap.hidden = true;
-    ui.reveal.textContent = '英語を見る';
+    ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
     renderCurrentRecords();
   }
-  function reveal() {
-    const showing = !ui.enWrap.hidden;
-    ui.enWrap.hidden = showing;
-    ui.reveal.textContent = showing ? '英語を見る' : '英語を隠す';
+  function stopSpeech() {
+    speechVersion++;
+    if (!quoteAudio) return;
+    quoteAudio.onended = null;
+    quoteAudio.onerror = null;
+    quoteAudio.pause();
+    try { quoteAudio.currentTime = 0; } catch { /* The audio may not be ready yet. */ }
   }
-  function stopSpeech() { window.speechSynthesis?.cancel(); }
   function speakCurrent(onEnd) {
-    if (!current || !('speechSynthesis' in window)) { ui.recordStatus.textContent = 'このブラウザでは音声読み上げに対応していません。'; return; }
-    revealIfHidden();
+    if (!current) return;
     stopSpeech();
-    const utterance = new SpeechSynthesisUtterance(current.en);
-    const voices = speechSynthesis.getVoices();
-    utterance.voice = voices.find(v => /^en-US/i.test(v.lang)) || voices.find(v => /^en/i.test(v.lang)) || null;
-    utterance.lang = utterance.voice?.lang || 'en-US';
-    utterance.rate = 0.88;
-    utterance.onend = () => { if (onEnd) onEnd(); };
-    utterance.onerror = () => { if (series) stopSeries(); ui.recordStatus.textContent = '読み上げを開始できませんでした。'; };
-    speechSynthesis.speak(utterance);
+    const version = speechVersion;
+    const audio = quoteAudio ||= new Audio();
+    audio.src = `./audio/q${String(current.id).padStart(3, '0')}.mp3`;
+    audio.onended = () => {
+      if (version !== speechVersion) return;
+      ui.speechStatus.textContent = 'Gemini音声の再生が終わりました。';
+      onEnd?.();
+    };
+    const fail = () => {
+      if (version !== speechVersion) return;
+      if (series) stopSeries();
+      ui.speechStatus.textContent = 'Gemini音声を再生できませんでした。通信状態をご確認ください。';
+    };
+    audio.onerror = fail;
+    ui.speechStatus.textContent = 'Gemini音声を再生中…';
+    audio.play().catch(fail);
   }
-  function revealIfHidden() { if (ui.enWrap.hidden) reveal(); }
   function chooseRandom(list = items) { if (!list.length) return null; return list[Math.floor(Math.random() * list.length)]; }
   function startSeries(type, list) {
-    if (!list.length) { ui.recordStatus.textContent = 'このモードに再生できる一文がありません。'; return; }
-    stopSpeech();
+    if (!list.length) { ui.speechStatus.textContent = 'このモードに再生できる一文がありません。'; return; }
+    stopSeries();
     series = { type, queue: type === 'random' ? shuffled(list) : [...list], pos: 0 };
     ui.series.hidden = false;
     advanceSeries();
   }
+  function scheduleNext(activeSeries) {
+    if (series !== activeSeries) return;
+    seriesTimer = window.setTimeout(() => {
+      seriesTimer = null;
+      if (series === activeSeries) advanceSeries();
+    }, 550);
+  }
   function advanceSeries() {
     if (!series) return;
+    window.clearTimeout(seriesTimer);
+    seriesTimer = null;
     if (series.pos >= series.queue.length) {
       if (series.type === 'random') { series.queue = shuffled(items); series.pos = 0; }
       else { stopSeries(); return; }
@@ -66,9 +81,17 @@
     current = series.queue[series.pos++];
     renderItem(current);
     ui.seriesStatus.textContent = `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生 · ${series.pos} / ${series.queue.length}`;
-    speakCurrent(() => window.setTimeout(advanceSeries, 550));
+    const activeSeries = series;
+    speakCurrent(() => scheduleNext(activeSeries));
   }
-  function stopSeries() { stopSpeech(); series = null; ui.series.hidden = true; }
+  function stopSeries() {
+    window.clearTimeout(seriesTimer);
+    seriesTimer = null;
+    stopSpeech();
+    series = null;
+    ui.series.hidden = true;
+    ui.speechStatus.textContent = '';
+  }
   function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) renderItem(next); }
   function setMode(nextMode) {
     stopSeries(); mode = nextMode;
@@ -171,15 +194,19 @@
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
-  ui.reveal.addEventListener('click', reveal);
-  ui.speak.addEventListener('click', () => speakCurrent());
+  ui.speak.addEventListener('click', () => {
+    window.clearTimeout(seriesTimer);
+    seriesTimer = null;
+    const activeSeries = series;
+    speakCurrent(activeSeries ? () => scheduleNext(activeSeries) : undefined);
+  });
   ui.next.addEventListener('click', () => series ? advanceSeries() : randomOne());
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=7').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=9').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   ui.heroCount.textContent = `${items.length} SENTENCES`;
