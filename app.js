@@ -9,6 +9,23 @@
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
   let dbPromise;
+  const functionWords = new Set(`a an the i me my you your yourself we our ourselves they them their themselves he him his she her it its this that these those who whom whose which what when where why how another each every either neither all no any some as at by for from in into of on onto out over under with within without after before against between beyond through to than like and or but so because if while although though unless until whether then instead rather not do does did can cannot could may might must shall should will would am is are was were be been being has had ought`.split(' '));
+
+  function renderEnglish(text) {
+    const fragment = document.createDocumentFragment();
+    const parts = text.match(/[A-Za-z]+(?:['’][A-Za-z]+)*|[^A-Za-z]+/g) || [];
+    for (const part of parts) {
+      if (/^[A-Za-z]/.test(part) && !functionWords.has(part.toLowerCase())) {
+        const word = document.createElement('span');
+        word.className = 'content-word';
+        word.textContent = part;
+        fragment.append(word);
+      } else {
+        fragment.append(document.createTextNode(part));
+      }
+    }
+    ui.en.replaceChildren(fragment);
+  }
 
   function shuffled(list) {
     const copy = [...list];
@@ -22,7 +39,7 @@
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
     ui.source.textContent = `出典画像 ${item.sourceImage} / 600（ZIP内のファイル名順）`;
-    ui.en.textContent = item.en;
+    renderEnglish(item.en);
     ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
     renderCurrentRecords();
@@ -206,7 +223,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=9').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=10').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   ui.heroCount.textContent = `${items.length} SENTENCES`;
