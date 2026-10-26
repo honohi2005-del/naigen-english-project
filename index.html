@@ -4,30 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#071a31" />
-    <meta name="description" content="出典画像からOCRで読み取った日本語の一文とCEFR B2相当の英訳を、ランダムまたはテーマ別に練習できます。" />
+    <meta name="description" content="内言英語化プロジェクト。画像から読み取った一文を英語で振り返る備忘録です。" />
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=14" />
-    <title>内言英語化プロジェクト</title>
+    <link rel="stylesheet" href="styles.css?v=15" />
+    <title>備忘録</title>
   </head>
   <body>
     <header class="hero">
       <div class="hero-art" aria-hidden="true"></div>
       <div class="hero-copy">
-        <p class="eyebrow">INNER VOICE · ENGLISH PRACTICE</p>
-        <h1>内言英語化プロジェクト</h1>
+        <h1>備忘録</h1>
+        <p class="hero-subtitle">内言英語化プロジェクト</p>
         <button class="install-button" id="install-button" type="button" hidden>アプリをインストール</button>
       </div>
-      <div class="hero-foot"><span>REFLECTIONS, IN ANOTHER LANGUAGE</span><span id="hero-count">読み込み中</span></div>
     </header>
 
     <main>
-      <section class="practice" aria-labelledby="practice-title">
-        <div class="section-heading">
-          <div><p class="section-kicker">SPEAK · LISTEN · RETURN</p><h2 id="practice-title">今日の一文</h2></div>
-          <span class="total-count" id="total-count">読み込み中</span>
-        </div>
+      <section class="practice" aria-label="格言の練習">
+        <p class="total-count collection-count" id="total-count">読み込み中</p>
 
         <div class="mode-switch" role="tablist" aria-label="練習方法">
           <button class="mode-tab active" data-mode="random" role="tab" aria-selected="true">ランダム</button>
@@ -74,14 +70,8 @@
         </section>
       </section>
 
-      <section class="howto">
-        <div class="section-heading"><div><p class="section-kicker">A SMALL DAILY PRACTICE</p><h2>自分の言葉を、英語へ</h2></div></div>
-        <p>英語の一文と、その下の日本語の原文を見比べながら声に出してみましょう。赤字の内容語を少し強く、短い語をなめらかにつなげてみましょう。</p>
-        <div class="practice-steps"><div><b>01</b><span>英語を読む</span></div><div><b>02</b><span>日本語と比べる</span></div><div><b>03</b><span>声に出してみる</span></div></div>
-      </section>
-      <footer><span>内言英語化プロジェクト</span><span>MADE FOR A MOMENT OF REFLECTION</span></footer>
     </main>
     <script src="data.js?v=24"></script>
-    <script src="app.js?v=22"></script>
+    <script src="app.js?v=23"></script>
   </body>
 </html>
