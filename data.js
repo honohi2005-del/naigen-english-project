@@ -251,5 +251,16 @@ window.MAXIMS = [
   {id:250,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:244,ja:'もっと初級の段階で日本語を話すことに自信がもてるような経験をしてほしい',en:'I want learners to gain confidence in speaking Japanese at a much earlier stage.'},
   {id:251,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:244,ja:'言葉の習得はナンバーワンではなくオンリーワンを目指せばいいところが気に入っている。',en:'What I like about learning a language is that you can aim to be unique rather than number one.'},
   {id:252,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:245,ja:'しゃべろうとすればするほどのどをいためるからしゃべろうとしない',en:'The harder I try to speak, the more I hurt my throat, so I stop trying to speak.'},
-  {id:253,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:245,ja:'のどでもはらでもなくせなかではなす',en:'Speak with your back, not with your throat or stomach.'}
+  {id:253,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:245,ja:'のどでもはらでもなくせなかではなす',en:'Speak with your back, not with your throat or stomach.'},
+  {id:254,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:294,ja:'沈黙せよ',en:'Be silent.'},
+  {id:255,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:295,ja:'他人に粘着している奴と同じくらい自分自身に粘着している奴も気持ち悪い',en:'Being obsessed with yourself is just as unpleasant as being obsessed with someone else.'},
+  {id:256,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:296,ja:'若さとは相対的なものだ',en:'Youth is relative.'},
+  {id:257,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:303,ja:'プロは芸を圧縮する',en:'A professional compresses a craft into its essentials.'},
+  {id:258,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:305,ja:'想像力ももとは予測である',en:'Imagination, too, begins as prediction.'},
+  {id:259,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:305,ja:'自分のことばで話す',en:'Speak in your own words.'},
+  {id:260,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:316,ja:'原理を探究せよ',en:'Explore the underlying principles.'},
+  {id:261,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:295,ja:'芸事は繰り返し練習してまず自分が自分の動きを予測できるようになることだ',en:'Through repeated practice, first learn to predict your own movements.'},
+  {id:262,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:295,ja:'人前に出て緊張するという感覚はナチュラルドラッグのようだ',en:'The feeling of nervousness in front of people is like a natural drug.'},
+  {id:263,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:303,ja:'プロは常にどうみせるかを考える',en:'A professional always thinks about how to present their work.'},
+  {id:264,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:305,ja:'漢字を指導するとき、学生の書く時のからだの姿勢にもかならず着目しよう',en:'When teaching kanji, always pay attention to a student’s posture while writing.'}
 ];
