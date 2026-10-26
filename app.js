@@ -38,7 +38,7 @@
     current = item;
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
-    ui.source.textContent = `出典画像 ${item.sourceImage} / 600（ZIP内のファイル名順）`;
+    ui.source.textContent = `出典画像 ${item.sourceImage} / 607（ZIP内のファイル名順）`;
     renderEnglish(item.en);
     ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
@@ -223,7 +223,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=12').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=13').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   ui.heroCount.textContent = `${items.length} SENTENCES`;
