@@ -56,5 +56,16 @@ window.MAXIMS = [
   {id:55,topic:'学びと習得',topicLabel:'学びと習得',ja:'教える立場でも、学ぶ人の課題を決めつけてはならない。',en:'Even as a teacher, do not assume you know a learner’s main challenge.'},
   {id:56,topic:'創作と思考',topicLabel:'創作と思考',ja:'文体とは、書き方に表れるその人らしい癖である。',en:'A writing style is a personal pattern in the way someone writes.'},
   {id:57,topic:'学びと習得',topicLabel:'学びと習得',ja:'よく使う動詞の形を知れば、ほかの形も推測しやすくなる。',en:'Knowing common verb forms makes it easier to guess other forms.'},
-  {id:58,topic:'身体と意識',topicLabel:'身体と意識',ja:'力みながら、その瞬間に心をとどめることは難しい。',en:'It is hard to stay in the present moment when your body is tense.'}
+  {id:58,topic:'身体と意識',topicLabel:'身体と意識',ja:'力みながら、その瞬間に心をとどめることは難しい。',en:'It is hard to stay in the present moment when your body is tense.'},
+  {id:59,topic:'英語学習',topicLabel:'英語学習',ja:'聞きながら先を予測すると、言葉の流れをつかみやすくなる。',en:'Predicting what comes next as you listen helps you follow the flow of speech.'},
+  {id:60,topic:'創作と思考',topicLabel:'創作と思考',ja:'再生とは模倣ではなく、予測を通じて記憶を組み立て直すことだ。',en:'Replaying is more than imitation; it is a way to rebuild memory through prediction.'},
+  {id:61,topic:'生き方と思索',topicLabel:'生き方と思索',ja:'極端な考えには、見落とされた真実の一端が隠れていることがある。',en:'An extreme idea may contain part of the truth that we have overlooked.'},
+  {id:62,topic:'学びと習得',topicLabel:'学びと習得',ja:'学び手の理解は本人のものだが、師の助けが道を照らすこともある。',en:'Understanding belongs to the learner, though a teacher can help light the way.'},
+  {id:63,topic:'身体と意識',topicLabel:'身体と意識',ja:'筆圧と同じように、声の響きにもその日の調子が表れる。',en:'Like the pressure of handwriting, the sound of a voice can reflect how we feel that day.'},
+  {id:64,topic:'行動と内省',topicLabel:'行動と内省',ja:'心を観察し、確かめ、整えたら、また観察へ戻ろう。',en:'Observe your mind, check what you find, make needed changes, and begin observing again.'},
+  {id:65,topic:'体験と思索',topicLabel:'体験と思索',ja:'情報として知ることと、身をもって味わうことは別の理解である。',en:'Knowing something as information is different from experiencing it for yourself.'},
+  {id:66,topic:'体験と思索',topicLabel:'体験と思索',ja:'知識は、現場の経験と結びつくほど立体的に見えてくる。',en:'Knowledge becomes more complete when it is connected to real experience.'},
+  {id:67,topic:'朗読と表現',topicLabel:'朗読と表現',ja:'声の細かな変化に心の動きを映せば、朗読に新鮮さが生まれる。',en:'Reading aloud feels fresh when your voice reflects small changes in feeling.'},
+  {id:68,topic:'朗読と表現',topicLabel:'朗読と表現',ja:'筆跡と声の響きには、語る内容を越えてその人らしさが残る。',en:'Handwriting and voice carry personal patterns beyond the words they express.'},
+  {id:69,topic:'行動と内省',topicLabel:'行動と内省',ja:'内と外へ注意を同時に向けにくいからこそ、一つずつ観察しよう。',en:'Because it is hard to focus inward and outward at once, observe one at a time.'}
 ];
