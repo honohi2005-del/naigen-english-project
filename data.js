@@ -184,5 +184,19 @@ window.MAXIMS = [
   {id:183,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:115,ja:'まなざしがある。',en:'There is a gaze.'},
   {id:184,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:115,ja:'ChatGPTの問題点は、多くの（言語）教育の問題点に通じる。',en:'The problems with ChatGPT are connected to problems found in much of language education.'},
   {id:185,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:116,ja:'最初からChatGPTだと、言語表現の芽が育たない。',en:'If you turn to ChatGPT from the start, the seeds of your own expression will not grow.'},
-  {id:186,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:116,ja:'芽が育たなければ、当然、木も育たない。',en:'If a seedling does not grow, naturally, a tree will not grow either.'}
+  {id:186,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:116,ja:'芽が育たなければ、当然、木も育たない。',en:'If a seedling does not grow, naturally, a tree will not grow either.'},
+  {id:187,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:117,ja:'発音を改善するには、実は舌の動きにではなく首や肩、腕の筋肉の脱力に注力すべし。',en:'To improve pronunciation, focus on relaxing the muscles in your neck, shoulders, and arms rather than on moving your tongue.'},
+  {id:188,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:117,ja:'まるで中心線が引かれているかのような声の出し方ができるようになりたい。',en:'I want to speak as though a center line runs through my voice.'},
+  {id:189,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:117,ja:'文字であれば、このように補助線が引けるが、はて、声の場合はどうしたものか。',en:'We can draw guide lines for written letters, but what can we do for the voice?'},
+  {id:190,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:118,ja:'体のどこかの筋肉が緊張していると声の共鳴が妨げられる。',en:'When a muscle anywhere in the body is tense, it prevents the voice from resonating freely.'},
+  {id:191,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:118,ja:'声が体に響いていないとき、そう気付こう。',en:'Notice when your voice is not resonating through your body.'},
+  {id:192,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:118,ja:'そして、緊張を弛めよう。',en:'Then, release the tension.'},
+  {id:193,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:118,ja:'もっと学生の身体の状態を観察しよう。',en:'Pay closer attention to the state of your students’ bodies.'},
+  {id:194,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:119,ja:'全身を脱力せよ。',en:'Relax your whole body.'},
+  {id:195,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:119,ja:'気づきは、ことばの意味内容よりも形式（たとえば均整のとれた文字や声）によってこそ生じる。',en:'Awareness arises from form, such as well-balanced writing or voice, more than from the meaning of words.'},
+  {id:196,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:119,ja:'文を生成する能力と文を予測する能力には強い相関がある。',en:'The ability to produce sentences is strongly linked to the ability to predict them.'},
+  {id:197,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:119,ja:'わたしの言葉は翻訳できないそうだ。',en:'Apparently, my words cannot be translated.'},
+  {id:198,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:120,ja:'私にとって異文化とはにおいである。',en:'To me, another culture is a smell.'},
+  {id:199,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:121,ja:'行為の瞬間にしか興味を持たない。',en:'Only the moment of action interests me.'},
+  {id:200,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:121,ja:'美術館の展示作品自体は、行為の瞬間ではない。',en:'The works displayed in a museum are not themselves the moment of action.'}
 ];
