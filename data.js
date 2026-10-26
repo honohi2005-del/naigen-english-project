@@ -67,5 +67,9 @@ window.MAXIMS = [
   {id:66,topic:'体験と思索',topicLabel:'体験と思索',ja:'知識は、現場の経験と結びつくほど立体的に見えてくる。',en:'Knowledge becomes more complete when it is connected to real experience.'},
   {id:67,topic:'朗読と表現',topicLabel:'朗読と表現',ja:'声の細かな変化に心の動きを映せば、朗読に新鮮さが生まれる。',en:'Reading aloud feels fresh when your voice reflects small changes in feeling.'},
   {id:68,topic:'朗読と表現',topicLabel:'朗読と表現',ja:'筆跡と声の響きには、語る内容を越えてその人らしさが残る。',en:'Handwriting and voice carry personal patterns beyond the words they express.'},
-  {id:69,topic:'行動と内省',topicLabel:'行動と内省',ja:'内と外へ注意を同時に向けにくいからこそ、一つずつ観察しよう。',en:'Because it is hard to focus inward and outward at once, observe one at a time.'}
+  {id:69,topic:'行動と内省',topicLabel:'行動と内省',ja:'内と外へ注意を同時に向けにくいからこそ、一つずつ観察しよう。',en:'Because it is hard to focus inward and outward at once, observe one at a time.'},
+  {id:70,topic:'行動と内省',topicLabel:'行動と内省',ja:'予測が注意を導き、注意が気づきを意識へ運ぶ。',en:'Expectations guide our attention, and attention brings things into awareness.'},
+  {id:71,topic:'行動と内省',topicLabel:'行動と内省',ja:'情報が多すぎると、細かな変化に気づきにくくなる。',en:'Too much information can make small changes harder to notice.'},
+  {id:72,topic:'学びと習得',topicLabel:'学びと習得',ja:'まねる前に、まず細部を観察しよう。',en:'Observe the details before trying to imitate them.'},
+  {id:73,topic:'朗読と表現',topicLabel:'朗読と表現',ja:'役を演じるなら、すべてに気づき、役に必要なものに応えよう。',en:'When you perform a role, notice every detail and respond to what the role needs.'}
 ];
