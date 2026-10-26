@@ -198,5 +198,9 @@ window.MAXIMS = [
   {id:197,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:119,ja:'わたしの言葉は翻訳できないそうだ。',en:'Apparently, my words cannot be translated.'},
   {id:198,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:120,ja:'私にとって異文化とはにおいである。',en:'To me, another culture is a smell.'},
   {id:199,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:121,ja:'行為の瞬間にしか興味を持たない。',en:'Only the moment of action interests me.'},
-  {id:200,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:121,ja:'美術館の展示作品自体は、行為の瞬間ではない。',en:'The works displayed in a museum are not themselves the moment of action.'}
+  {id:200,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:121,ja:'美術館の展示作品自体は、行為の瞬間ではない。',en:'The works displayed in a museum are not themselves the moment of action.'},
+  {id:201,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:137,ja:'理解というのは自動的に処理されるものだ。',en:'Understanding is something that happens automatically.'},
+  {id:202,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:138,ja:'日本語授業の導入は落語のまくらだ。',en:'The opening of a Japanese lesson is like the introduction to a rakugo story.'},
+  {id:203,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:138,ja:'演繹的に理解してわかった気になるなよ。',en:'Do not assume you understand something just because you have reasoned it out from a general rule.'},
+  {id:204,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:142,ja:'脳は予測の器官である。',en:'The brain is an organ that makes predictions.'}
 ];

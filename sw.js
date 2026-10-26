@@ -1,6 +1,6 @@
-const CACHE = 'naigen-en-project-v18';
+const CACHE = 'naigen-en-project-v19';
 const CACHE_PREFIX = 'naigen-en-project-';
-const CORE = ['./?v=18', './index.html?v=18', './styles.css?v=14', './app.js?v=17', './data.js?v=18', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', ...Array.from({ length: 200 }, (_, i) => `./audio/q${String(i + 1).padStart(3, '0')}.mp3`)];
+const CORE = ['./?v=19', './index.html?v=19', './styles.css?v=14', './app.js?v=17', './data.js?v=19', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', ...Array.from({ length: 204 }, (_, i) => `./audio/q${String(i + 1).padStart(3, '0')}.mp3`)];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)).then(() => self.skipWaiting())));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));
 self.addEventListener('fetch', event => {
