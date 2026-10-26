@@ -1,0 +1,16 @@
+{
+  "name": "内言英語化プロジェクト",
+  "short_name": "内言英語化",
+  "description": "心に残った考えを英語の一文にして声に出す練習アプリ",
+  "lang": "ja",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f8f8f5",
+  "theme_color": "#071a31",
+  "icons": [
+    {"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"},
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}

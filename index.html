@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#071a31" />
+    <meta name="description" content="心に残った考えを、英語の一文に。テーマ別にもランダムにも声に出して練習できます。" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>内言英語化プロジェクト</title>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="hero-art" aria-hidden="true"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">INNER VOICE · ENGLISH PRACTICE</p>
+        <h1>内言英語化プロジェクト</h1>
+        <p class="hero-lead">心に残った考えを、英語の一文に。<br />今日の自分の言葉を、声にしてみる。</p>
+        <button class="install-button" id="install-button" type="button" hidden>アプリをインストール</button>
+      </div>
+      <div class="hero-foot"><span>REFLECTIONS, IN ANOTHER LANGUAGE</span><span id="hero-count">読み込み中</span></div>
+    </header>
+
+    <main>
+      <section class="practice" aria-labelledby="practice-title">
+        <div class="section-heading">
+          <div><p class="section-kicker">SPEAK · LISTEN · RETURN</p><h2 id="practice-title">今日の一文</h2></div>
+          <span class="total-count" id="total-count">読み込み中</span>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="練習方法">
+          <button class="mode-tab active" data-mode="random" role="tab" aria-selected="true">ランダム</button>
+          <button class="mode-tab" data-mode="topic" role="tab" aria-selected="false">トピック別</button>
+        </div>
+
+        <div class="random-picker" id="random-picker">
+          <div><strong>ランダムに練習</strong><p class="hint">格言を順不同で連続再生します。</p></div>
+          <button id="random-play" class="button button-dark" type="button">ランダム再生</button>
+        </div>
+
+        <div class="topic-picker" id="topic-picker" hidden>
+          <label for="topic-select">テーマを選ぶ</label>
+          <div class="topic-row"><select id="topic-select"></select><button id="topic-play" class="button button-dark" type="button">このテーマを連続再生</button></div>
+          <p class="hint" id="topic-count"></p>
+        </div>
+
+        <article class="quote-card" aria-live="polite">
+          <div class="quote-meta"><span id="mode-label">RANDOM PRACTICE</span><span id="item-number">—</span></div>
+          <p class="topic-label" id="item-topic"></p>
+          <p class="japanese-quote" id="japanese-quote">読み込み中…</p>
+          <div class="english-wrap" id="english-wrap" hidden>
+            <p class="english-quote" id="english-quote"></p>
+            <span class="level-label">CEFR B2</span>
+          </div>
+          <div class="card-actions">
+            <button id="reveal-button" class="button button-outline" type="button">英語を見る</button>
+            <button id="speak-button" class="button button-primary" type="button"><span aria-hidden="true">▶</span> 英文を読む</button>
+            <button id="next-button" class="button button-quiet" type="button">別の一文 <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="series-bar" id="series-bar" hidden>
+            <span id="series-status">連続再生</span>
+            <button id="series-stop" class="text-button" type="button">停止</button>
+          </div>
+        </article>
+
+        <section class="recording" aria-labelledby="recording-title">
+          <div class="record-copy"><p class="section-kicker">YOUR VOICE, ON THIS DEVICE</p><h3 id="recording-title">自分の発音を残す</h3><p>録音はこの端末のブラウザ内だけに保存されます。</p></div>
+          <div class="record-actions"><button id="record-button" class="button button-outline" type="button">録音を開始</button><button id="record-play-all" class="button button-quiet" type="button" disabled>録音を連続再生 <span id="record-count"></span></button></div>
+          <p class="record-status" id="record-status" aria-live="polite">この一文の録音はまだありません。</p>
+          <div id="record-list" class="record-list"></div>
+        </section>
+      </section>
+
+      <section class="howto">
+        <div class="section-heading"><div><p class="section-kicker">A SMALL DAILY PRACTICE</p><h2>自分の言葉を、英語へ</h2></div></div>
+        <p>まず日本語の一文を読み、英語を思い出してから答えを開きます。声に出すときは、内容語を少し強く、短い語をなめらかにつなげてみましょう。</p>
+        <div class="practice-steps"><div><b>01</b><span>日本語を読む</span></div><div><b>02</b><span>英語を思い出す</span></div><div><b>03</b><span>声に出してみる</span></div></div>
+      </section>
+      <footer><span>内言英語化プロジェクト</span><span>MADE FOR A MOMENT OF REFLECTION</span></footer>
+    </main>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
