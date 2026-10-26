@@ -51,7 +51,7 @@
   function revealIfHidden() { if (ui.enWrap.hidden) reveal(); }
   function chooseRandom(list = items) { if (!list.length) return null; return list[Math.floor(Math.random() * list.length)]; }
   function startSeries(type, list) {
-    if (list.length < 2) { ui.recordStatus.textContent = 'このモードには2件以上の一文が必要です。'; return; }
+    if (!list.length) { ui.recordStatus.textContent = 'このモードに再生できる一文がありません。'; return; }
     stopSpeech();
     series = { type, queue: type === 'random' ? shuffled(list) : [...list], pos: 0 };
     ui.series.hidden = false;
@@ -81,7 +81,7 @@
   function updateTopicCount() {
     const count = topicItems().length;
     ui.topicCount.textContent = `${count}件の一文`;
-    ui.topicPlay.disabled = count < 2;
+    ui.topicPlay.disabled = count < 1;
   }
 
   function openDb() {
@@ -179,7 +179,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=6').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=7').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   ui.heroCount.textContent = `${items.length} SENTENCES`;
