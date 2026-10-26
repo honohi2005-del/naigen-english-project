@@ -4,7 +4,7 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     total: $('total-count'), heroCount: $('hero-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), ja: $('japanese-quote'), enWrap: $('english-wrap'), en: $('english-quote'), reveal: $('reveal-button'), speak: $('speak-button'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), ja: $('japanese-quote'), source: $('source-page'), enWrap: $('english-wrap'), en: $('english-quote'), reveal: $('reveal-button'), speak: $('speak-button'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
@@ -22,6 +22,7 @@
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
     ui.ja.textContent = item.ja;
+    ui.source.textContent = `出典画像 ${item.sourceImage} / 600（ZIP内のファイル名順）`;
     ui.en.textContent = item.en;
     ui.enWrap.hidden = true;
     ui.reveal.textContent = '英語を見る';
@@ -50,7 +51,7 @@
   function revealIfHidden() { if (ui.enWrap.hidden) reveal(); }
   function chooseRandom(list = items) { if (!list.length) return null; return list[Math.floor(Math.random() * list.length)]; }
   function startSeries(type, list) {
-    if (list.length < 2) { ui.recordStatus.textContent = 'このモードには2件以上の格言が必要です。'; return; }
+    if (list.length < 2) { ui.recordStatus.textContent = 'このモードには2件以上の一文が必要です。'; return; }
     stopSpeech();
     series = { type, queue: type === 'random' ? shuffled(list) : [...list], pos: 0 };
     ui.series.hidden = false;
@@ -79,7 +80,7 @@
   }
   function updateTopicCount() {
     const count = topicItems().length;
-    ui.topicCount.textContent = `${count}件の格言`;
+    ui.topicCount.textContent = `${count}件の一文`;
     ui.topicPlay.disabled = count < 2;
   }
 
@@ -181,7 +182,7 @@
   if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
-  ui.heroCount.textContent = `${items.length} MAXIMS`;
+  ui.heroCount.textContent = `${items.length} SENTENCES`;
   const counts = new Map();
   for (const item of items) counts.set(item.topic, (counts.get(item.topic) || 0) + 1);
   [...counts.keys()].sort((a, b) => a.localeCompare(b, 'ja')).forEach(topic => {
