@@ -495,4 +495,5 @@ window.MAXIMS = [
   {"id":496,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":598,"ja":"調子がいい時ほど、マルチタスクを控える","en":"The better things are going, the more you should refrain from multitasking."},
   {"id":497,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":601,"ja":"話す前に軽く息を吐き切ってから吸うと、喉に力が入りにくくなる","en":"Before you speak, gently breathe all the way out, then breathe in; this helps keep your throat from tightening."},
   {"id":498,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":602,"ja":"日本語の「話し方」を日本舞踊の型の稽古のように学ぶことに集中することで、実用的な日本語の習得にかかる時間を大幅に短縮できるのではないか","en":"Might we greatly shorten the time needed to acquire practical Japanese by focusing on learning how to speak it the way one practices the forms of Japanese classical dance?"},
+  {"id":499,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":600,"ja":"合気道とは、日々自他の分別をなくして生きよ、ということと見つけたり、という教えである。すなわち、ある日刃物を持った暴漢に襲われ絶命しようとも、それもまた天命、ということだ","en":"Aikido teaches us to live each day without distinguishing between ourselves and others. In other words, even if one day I were attacked by an armed assailant and met my end, that too would be fate."},
 ];
