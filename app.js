@@ -4,10 +4,11 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
+  let randomHistory = [], randomHistoryPos = -1;
   let dbPromise;
   const functionWords = new Set(`a an the i me my you your yourself we our ourselves they them their themselves he him his she her it its this that these those who whom whose which what when where why how another each every either neither all no any some as at by for from in into of on onto out over under with within without after before against between beyond through to than like and or but so because if while although though unless until whether then instead rather not do does did can cannot could may might must shall should will would am is are was were be been being has had ought`.split(' '));
 
@@ -41,6 +42,16 @@
     return queue;
   }
   function topicItems() { return items.filter(item => item.topic === ui.topic.value); }
+  function updatePreviousButton() {
+    ui.previous.disabled = mode !== 'random' || series?.type === 'model' || randomHistoryPos <= 0;
+  }
+  function rememberRandom(item) {
+    if (!item) return;
+    if (randomHistoryPos < randomHistory.length - 1) randomHistory = randomHistory.slice(0, randomHistoryPos + 1);
+    if (randomHistory.at(-1)?.id !== item.id) randomHistory.push(item);
+    randomHistoryPos = randomHistory.length - 1;
+    updatePreviousButton();
+  }
   function renderItem(item) {
     if (!item) return;
     current = item;
@@ -51,6 +62,7 @@
     ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
     renderCurrentRecords();
+    updatePreviousButton();
   }
   function stopSpeech() {
     speechVersion++;
@@ -95,7 +107,7 @@
       return;
     }
     stopSeries();
-    series = { type, queue: type === 'random' ? shuffled(list) : [...list], pos: 0 };
+    series = { type, queue: type === 'random' ? shuffledAfter(list, current?.id) : [...list], pos: 0 };
     ui.series.hidden = false;
     advanceSeries();
   }
@@ -110,12 +122,17 @@
     if (!series) return;
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
-    if (series.pos >= series.queue.length) {
-      if (series.type === 'random') { series.queue = shuffledAfter(items, current?.id); series.pos = 0; }
-      else if (series.type === 'model') { series.queue = shuffledAfter(series.pool, current?.id); series.pos = 0; }
-      else { stopSeries(); return; }
+    if (series.type === 'random' && randomHistoryPos < randomHistory.length - 1) {
+      current = randomHistory[++randomHistoryPos];
+    } else {
+      if (series.pos >= series.queue.length) {
+        if (series.type === 'random') { series.queue = shuffledAfter(items, current?.id); series.pos = 0; }
+        else if (series.type === 'model') { series.queue = shuffledAfter(series.pool, current?.id); series.pos = 0; }
+        else { stopSeries(); return; }
+      }
+      current = series.queue[series.pos++];
+      if (series.type === 'random') rememberRandom(current);
     }
-    current = series.queue[series.pos++];
     renderItem(current);
     ui.seriesStatus.textContent = series.type === 'model'
       ? `モデル音声を連続再生中 · ${series.pos} / ${series.queue.length}`
@@ -130,8 +147,18 @@
     series = null;
     ui.series.hidden = true;
     ui.speechStatus.textContent = '';
+    updatePreviousButton();
   }
-  function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) renderItem(next); }
+  function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { if (mode === 'random') rememberRandom(next); renderItem(next); } }
+  function previousRandom() {
+    if (mode !== 'random' || randomHistoryPos <= 0 || series?.type === 'model') return;
+    const activeSeries = series?.type === 'random' ? series : null;
+    if (activeSeries) { window.clearTimeout(seriesTimer); seriesTimer = null; stopSpeech(); }
+    randomHistoryPos--;
+    renderItem(randomHistory[randomHistoryPos]);
+    if (activeSeries) speakCurrent(() => scheduleNext(activeSeries));
+    else speakCurrent();
+  }
   function setMode(nextMode) {
     stopSeries(); mode = nextMode;
     ui.tabs.forEach(tab => { const active = tab.dataset.mode === mode; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
@@ -240,13 +267,14 @@
     const activeSeries = series;
     speakCurrent(activeSeries ? () => scheduleNext(activeSeries) : undefined);
   });
+  ui.previous.addEventListener('click', previousRandom);
   ui.next.addEventListener('click', () => series ? advanceSeries() : randomOne());
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=27').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=28').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   const counts = new Map();
@@ -255,6 +283,8 @@
     const option = document.createElement('option'); option.value = topic; option.textContent = `${topic} · ${counts.get(topic)}`; ui.topic.append(option);
   });
   updateTopicCount();
-  renderItem(chooseRandom());
+  const first = chooseRandom();
+  rememberRandom(first);
+  renderItem(first);
   loadRecords();
 })();

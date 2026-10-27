@@ -9,3 +9,4 @@ main{max-width:860px;margin:0 auto;padding:43px 24px 30px}.section-heading{displ
 @media(max-width:620px){.random-picker{padding:12px;gap:8px}.random-picker .button{font-size:11px;padding:9px 10px}}
 
 .hero{height:270px}.hero-subtitle{margin:9px 0 0;color:#d1dce5;font-size:14px;letter-spacing:.04em}.collection-count{text-align:right;margin:-8px 0 8px}@media(max-width:620px){.hero{height:230px}.hero-subtitle{font-size:13px}.collection-count{margin:-4px 0 7px}}
+.card-actions .button:disabled{opacity:.45;cursor:not-allowed;transform:none}

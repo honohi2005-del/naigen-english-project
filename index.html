@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=15" />
+    <link rel="stylesheet" href="styles.css?v=16" />
     <title>備忘録</title>
   </head>
   <body>
@@ -53,6 +53,7 @@
           <div class="card-actions">
             <button id="speak-button" class="button button-primary" type="button"><span aria-hidden="true">▶</span> Gemini音声を再生</button>
             <button id="model-loop-button" class="button button-outline" type="button">モデル音声を連続再生</button>
+            <button id="previous-button" class="button button-quiet" type="button" disabled>前の一文 <span aria-hidden="true">←</span></button>
             <button id="next-button" class="button button-quiet" type="button">別の一文 <span aria-hidden="true">→</span></button>
           </div>
           <p class="speech-status" id="speech-status" aria-live="polite"></p>
@@ -71,7 +72,7 @@
       </section>
 
     </main>
-    <script src="data.js?v=24"></script>
-    <script src="app.js?v=24"></script>
+    <script src="data.js?v=25"></script>
+    <script src="app.js?v=25"></script>
   </body>
 </html>
