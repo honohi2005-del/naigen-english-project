@@ -4,10 +4,10 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
-  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
+  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
   let randomHistory = [], randomHistoryPos = -1;
   let dbPromise;
   const functionWords = new Set(`a an the i me my you your yourself we our ourselves they them their themselves he him his she her it its this that these those who whom whose which what when where why how another each every either neither all no any some as at by for from in into of on onto out over under with within without after before against between beyond through to than like and or but so because if while although though unless until whether then instead rather not do does did can cannot could may might must shall should will would am is are was were be been being has had ought`.split(' '));
@@ -64,13 +64,22 @@
     renderCurrentRecords();
     updatePreviousButton();
   }
+  function updatePauseButton() {
+    const canToggle = quotePlaybackActive && quoteAudio && !quoteAudio.ended;
+    ui.pause.disabled = !canToggle;
+    ui.pause.textContent = canToggle && quoteAudio.paused ? '再開' : '一時停止';
+  }
   function stopSpeech() {
     speechVersion++;
-    if (!quoteAudio) return;
+    quotePlaybackActive = false;
+    if (!quoteAudio) { updatePauseButton(); return; }
     quoteAudio.onended = null;
     quoteAudio.onerror = null;
+    quoteAudio.onplaying = null;
+    quoteAudio.onpause = null;
     quoteAudio.pause();
     try { quoteAudio.currentTime = 0; } catch { /* The audio may not be ready yet. */ }
+    updatePauseButton();
   }
   function speakCurrent(onEnd) {
     if (!current) return;
@@ -78,13 +87,25 @@
     const version = speechVersion;
     const audio = quoteAudio ||= new Audio();
     audio.src = `./audio/q${String(current.id).padStart(3, '0')}.mp3`;
+    audio.onplaying = () => {
+      if (version !== speechVersion) return;
+      quotePlaybackActive = true;
+      updatePauseButton();
+    };
+    audio.onpause = () => {
+      if (version === speechVersion) updatePauseButton();
+    };
     audio.onended = () => {
       if (version !== speechVersion) return;
+      quotePlaybackActive = false;
+      updatePauseButton();
       ui.speechStatus.textContent = 'Gemini音声の再生が終わりました。';
       onEnd?.();
     };
     const fail = () => {
       if (version !== speechVersion) return;
+      quotePlaybackActive = false;
+      updatePauseButton();
       if (series) stopSeries();
       ui.speechStatus.textContent = 'Gemini音声を再生できませんでした。通信状態をご確認ください。';
     };
@@ -267,6 +288,21 @@
     const activeSeries = series;
     speakCurrent(activeSeries ? () => scheduleNext(activeSeries) : undefined);
   });
+  ui.pause.addEventListener('click', () => {
+    if (!quoteAudio || !quotePlaybackActive) return;
+    if (quoteAudio.paused) {
+      quoteAudio.play().catch(() => {
+        quotePlaybackActive = false;
+        updatePauseButton();
+        ui.speechStatus.textContent = 'Gemini音声を再生できませんでした。通信状態をご確認ください。';
+      });
+      ui.speechStatus.textContent = 'Gemini音声を再生中…';
+    } else {
+      quoteAudio.pause();
+      ui.speechStatus.textContent = 'Gemini音声を一時停止中。';
+    }
+    updatePauseButton();
+  });
   ui.previous.addEventListener('click', previousRandom);
   ui.next.addEventListener('click', () => series ? advanceSeries() : randomOne());
   ui.stop.addEventListener('click', stopSeries);
@@ -274,7 +310,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=28').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=29').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   const counts = new Map();
@@ -283,6 +319,7 @@
     const option = document.createElement('option'); option.value = topic; option.textContent = `${topic} · ${counts.get(topic)}`; ui.topic.append(option);
   });
   updateTopicCount();
+  updatePauseButton();
   const first = chooseRandom();
   rememberRandom(first);
   renderItem(first);
