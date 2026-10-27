@@ -1,8 +1,10 @@
 (() => {
   'use strict';
   const items = window.MAXIMS || [];
+  const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
   const $ = (id) => document.getElementById(id);
   const ui = {
+    practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
@@ -195,18 +197,77 @@
     if (activeSeries) speakCurrent(() => scheduleNext(activeSeries));
     else speakCurrent();
   }
-  function setMode(nextMode) {
+  function setMode(nextMode, selectedItem = null) {
     stopSeries(); mode = nextMode;
     ui.tabs.forEach(tab => { const active = tab.dataset.mode === mode; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
     ui.picker.hidden = mode !== 'topic';
     ui.randomPicker.hidden = mode !== 'random';
-    if (mode === 'random') { randomOne(); ui.modeLabel.textContent = 'RANDOM PRACTICE'; }
+    if (mode === 'random') { if (selectedItem) { rememberRandom(selectedItem); renderItem(selectedItem); } else randomOne(); ui.modeLabel.textContent = 'RANDOM PRACTICE'; }
     else { const list = topicItems(); renderItem(chooseRandom(list)); updateTopicCount(); }
   }
   function updateTopicCount() {
     const count = topicItems().length;
     ui.topicCount.textContent = `${count}件の一文`;
     ui.topicPlay.disabled = count < 1;
+  }
+
+  function renderLibrary(query = '') {
+    const terms = query.trim().toLocaleLowerCase('ja').split(/\s+/).filter(Boolean);
+    const matched = orderedItems.filter(item => {
+      const searchable = [item.id, String(item.id).padStart(3, '0'), item.topic, item.topicLabel, item.ja, item.en, item.sourceImage].join(' ').toLocaleLowerCase('ja');
+      return terms.every(term => searchable.includes(term));
+    });
+    const fragment = document.createDocumentFragment();
+    for (const item of matched) {
+      const row = document.createElement('li');
+      row.className = 'library-row';
+      const button = document.createElement('button');
+      button.className = 'library-entry';
+      button.type = 'button';
+      const meta = document.createElement('span');
+      meta.className = 'library-entry-meta';
+      const number = document.createElement('span');
+      number.className = 'library-entry-number';
+      number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
+      const topic = document.createElement('span');
+      topic.className = 'library-entry-topic';
+      topic.textContent = item.topicLabel || item.topic || '';
+      meta.append(number, topic);
+      const japanese = document.createElement('span');
+      japanese.className = 'library-entry-ja';
+      japanese.textContent = item.ja || '';
+      const english = document.createElement('span');
+      english.className = 'library-entry-en';
+      english.textContent = item.en || '';
+      const source = document.createElement('span');
+      source.className = 'library-entry-source';
+      source.textContent = item.sourceImage ? `出典画像 ${item.sourceImage}` : '';
+      button.append(meta, japanese, english, source);
+      button.addEventListener('click', () => openLibraryItem(item));
+      row.append(button);
+      fragment.append(row);
+    }
+    ui.libraryList.replaceChildren(fragment);
+    ui.libraryCount.textContent = `${orderedItems.length}件`;
+    ui.libraryResultCount.textContent = terms.length ? `${matched.length} / ${orderedItems.length}件` : `${orderedItems.length}件`;
+    ui.libraryEmpty.hidden = matched.length > 0;
+  }
+
+  function switchScreen(screen) {
+    const showLibrary = screen === 'library';
+    if (showLibrary) stopSeries();
+    ui.practiceScreen.hidden = showLibrary;
+    ui.libraryScreen.hidden = !showLibrary;
+    ui.practiceScreenTab.classList.toggle('active', !showLibrary);
+    ui.libraryScreenTab.classList.toggle('active', showLibrary);
+    ui.practiceScreenTab.setAttribute('aria-selected', String(!showLibrary));
+    ui.libraryScreenTab.setAttribute('aria-selected', String(showLibrary));
+  }
+
+  function openLibraryItem(item) {
+    setMode('random', item);
+    switchScreen('practice');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function openDb() {
@@ -293,6 +354,9 @@
   }
 
   ui.tabs.forEach(tab => tab.addEventListener('click', () => setMode(tab.dataset.mode)));
+  ui.practiceScreenTab.addEventListener('click', () => switchScreen('practice'));
+  ui.libraryScreenTab.addEventListener('click', () => switchScreen('library'));
+  ui.librarySearch.addEventListener('input', () => renderLibrary(ui.librarySearch.value));
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
@@ -325,9 +389,10 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=29').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=30').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
+  renderLibrary();
   const counts = new Map();
   for (const item of items) counts.set(item.topic, (counts.get(item.topic) || 0) + 1);
   [...counts.keys()].sort((a, b) => a.localeCompare(b, 'ja')).forEach(topic => {

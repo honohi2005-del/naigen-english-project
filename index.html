@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=16" />
+    <link rel="stylesheet" href="styles.css?v=17" />
     <title>備忘録</title>
   </head>
   <body>
@@ -22,7 +22,12 @@
     </header>
 
     <main>
-      <section class="practice" aria-label="格言の練習">
+      <div class="screen-switch" role="tablist" aria-label="表示画面">
+        <button class="screen-tab active" id="practice-screen-tab" type="button" role="tab" aria-selected="true" aria-controls="practice-screen">練習</button>
+        <button class="screen-tab" id="library-screen-tab" type="button" role="tab" aria-selected="false" aria-controls="library-screen">格言一覧 <span id="library-count"></span></button>
+      </div>
+
+      <section class="practice" id="practice-screen" aria-label="格言の練習" role="tabpanel" aria-labelledby="practice-screen-tab">
         <p class="total-count collection-count" id="total-count">読み込み中</p>
 
         <div class="mode-switch" role="tablist" aria-label="練習方法">
@@ -72,8 +77,19 @@
         </section>
       </section>
 
+      <section class="library-screen" id="library-screen" aria-label="格言一覧" role="tabpanel" aria-labelledby="library-screen-tab" hidden>
+        <div class="library-heading">
+          <div><p class="section-kicker">ALL MAXIMS</p><h2>格言一覧</h2></div>
+          <p class="library-count" id="library-result-count" aria-live="polite"></p>
+        </div>
+        <label class="library-search-label" for="library-search">番号・テーマ・日本語・英語で検索</label>
+        <input class="library-search" id="library-search" type="search" placeholder="例：179、表現と学習、writing" autocomplete="off" />
+        <ol class="library-list" id="library-list"></ol>
+        <p class="library-empty" id="library-empty" hidden>一致する格言がありません。</p>
+      </section>
+
     </main>
     <script src="data.js?v=28"></script>
-    <script src="app.js?v=28"></script>
+    <script src="app.js?v=29"></script>
   </body>
 </html>
