@@ -6,11 +6,13 @@
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
   let randomHistory = [], randomHistoryPos = -1;
+  const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
+  let modelPlaybackRate = 1;
   let dbPromise;
   const functionWords = new Set(`a an the i me my you your yourself we our ourselves they them their themselves he him his she her it its this that these those who whom whose which what when where why how another each every either neither all no any some as at by for from in into of on onto out over under with within without after before against between beyond through to than like and or but so because if while although though unless until whether then instead rather not do does did can cannot could may might must shall should will would am is are was were be been being has had ought`.split(' '));
 
@@ -91,6 +93,7 @@
     const version = speechVersion;
     const audio = quoteAudio ||= new Audio();
     audio.src = `./audio/q${String(current.id).padStart(3, '0')}.mp3`;
+    audio.playbackRate = modelPlaybackRate;
     audio.onplaying = () => {
       if (version !== speechVersion) return;
       quotePlaybackActive = true;
@@ -367,6 +370,19 @@
     const activeSeries = series;
     speakCurrent(activeSeries ? () => scheduleNext(activeSeries) : undefined);
   });
+  try {
+    const savedRate = Number(localStorage.getItem('naigen-model-playback-rate'));
+    if (playbackRates.includes(savedRate)) modelPlaybackRate = savedRate;
+  } catch { /* Playback speed can still be changed for this session. */ }
+  ui.modelSpeed.value = String(modelPlaybackRate);
+  ui.modelSpeed.addEventListener('change', () => {
+    const selectedRate = Number(ui.modelSpeed.value);
+    if (!playbackRates.includes(selectedRate)) return;
+    modelPlaybackRate = selectedRate;
+    try { localStorage.setItem('naigen-model-playback-rate', String(selectedRate)); }
+    catch { /* Keep the selected speed for the current session. */ }
+    if (quoteAudio) quoteAudio.playbackRate = selectedRate;
+  });
   ui.pause.addEventListener('click', () => {
     if (!quoteAudio || !quotePlaybackActive) return;
     if (quoteAudio.paused) {
@@ -389,7 +405,7 @@
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=30').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=31').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
