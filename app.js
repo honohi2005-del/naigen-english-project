@@ -57,7 +57,7 @@
     current = item;
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
-    ui.source.textContent = `出典画像 ${item.sourceImage} / 600（ZIP内のファイル名順）`;
+    ui.source.textContent = `出典画像 ${item.sourceImage} / 602（ZIP内のファイル名順）`;
     renderEnglish(item.en);
     ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';

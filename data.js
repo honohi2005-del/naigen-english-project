@@ -493,4 +493,6 @@ window.MAXIMS = [
   {"id":494,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":593,"ja":"熟達すると改善のアイディアが勝手に浮かぶようになる","en":"With true mastery, ideas for improvement simply arise on their own."},
   {"id":495,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":594,"ja":"声色を真似しようとするとこわばった「つまらない」声になる。","en":"Trying to imitate someone's tone produces only a stiff, lifeless voice."},
   {"id":496,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":598,"ja":"調子がいい時ほど、マルチタスクを控える","en":"The better things are going, the more you should refrain from multitasking."},
+  {"id":497,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":601,"ja":"話す前に軽く息を吐き切ってから吸うと、喉に力が入りにくくなる","en":"Before you speak, gently breathe all the way out, then breathe in; this helps keep your throat from tightening."},
+  {"id":498,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":602,"ja":"日本語の「話し方」を日本舞踊の型の稽古のように学ぶことに集中することで、実用的な日本語の習得にかかる時間を大幅に短縮できるのではないか","en":"Might we greatly shorten the time needed to acquire practical Japanese by focusing on learning how to speak it the way one practices the forms of Japanese classical dance?"},
 ];

@@ -2965,6 +2965,18 @@
       "file": "q496.mp3",
       "textSha256": "95d34294b8979a43e6702d180edfc872c6f489640e7c15a209217740424ef49f",
       "seconds": 5.96
+    },
+    {
+      "id": 497,
+      "file": "q497.mp3",
+      "textSha256": "f59631944ea34d273e0ec0a8f1b78678ceb088f93cd6aa81f80460f433944766",
+      "seconds": 10.24
+    },
+    {
+      "id": 498,
+      "file": "q498.mp3",
+      "textSha256": "d88d308670d76642d48a723e4a52ee535a5a92a8f93afee2d544f9d9d307513e",
+      "seconds": 14.4
     }
   ]
 }
