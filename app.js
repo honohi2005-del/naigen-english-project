@@ -43,7 +43,9 @@
   }
   function topicItems() { return items.filter(item => item.topic === ui.topic.value); }
   function updatePreviousButton() {
-    ui.previous.disabled = mode !== 'random' || series?.type === 'model' || randomHistoryPos <= 0;
+    ui.previous.disabled = series?.type === 'model'
+      ? series.pos <= 1
+      : mode !== 'random' || randomHistoryPos <= 0;
   }
   function rememberRandom(item) {
     if (!item) return;
@@ -172,7 +174,20 @@
   }
   function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { if (mode === 'random') rememberRandom(next); renderItem(next); } }
   function previousRandom() {
-    if (mode !== 'random' || randomHistoryPos <= 0 || series?.type === 'model') return;
+    if (series?.type === 'model') {
+      if (series.pos <= 1) return;
+      const activeSeries = series;
+      window.clearTimeout(seriesTimer);
+      seriesTimer = null;
+      stopSpeech();
+      series.pos--;
+      current = series.queue[series.pos - 1];
+      renderItem(current);
+      ui.seriesStatus.textContent = `モデル音声を連続再生中 · ${series.pos} / ${series.queue.length}`;
+      speakCurrent(() => scheduleNext(activeSeries));
+      return;
+    }
+    if (mode !== 'random' || randomHistoryPos <= 0) return;
     const activeSeries = series?.type === 'random' ? series : null;
     if (activeSeries) { window.clearTimeout(seriesTimer); seriesTimer = null; stopSpeech(); }
     randomHistoryPos--;
