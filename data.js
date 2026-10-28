@@ -519,4 +519,10 @@ window.MAXIMS = [
   {"id":521,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":553,"ja":"身体が意味として立ち上がっているかは、間を見ればわかる。","en":"Whether the body is emerging as meaning can be seen in the pauses."},
   {"id":522,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":552,"ja":"あらゆるアウトプットが無意味なら、あらゆるインプットも同様に無意味にちがいない。","en":"If every kind of output is meaningless, then every kind of input must be equally meaningless."},
   {"id":523,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":551,"ja":"身体に全振りするということは頭の中が静かになるということだ。","en":"Putting everything into the body means that your mind grows quiet."},
+  {"id":524,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":539,"ja":"ナラティブとは予測モデルである。","en":"A narrative is a predictive model."},
+  {"id":525,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":535,"ja":"本を読んでいて、ある一文に「まさしくその通り」と思い、その一文を保存しておきたいと思うのは、その一文に触れたときに起きた「自分自身との仲直り」の瞬間を物理的な形に変換することで、この世界につなぎとめておきたいからである。","en":"When I come across a sentence in a book and think, ‘That is exactly right,’ and want to save it, I am turning the moment of reconciling with myself that the sentence brought about into physical form, so I can keep it anchored in this world."},
+  {"id":526,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":330,"ja":"予測誤差は客（学生）の眼の奥からあふれてくる。","en":"Prediction error wells up from the depths of the customer's (student's) eyes."},
+  {"id":527,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":327,"ja":"感覚の予測誤差が大きいとき、予測誤差を小さくするために、私は言葉に頼ろうとする。","en":"When sensory prediction error is high, I try to rely on words to reduce it."},
+  {"id":528,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":522,"ja":"意味を求めない反復に身を置く。","en":"Place yourself in repetition without seeking meaning."},
+  {"id":529,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":510,"ja":"トライ＆エラーの多い、多い授業をデザインする。","en":"Design lessons with lots and lots of trial and error."},
 ];
