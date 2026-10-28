@@ -3121,6 +3121,42 @@
       "file": "q523.mp3",
       "textSha256": "b95cda28e6ad51e3df51ce55414c0341f61bc97935bdf47adf96a4e87bda17a4",
       "seconds": 6
+    },
+    {
+      "id": 524,
+      "file": "q524.mp3",
+      "textSha256": "af2d2fd0899753a0bb8ea845148a56c1153347bf4232fc6406bf7fe6716493e5",
+      "seconds": 3.48
+    },
+    {
+      "id": 525,
+      "file": "q525.mp3",
+      "textSha256": "9321ae2948eb917296147000640078158766d2e558e16bab637f75e01fbbf711",
+      "seconds": 19.52
+    },
+    {
+      "id": 526,
+      "file": "q526.mp3",
+      "textSha256": "267fff6d941aadac8d6327bc6f9c2660e030a124a7f9443d04c9d38f8facf00f",
+      "seconds": 5.44
+    },
+    {
+      "id": 527,
+      "file": "q527.mp3",
+      "textSha256": "e5b34ef05ef76b6850d269dae671e144ce2726aeb6caa144192532c753d7d226",
+      "seconds": 7
+    },
+    {
+      "id": 528,
+      "file": "q528.mp3",
+      "textSha256": "93757418275d479bb7f08021aa4fd5378bb35da7b755389f10feecebab52835f",
+      "seconds": 4.56
+    },
+    {
+      "id": 529,
+      "file": "q529.mp3",
+      "textSha256": "70e960a105b789a83828e8f200afbd64ae7730e0ee035ffaf87ec1054c7f4029",
+      "seconds": 5.28
     }
   ]
 }
