@@ -7,9 +7,9 @@
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
-    series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
+    series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
-  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
+  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
   let randomHistory = [], randomHistoryPos = -1;
   const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let modelPlaybackRate = 1;
@@ -312,14 +312,59 @@
     await new Promise((resolve, reject) => { const request = db.transaction('recordings', 'readwrite').objectStore('recordings').delete(key); request.onsuccess = resolve; request.onerror = () => reject(request.error); });
     await loadRecords();
   }
+  function updateRecordControls() {
+    ui.recordAll.disabled = allRecords.length === 0 || recordDeletionPending;
+    ui.recordClear.disabled = allRecords.length === 0 || recordingStarting || recorder?.state === 'recording' || recordSavePending || recordDeletionPending;
+    ui.recordCount.textContent = allRecords.length ? `(${allRecords.length})` : '';
+  }
   async function loadRecords() {
     try {
       const db = await openDb();
       allRecords = await new Promise((resolve, reject) => { const request = db.transaction('recordings').objectStore('recordings').getAll(); request.onsuccess = () => resolve(request.result || []); request.onerror = () => reject(request.error); });
     } catch { allRecords = []; }
-    ui.recordAll.disabled = allRecords.length === 0;
-    ui.recordCount.textContent = allRecords.length ? `(${allRecords.length})` : '';
+    updateRecordControls();
     renderCurrentRecords();
+  }
+  function stopRecordPlayback() {
+    if (playbackAudio) {
+      playbackAudio.onended = null;
+      playbackAudio.onerror = null;
+      playbackAudio.pause();
+      playbackAudio.removeAttribute('src');
+      playbackAudio.load();
+      playbackAudio = null;
+    }
+    playbackQueue.forEach(url => URL.revokeObjectURL(url));
+    playbackQueue = [];
+  }
+  async function deleteAllRecords() {
+    if (recordDeletionPending) return;
+    if (recordingStarting || recorder?.state === 'recording' || recordSavePending) {
+      ui.recordStatus.textContent = '録音中または保存中のため、完了してから削除してください。';
+      return;
+    }
+    const count = allRecords.length;
+    if (!count || !window.confirm(`この端末に保存された自分の録音を${count}件、すべて削除しますか？この操作は元に戻せません。`)) return;
+    recordDeletionPending = true;
+    updateRecordControls();
+    try {
+      stopRecordPlayback();
+      const db = await openDb();
+      await new Promise((resolve, reject) => {
+        const transaction = db.transaction('recordings', 'readwrite');
+        transaction.objectStore('recordings').clear();
+        transaction.oncomplete = resolve;
+        transaction.onerror = () => reject(transaction.error || new Error('Recording deletion failed'));
+        transaction.onabort = () => reject(transaction.error || new Error('Recording deletion aborted'));
+      });
+      await loadRecords();
+      ui.recordStatus.textContent = `自分の録音を${count}件削除しました。`;
+    } catch {
+      ui.recordStatus.textContent = '録音を削除できませんでした。';
+    } finally {
+      recordDeletionPending = false;
+      updateRecordControls();
+    }
   }
   function renderCurrentRecords() {
     recordObjectUrls.forEach(url => URL.revokeObjectURL(url));
@@ -336,9 +381,12 @@
     }
   }
   async function toggleRecording() {
+    if (recordDeletionPending) return;
     if (recorder?.state === 'recording') { recorder.stop(); return; }
     if (!current) return;
     if (!navigator.mediaDevices?.getUserMedia || !window.MediaRecorder) { ui.recordStatus.textContent = 'この端末では録音に対応していません。'; return; }
+    recordingStarting = true;
+    updateRecordControls();
     try {
       const recordingId = current.id;
       recordStream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -352,16 +400,24 @@
       recordingParts = [];
       recorder.ondataavailable = event => { if (event.data.size) recordingParts.push(event.data); };
       recorder.onstop = async () => {
-        recordStream?.getTracks().forEach(track => track.stop()); recordStream = null;
-        const blob = new Blob(recordingParts, { type: recorder.mimeType || 'audio/webm' });
-        if (blob.size) {
-          try { const createdAt = Date.now(); await storeRecord({ key: `${recordingId}-${createdAt}`, id: recordingId, blob, createdAt }); await loadRecords(); }
-          catch { ui.recordStatus.textContent = '録音の保存に失敗しました。端末の空き容量をご確認ください。'; }
+        recordSavePending = true;
+        updateRecordControls();
+        try {
+          recordStream?.getTracks().forEach(track => track.stop()); recordStream = null;
+          const blob = new Blob(recordingParts, { type: recorder.mimeType || 'audio/webm' });
+          if (blob.size) {
+            try { const createdAt = Date.now(); await storeRecord({ key: `${recordingId}-${createdAt}`, id: recordingId, blob, createdAt }); await loadRecords(); }
+            catch { ui.recordStatus.textContent = '録音の保存に失敗しました。端末の空き容量をご確認ください。'; }
+          }
+          ui.record.textContent = '録音を開始';
+        } finally {
+          recordSavePending = false;
+          updateRecordControls();
         }
-        ui.record.textContent = '録音を開始';
       };
       recorder.start(); ui.record.textContent = '録音を停止'; ui.recordStatus.textContent = '録音中…';
     } catch { ui.recordStatus.textContent = 'マイクを使えません。ブラウザのマイク許可をご確認ください。'; }
+    finally { recordingStarting = false; updateRecordControls(); }
   }
   async function playAllRecords() {
     playbackAudio?.pause();
@@ -429,9 +485,10 @@
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
+  ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=34').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=35').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();

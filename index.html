@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <link rel="stylesheet" href="styles.css?v=20" />
     <title>備忘録</title>
   </head>
   <body>
@@ -73,7 +73,7 @@
 
         <section class="recording" aria-labelledby="recording-title">
           <div class="record-copy"><p class="section-kicker">YOUR VOICE, ON THIS DEVICE</p><h3 id="recording-title">自分の発音を残す</h3><p>録音はこの端末のブラウザ内だけに保存されます。</p></div>
-          <div class="record-actions"><button id="record-button" class="button button-outline" type="button">録音を開始</button><button id="record-play-all" class="button button-quiet" type="button" disabled>録音を連続再生 <span id="record-count"></span></button></div>
+          <div class="record-actions"><button id="record-button" class="button button-outline" type="button">録音を開始</button><button id="record-play-all" class="button button-quiet" type="button" disabled>録音を連続再生 <span id="record-count"></span></button><button id="record-delete-all" class="button button-outline delete-recordings" type="button" title="この端末に保存された自分の録音をすべて削除します" disabled>自分の録音をすべて削除</button></div>
           <p class="record-status" id="record-status" aria-live="polite">この一文の録音はまだありません。</p>
           <div id="record-list" class="record-list"></div>
         </section>
@@ -92,6 +92,6 @@
 
     </main>
     <script src="data.js?v=33"></script>
-    <script src="app.js?v=32"></script>
+    <script src="app.js?v=33"></script>
   </body>
 </html>
