@@ -2989,6 +2989,30 @@
       "file": "q500.mp3",
       "textSha256": "310ea951f08393c12878ac2710ade68b6b0d03ca4f08b59ada956b5692b92924",
       "seconds": 7.8
+    },
+    {
+      "id": 502,
+      "file": "q502.mp3",
+      "textSha256": "a40a657ac7944e83c921dd99174a12f3a6fd0ed174556999d794d0682f3f76d1",
+      "seconds": 11.48
+    },
+    {
+      "id": 503,
+      "file": "q503.mp3",
+      "textSha256": "b9f5b8bc9a1ef5e28d435901aa0ac94f5500715fd136fcd1b354e228ffff122f",
+      "seconds": 8.68
+    },
+    {
+      "id": 504,
+      "file": "q504.mp3",
+      "textSha256": "2a05391cba817104ef2ada82d88dc76d9a9afdef0ff891ec096fc8065c9cdf4c",
+      "seconds": 13.64
+    },
+    {
+      "id": 505,
+      "file": "q505.mp3",
+      "textSha256": "fb443e861604b9b7906074837c0ca3521246beafef7c79a0085116930e926289",
+      "seconds": 15.92
     }
   ]
 }
