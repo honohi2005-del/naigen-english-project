@@ -6,7 +6,7 @@
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null;
@@ -50,6 +50,14 @@
     ui.previous.disabled = series?.type === 'model'
       ? series.pos <= 1
       : mode !== 'random' || randomHistoryPos <= 0;
+  }
+  function updateSeriesStatus() {
+    if (!series) return;
+    const repeatLabel = series.repeatCount === 2 ? '（各格言を2回）' : '';
+    const position = `${series.pos} / ${series.queue.length}`;
+    ui.seriesStatus.textContent = series.type === 'model'
+      ? `モデル音声を連続再生中${repeatLabel} · ${position}`
+      : `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生${repeatLabel} · ${position}`;
   }
   function rememberRandom(item) {
     if (!item) return;
@@ -123,19 +131,20 @@
   function chooseRandom(list = items) { if (!list.length) return null; return list[Math.floor(Math.random() * list.length)]; }
   function startSeries(type, list) {
     if (!list.length) { ui.speechStatus.textContent = 'このモードに再生できる一文がありません。'; return; }
+    const repeatCount = ui.repeatTwice.checked ? 2 : 1;
     if (type === 'model') {
       const pool = [...new Map(list.map(item => [item.id, item])).values()];
       if (pool.length < 2) { ui.speechStatus.textContent = '別の一文がないため、連続再生できません。'; return; }
       stopSeries();
       const first = pool.find(item => item.id === current?.id);
       const queue = first ? [first, ...shuffled(pool.filter(item => item.id !== first.id))] : shuffled(pool);
-      series = { type, pool, queue, pos: 0 };
+      series = { type, pool, queue, pos: 0, repeatCount, currentItemId: null, currentReadCount: 0 };
       ui.series.hidden = false;
       advanceSeries();
       return;
     }
     stopSeries();
-    series = { type, queue: type === 'random' ? shuffledAfter(list, current?.id) : [...list], pos: 0 };
+    series = { type, queue: type === 'random' ? shuffledAfter(list, current?.id) : [...list], pos: 0, repeatCount, currentItemId: null, currentReadCount: 0 };
     ui.series.hidden = false;
     advanceSeries();
   }
@@ -146,10 +155,17 @@
       if (series === activeSeries) advanceSeries();
     }, 550);
   }
-  function advanceSeries() {
+  function advanceSeries(forceNext = false) {
     if (!series) return;
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
+    if (!forceNext && series.currentItemId === current?.id && series.currentReadCount < series.repeatCount) {
+      series.currentReadCount++;
+      updateSeriesStatus();
+      const activeSeries = series;
+      speakCurrent(() => scheduleNext(activeSeries));
+      return;
+    }
     if (series.type === 'random' && randomHistoryPos < randomHistory.length - 1) {
       current = randomHistory[++randomHistoryPos];
     } else {
@@ -161,10 +177,10 @@
       current = series.queue[series.pos++];
       if (series.type === 'random') rememberRandom(current);
     }
+    series.currentItemId = current.id;
+    series.currentReadCount = 1;
     renderItem(current);
-    ui.seriesStatus.textContent = series.type === 'model'
-      ? `モデル音声を連続再生中 · ${series.pos} / ${series.queue.length}`
-      : `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生 · ${series.pos} / ${series.queue.length}`;
+    updateSeriesStatus();
     const activeSeries = series;
     speakCurrent(() => scheduleNext(activeSeries));
   }
@@ -187,8 +203,10 @@
       stopSpeech();
       series.pos--;
       current = series.queue[series.pos - 1];
+      series.currentItemId = current.id;
+      series.currentReadCount = 1;
       renderItem(current);
-      ui.seriesStatus.textContent = `モデル音声を連続再生中 · ${series.pos} / ${series.queue.length}`;
+      updateSeriesStatus();
       speakCurrent(() => scheduleNext(activeSeries));
       return;
     }
@@ -196,7 +214,9 @@
     const activeSeries = series?.type === 'random' ? series : null;
     if (activeSeries) { window.clearTimeout(seriesTimer); seriesTimer = null; stopSpeech(); }
     randomHistoryPos--;
-    renderItem(randomHistory[randomHistoryPos]);
+    const previousItem = randomHistory[randomHistoryPos];
+    if (activeSeries) { activeSeries.currentItemId = previousItem.id; activeSeries.currentReadCount = 1; }
+    renderItem(previousItem);
     if (activeSeries) speakCurrent(() => scheduleNext(activeSeries));
     else speakCurrent();
   }
@@ -364,6 +384,12 @@
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
+  try { ui.repeatTwice.checked = localStorage.getItem('naigen-repeat-maxims-twice') === 'true'; }
+  catch { /* Repeat mode can still be selected for this session. */ }
+  ui.repeatTwice.addEventListener('change', () => {
+    try { localStorage.setItem('naigen-repeat-maxims-twice', String(ui.repeatTwice.checked)); }
+    catch { /* Keep the selected mode for the current session. */ }
+  });
   ui.speak.addEventListener('click', () => {
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
@@ -399,13 +425,13 @@
     updatePauseButton();
   });
   ui.previous.addEventListener('click', previousRandom);
-  ui.next.addEventListener('click', () => series ? advanceSeries() : randomOne());
+  ui.next.addEventListener('click', () => series ? advanceSeries(true) : randomOne());
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=33').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=34').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
