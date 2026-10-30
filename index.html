@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=20" />
+    <link rel="stylesheet" href="styles.css?v=21" />
     <title>備忘録</title>
   </head>
   <body>
@@ -36,8 +36,11 @@
         </div>
 
         <div class="random-picker" id="random-picker">
-          <div><strong>ランダムに練習</strong><p class="hint">画像から読み取った一文をランダムに連続再生します。</p></div>
-          <button id="random-play" class="button button-dark" type="button">ランダム再生</button>
+          <div><strong>連続再生</strong><p class="hint">ランダム、または出典画像の先頭から順に一文ずつ再生します。</p></div>
+          <div class="random-picker-actions">
+            <button id="random-play" class="button button-dark" type="button">ランダム再生</button>
+            <button id="ordered-play" class="button button-outline" type="button">順番に再生</button>
+          </div>
         </div>
 
         <div class="topic-picker" id="topic-picker" hidden>
@@ -63,6 +66,7 @@
             <button id="model-loop-button" class="button button-outline" type="button">モデル音声を連続再生</button>
             <button id="previous-button" class="button button-quiet" type="button" disabled>前の一文 <span aria-hidden="true">←</span></button>
             <button id="next-button" class="button button-quiet" type="button">別の一文 <span aria-hidden="true">→</span></button>
+            <button id="ordered-next-button" class="button button-quiet" type="button">次の一文 <span aria-hidden="true">→</span></button>
           </div>
           <p class="speech-status" id="speech-status" aria-live="polite"></p>
           <div class="series-bar" id="series-bar" hidden>
@@ -92,6 +96,6 @@
 
     </main>
     <script src="data.js?v=35"></script>
-    <script src="app.js?v=35"></script>
+    <script src="app.js?v=37"></script>
   </body>
 </html>

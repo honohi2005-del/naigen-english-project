@@ -6,8 +6,8 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
-    total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'),
+    total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'), orderedNext: $('ordered-next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
@@ -48,17 +48,22 @@
   }
   function topicItems() { return items.filter(item => item.topic === ui.topic.value); }
   function updatePreviousButton() {
-    ui.previous.disabled = series?.type === 'model'
+    ui.previous.disabled = series?.type === 'model' || series?.type === 'ordered'
       ? series.pos <= 1
       : mode !== 'random' || randomHistoryPos <= 0;
+  }
+  function updateOrderedNextButton() {
+    const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
+    ui.orderedNext.disabled = index < 0 || index >= sourceOrderedItems.length - 1;
   }
   function updateSeriesStatus() {
     if (!series) return;
     const repeatLabel = series.repeatCount === 2 ? '（各格言を2回）' : '';
     const position = `${series.pos} / ${series.queue.length}`;
+    const label = { random: 'ランダム', ordered: '順番', topic: 'トピック' }[series.type] || '連続';
     ui.seriesStatus.textContent = series.type === 'model'
       ? `モデル音声を連続再生中${repeatLabel} · ${position}`
-      : `${series.type === 'random' ? 'ランダム' : 'トピック'}連続再生${repeatLabel} · ${position}`;
+      : `${label}連続再生${repeatLabel} · ${position}`;
   }
   function rememberRandom(item) {
     if (!item) return;
@@ -78,6 +83,7 @@
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
     renderCurrentRecords();
     updatePreviousButton();
+    updateOrderedNextButton();
   }
   function updatePauseButton() {
     const canToggle = quotePlaybackActive && quoteAudio && !quoteAudio.ended;
@@ -195,8 +201,16 @@
     updatePreviousButton();
   }
   function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { if (mode === 'random') rememberRandom(next); renderItem(next); } }
+  function nextInSourceOrder() {
+    if (series?.type === 'ordered') { advanceSeries(true); return; }
+    const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
+    const next = sourceOrderedItems[index + 1];
+    if (!next) return;
+    stopSeries();
+    renderItem(next);
+  }
   function previousRandom() {
-    if (series?.type === 'model') {
+    if (series?.type === 'model' || series?.type === 'ordered') {
       if (series.pos <= 1) return;
       const activeSeries = series;
       window.clearTimeout(seriesTimer);
@@ -438,6 +452,7 @@
   ui.libraryScreenTab.addEventListener('click', () => switchScreen('library'));
   ui.librarySearch.addEventListener('input', () => renderLibrary(ui.librarySearch.value));
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
+  ui.orderedPlay.addEventListener('click', () => startSeries('ordered', sourceOrderedItems));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
@@ -483,13 +498,14 @@
   });
   ui.previous.addEventListener('click', previousRandom);
   ui.next.addEventListener('click', () => series ? advanceSeries(true) : randomOne());
+  ui.orderedNext.addEventListener('click', nextInSourceOrder);
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=36').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=37').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
