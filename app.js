@@ -2,6 +2,7 @@
   'use strict';
   const items = window.MAXIMS || [];
   const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
+  const sourceOrderedItems = [...items].sort((a, b) => Number(a.sourceImage) - Number(b.sourceImage) || Number(a.id) - Number(b.id));
   const $ = (id) => document.getElementById(id);
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
@@ -236,7 +237,7 @@
 
   function renderLibrary(query = '') {
     const terms = query.trim().toLocaleLowerCase('ja').split(/\s+/).filter(Boolean);
-    const matched = orderedItems.filter(item => {
+    const matched = sourceOrderedItems.filter(item => {
       const searchable = [item.id, String(item.id).padStart(3, '0'), item.topic, item.topicLabel, item.ja, item.en, item.sourceImage].join(' ').toLocaleLowerCase('ja');
       return terms.every(term => searchable.includes(term));
     });
@@ -271,8 +272,8 @@
       fragment.append(row);
     }
     ui.libraryList.replaceChildren(fragment);
-    ui.libraryCount.textContent = `${orderedItems.length}件`;
-    ui.libraryResultCount.textContent = terms.length ? `${matched.length} / ${orderedItems.length}件` : `${orderedItems.length}件`;
+    ui.libraryCount.textContent = `${sourceOrderedItems.length}件`;
+    ui.libraryResultCount.textContent = terms.length ? `${matched.length} / ${sourceOrderedItems.length}件` : `${sourceOrderedItems.length}件`;
     ui.libraryEmpty.hidden = matched.length > 0;
   }
 
@@ -488,7 +489,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=35').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=36').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
