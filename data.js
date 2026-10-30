@@ -525,4 +525,9 @@ window.MAXIMS = [
   {"id":527,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":327,"ja":"感覚の予測誤差が大きいとき、予測誤差を小さくするために、私は言葉に頼ろうとする。","en":"When sensory prediction error is high, I try to rely on words to reduce it."},
   {"id":528,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":522,"ja":"意味を求めない反復に身を置く。","en":"Place yourself in repetition without seeking meaning."},
   {"id":529,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":510,"ja":"トライ＆エラーの多い、多い授業をデザインする。","en":"Design lessons with lots and lots of trial and error."},
+  {"id":530,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":603,"ja":"合気道は一芸を磨きすぎるという思い。","en":"The sense that aikido focuses too much on perfecting a single art."},
+  {"id":531,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"今生きている時代を特殊・特別なものと思わず、二、三歩引いた地点から眺める。","en":"Do not regard the era we live in as unusual or exceptional; look at it from two or three steps back."},
+  {"id":532,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"ナルシストとは潜在的な二元論ストレス補償である。","en":"A narcissist is a stress-compensating response to latent dualism."},
+  {"id":533,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":603,"ja":"何語であっても、言ってもしょうがないことは「言わぬが花」だ。","en":"Whatever the language, when something is not worth saying, silence is golden."},
+  {"id":534,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"空っぽの人生でいい。いや、空っぽの人生がいい。","en":"It is fine for life to be empty. No, better yet: an empty life is what I want."},
 ];
