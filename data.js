@@ -154,7 +154,7 @@ window.MAXIMS = [
   {"id":153,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":102,"ja":"身体が読めば、身体が変わる。","en":"When the body can read, the body changes."},
   {id:154,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:102,ja:'いくら本を読んでも、身体はちっとも変わらない。',en:'No matter how many books you read, your body does not change at all.'},
   {"id":155,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":102,"ja":"身体が変わらなければ、どこにも行けない、同じところをグルグル回っているだけ。","en":"If your body does not change, you cannot go anywhere."},
-  {"id":156,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":102,"ja":"身体が力んでいなければ、演じることは易しい。","en":"Performing is easy when the body is not involved."},
+  {"id":156,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":102,"ja":"身体が力んでいなければ、演じることは易しい。","en":"Performing is easy when your body isn't tense."},
   {id:157,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:102,ja:'イライラはまず動作にあらわれる。',en:'Irritation first shows itself in your movements.'},
   {"id":158,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":102,"ja":"誰もアドバイスしてくれなかったというが、そもそもおまえ自身がアドバイスを求めなかったのではないか。","en":"Was it really that no one advised you, or did you never ask for advice in the first place?"},
   {id:159,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:103,ja:'学校の教室は、映像授業では学ぶのが難しいことが学べる場所であるべきだ。',en:'A classroom should be a place to learn things that are difficult to learn from video lessons.'},
