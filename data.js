@@ -532,4 +532,5 @@ window.MAXIMS = [
   {"id":535,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":605,"ja":"罪を犯す人の心理的背景には、世間一般の通念に対する心情的反発がある。","en":"Behind the psychology of people who commit crimes lies an emotional resistance to society's common assumptions."},
   {"id":536,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":605,"ja":"本を読むのにもタイミングがある。","en":"There is a right time for reading, too."},
   {"id":537,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"指導者の役割は、生徒が築いた「仮説」や説明を見抜き、生徒の仮説の更なる検証とその修正のやり方を提供することだ。","en":"A teacher's role is to discern the hypotheses and explanations students have formed, then offer ways to test those hypotheses further and revise them."},
+  {"id":538,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"おもしろそうなものを勉強し、世界を一歩一歩探索してゆく。","en":"Study whatever seems interesting, and explore the world one step at a time."},
 ];
