@@ -529,8 +529,9 @@ window.MAXIMS = [
   {"id":532,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"ナルシストとは潜在的な将来のニヒリスト候補である。","en":"A narcissist is a potential future nihilist."},
   {"id":533,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":603,"ja":"何語であっても、言ってもしょうがないことは「言わぬが花」だ。","en":"Whatever the language, when something is not worth saying, silence is golden."},
   {"id":534,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"空っぽの人生でいい。いや、空っぽの人生がいい。","en":"It is fine for life to be empty. No, better yet: an empty life is what I want."},
-  {"id":535,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":605,"ja":"罪を犯す人の心理的背景には、世間一般の通念に対する心情的反発がある。","en":"Behind the psychology of people who commit crimes lies an emotional resistance to society's common assumptions."},
+  {"id":535,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":605,"ja":"罪を犯す人の心理的背景には、世間一般に対する鬱屈した想いがある。","en":"Behind the psychology of people who commit crimes lies a pent-up resentment toward society at large."},
   {"id":536,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":605,"ja":"本を読むのにもタイミングがある。","en":"There is a right time for reading, too."},
-  {"id":537,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"指導者の役割は、生徒が築いた「仮説」や説明を見抜き、生徒の仮説の更なる検証とその修正のやり方を提供することだ。","en":"A teacher's role is to discern the hypotheses and explanations students have formed, then offer ways to test those hypotheses further and revise them."},
-  {"id":538,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"おもしろそうなものを勉強し、世界を一歩一歩探索してゆく。","en":"Study whatever seems interesting, and explore the world one step at a time."},
+  {"id":537,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"導者の役割は、生徒が築いた「仮説」を見抜き、生徒の「仮説」の更なる検証とその修正のプロセスを手伝うことだ。","en":"A guide's role is to recognize the hypotheses students have formed, then help them test those hypotheses further and revise them."},
+  {"id":538,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"もうそろそろ、自分から世界にお返しをする頃合いだ。","en":"It is about time I started giving something back to the world."},
+  {"id":539,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":605,"ja":"近視眼的な考えを捨てよ。3.11にもコロナ禍にも言及するな","en":"Set aside short-sighted thinking. Do not mention 3/11 or the COVID-19 pandemic."},
 ];
