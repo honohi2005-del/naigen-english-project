@@ -48,9 +48,10 @@
   }
   function topicItems() { return items.filter(item => item.topic === ui.topic.value); }
   function updatePreviousButton() {
-    ui.previous.disabled = series?.type === 'model' || series?.type === 'ordered'
+    const historyMatchesCurrent = randomHistory[randomHistoryPos]?.id === current?.id;
+    ui.previous.disabled = series?.type === 'model' || series?.type === 'ordered' || series?.type === 'topic'
       ? series.pos <= 1
-      : mode !== 'random' || randomHistoryPos <= 0;
+      : !historyMatchesCurrent || randomHistoryPos <= 0;
   }
   function updateOrderedNextButton() {
     const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
@@ -200,17 +201,19 @@
     ui.speechStatus.textContent = '';
     updatePreviousButton();
   }
-  function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { if (mode === 'random') rememberRandom(next); renderItem(next); } }
+  function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { rememberRandom(current); rememberRandom(next); renderItem(next); } }
   function nextInSourceOrder() {
     if (series?.type === 'ordered') { advanceSeries(true); return; }
     const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
     const next = sourceOrderedItems[index + 1];
     if (!next) return;
     stopSeries();
+    rememberRandom(current);
+    rememberRandom(next);
     renderItem(next);
   }
   function previousRandom() {
-    if (series?.type === 'model' || series?.type === 'ordered') {
+    if (series?.type === 'model' || series?.type === 'ordered' || series?.type === 'topic') {
       if (series.pos <= 1) return;
       const activeSeries = series;
       window.clearTimeout(seriesTimer);
@@ -225,7 +228,7 @@
       speakCurrent(() => scheduleNext(activeSeries));
       return;
     }
-    if (mode !== 'random' || randomHistoryPos <= 0) return;
+    if (randomHistoryPos <= 0 || randomHistory[randomHistoryPos]?.id !== current?.id) return;
     const activeSeries = series?.type === 'random' ? series : null;
     if (activeSeries) { window.clearTimeout(seriesTimer); seriesTimer = null; stopSpeech(); }
     randomHistoryPos--;
@@ -241,7 +244,7 @@
     ui.picker.hidden = mode !== 'topic';
     ui.randomPicker.hidden = mode !== 'random';
     if (mode === 'random') { if (selectedItem) { rememberRandom(selectedItem); renderItem(selectedItem); } else randomOne(); ui.modeLabel.textContent = 'RANDOM PRACTICE'; }
-    else { const list = topicItems(); renderItem(chooseRandom(list)); updateTopicCount(); }
+    else { const list = topicItems(); const selected = chooseRandom(list); if (selected) { rememberRandom(selected); renderItem(selected); } updateTopicCount(); }
   }
   function updateTopicCount() {
     const count = topicItems().length;
@@ -453,7 +456,7 @@
   ui.librarySearch.addEventListener('input', () => renderLibrary(ui.librarySearch.value));
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.orderedPlay.addEventListener('click', () => startSeries('ordered', sourceOrderedItems));
-  ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') renderItem(chooseRandom(topicItems())); });
+  ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') { const selected = chooseRandom(topicItems()); if (selected) { rememberRandom(selected); renderItem(selected); } } });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
   try { ui.repeatTwice.checked = localStorage.getItem('naigen-repeat-maxims-twice') === 'true'; }
