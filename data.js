@@ -365,7 +365,7 @@ window.MAXIMS = [
   {id:366,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:536,ja:'保存は「記憶の代替装置」であって、統合とは別物である',en:'Preservation is a substitute for memory, not the same as integration.'},
   {id:367,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:539,ja:'あとで自分と仲違いせずにいられる行為こそが正しい行為である',en:'The right action is one you can live with without falling out with yourself later.'},
   {id:368,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:555,ja:'あるテキストからもっぱら実用的なメッセージを読みとるのが目的なら、時間をかけて一冊一冊を通読するのは目的と方法が合っていない',en:'If you are reading a text solely to extract practical insights, spending time reading every book cover to cover is a mismatch between your goal and your method.'},
-  {id:369,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:566,ja:'AIは自分が使うか、自分が誰かと一緒に使うものであり、決してもっぱら誰かに使わせるものではない',en:'AI is something you use yourself, or use with someone else; it should never be something you only have others use for you.'},
+  {id:369,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:566,ja:'AIは自分が使うか、自分が誰かと一緒に使うものであり、決してもっぱら誰かに使わせるものではない',en:'AI is something you use yourself or with someone else; it should never be used solely by others on your behalf.'},
   {id:370,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:570,ja:'言葉の使い方というのは言語化された使い方の説明を頭で覚えるのではなくて、言語化されない運動感覚を身体全体で覚えるのだ',en:'You learn how words are used not by memorizing verbal explanations in your head, but by learning nonverbal kinesthetic patterns with your whole body.'},
   {id:371,topic:'学びと思考',topicLabel:'学びと思考',sourceImage:570,ja:'決してAIのアウトプットを鵜呑みにするな。必ず疑え',en:'Never swallow AI output whole. Always question it.'},
   {id:372,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:588,ja:'動きすぎは見る側からすると次の所作の予測可能性を大幅に引き上げるが故に悪である',en:'Too much movement is bad because it makes the next gesture far more predictable to the viewer.'},

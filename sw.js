@@ -1,6 +1,6 @@
-const CACHE = 'naigen-en-project-v57';
+const CACHE = 'naigen-en-project-v58';
 const CACHE_PREFIX = 'naigen-en-project-';
-const CORE = ['./?v=56', './index.html?v=56', './styles.css?v=21', './app.js?v=40', './data.js?v=41', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './audio/manifest.json'];
+const CORE = ['./?v=56', './index.html?v=56', './styles.css?v=21', './app.js?v=40', './data.js?v=42', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './audio/manifest.json'];
 self.addEventListener('install', event => event.waitUntil((async () => {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
