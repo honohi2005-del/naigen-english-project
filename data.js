@@ -270,7 +270,6 @@ window.MAXIMS = [
   {"id":276,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":102,"ja":"いくら本を読んでも、身体はちっとも変わらない。","en":"No matter how many books you read, your body does not change at all."},
   {"id":277,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":106,"ja":"出来ている、出来ていない、という二分法がとどのつまり不毛である。","en":"In the end, the binary of success and failure is unproductive."},
   {"id":278,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":109,"ja":"中心線からのわずかなズレも見逃さずにいよう。","en":"Do not overlook even the slightest deviation from the centerline."},
-  {"id":279,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":110,"ja":"厚みある経験が熟達をもたらす。","en":"Rich experience leads to mastery."},
   {"id":280,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":120,"ja":"美術館で観客が発見するもの、それは己の身体である。","en":"What visitors discover in an art museum is their own body."},
   {"id":281,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":123,"ja":"コミュニケーションの起源はそもそも即興。","en":"Communication is rooted in improvisation."},
   {"id":282,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":126,"ja":"良い言葉はもう十分すぎるほど世にあふれている。足りないのは、そうした言葉に耳を傾けることのできる人間である。","en":"The world is already full of good words. What is lacking is someone willing to listen to them."},
