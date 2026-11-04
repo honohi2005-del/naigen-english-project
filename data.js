@@ -261,7 +261,6 @@ window.MAXIMS = [
   {id:262,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:295,ja:'人前に出て緊張するという感覚はナチュラルドラッグのようだ',en:'The feeling of nervousness in front of people is like a natural drug.'},
   {"id":263,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":303,"ja":"プロは常にどう見せるかを考える。","en":"A professional always thinks about how to present their work."},
   {id:264,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:305,ja:'漢字を指導するとき、学生の書く時のからだの姿勢にもかならず着目しよう',en:'When teaching kanji, always pay attention to a student’s posture while writing.'},
-  {"id":266,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":84,"ja":"今この瞬間に気づくことではじめて予測が働く。","en":"Prediction can work only when we notice the present moment."},
   {"id":267,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":85,"ja":"彼に直接働きかけるのではなく、環境に働きかけ、それを変化させて彼が自律的にその変化に気づくのを待て。","en":"Instead of acting on him directly, change the environment and let him notice the change for himself."},
   {"id":268,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":88,"ja":"意味を推測するに足る情報を過不足なくコントロールする。","en":"Control just enough information for the meaning to be inferred."},
   {"id":269,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":90,"ja":"生活すべてが修業だと思えば、一切は美しい。","en":"When you see all of life as practice, everything is beautiful."},
