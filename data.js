@@ -265,7 +265,6 @@ window.MAXIMS = [
   {"id":270,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":92,"ja":"呼吸の流れと気の流れをシンクロさせる。","en":"Synchronize the flow of your breath with the flow of energy."},
   {"id":271,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":93,"ja":"「不快」への反応をやめることはたやすい。「快」への反応をやめることは困難だ。","en":"It is easy to stop reacting to discomfort. It is hard to stop reacting to pleasure."},
   {"id":272,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":95,"ja":"情報過多は、予測の働きを妨げる阻害要因の最たるものだ。","en":"Information overload is one of the greatest obstacles to prediction."},
-  {"id":273,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":96,"ja":"微細な部分に気づいていなければ、どうしてそれが真似できよう。","en":"How can you imitate something if you have not noticed its finer details?"},
   {"id":274,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":100,"ja":"力が抜けた腕の感覚に意識を向ける。","en":"Bring your attention to the feeling of a relaxed arm."},
   {"id":275,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":101,"ja":"ポーズ（間）は声は出ていなくても、無音の中で様々な変化が生じている。","en":"Even when no voice is heard during a pause, many changes are taking place in the silence."},
   {"id":276,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":102,"ja":"いくら本を読んでも、身体はちっとも変わらない。","en":"No matter how many books you read, your body does not change at all."},
