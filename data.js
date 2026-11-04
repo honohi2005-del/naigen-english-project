@@ -132,7 +132,6 @@ window.MAXIMS = [
   {id:131,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:94,ja:'濃淡をつけること。',en:'Create differences in intensity.'},
   {id:132,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:94,ja:'書くとき、話すとき、動と静を常に意識しよう。',en:'When writing or speaking, always be aware of movement and stillness.'},
   {"id":133,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":95,"ja":"気づきが意識に上がるには、注意が向くことが必要である。","en":"To notice something, the realization must enter your awareness."},
-  {id:134,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:95,ja:'気づきが意識に上がるには、注意が向くことが必要である。',en:'For a realization to enter your awareness, your attention must turn toward it.'},
   {id:135,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:95,ja:'そして、注意が向く前に、予測が働かねばならない。',en:'Before your attention can turn, a prediction must be at work.'},
   {id:136,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:95,ja:'情報過多は、予測の働きを妨げる阻害要因の最たるものだ。',en:'Too much information is one of the greatest obstacles to making predictions.'},
   {id:137,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:96,ja:'違いは、まず予測に表われる。',en:'Differences first appear in what you predict.'},
