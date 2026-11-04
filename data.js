@@ -127,7 +127,7 @@ window.MAXIMS = [
   {id:126,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:92,ja:'人はよく、自分で気づかなければ人間は変われない、などと言う。',en:'People often say that we cannot change unless we realize it for ourselves.'},
   {id:127,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:93,ja:'「不快」への反応をやめることはたやすい。',en:'It is easy to stop reacting to discomfort.'},
   {id:128,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:93,ja:'「快」への反応をやめることは困難だ。',en:'It is hard to stop reacting to pleasure.'},
-  {"id":129,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":93,"ja":"脳が自動反応しなくなるレベルまで、自分自身を刺激から遠ざけない。","en":"I want to distance myself from stimulation until my brain stops reacting automatically."},
+  {"id":129,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":93,"ja":"脳が自動反応しなくなるレベルまで、自分自身を刺激から遠ざける。","en":"I want to distance myself from stimulation until my brain stops reacting automatically."},
   {id:130,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:94,ja:'力を均一に入れないようにすること。',en:'Avoid applying the same amount of force everywhere.'},
   {id:131,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:94,ja:'濃淡をつけること。',en:'Create differences in intensity.'},
   {id:132,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:94,ja:'書くとき、話すとき、動と静を常に意識しよう。',en:'When writing or speaking, always be aware of movement and stillness.'},
