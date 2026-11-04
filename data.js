@@ -24,7 +24,7 @@ window.MAXIMS = [
   {id:23,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:22,ja:'曲はシャッフルで聴く。',en:'Listen to music on shuffle.'},
   {"id":24,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":22,"ja":"原則、飛ばさない。","en":"As a rule, do not skip a song."},
   {id:25,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:22,ja:'曲との出会いは一期一会だ。',en:'Each encounter with a song happens only once.'},
-  {"id":26,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":22,"ja":"コミュニケーションを通して体がこわばらないようにする。","en":"My body becomes tense through communication."},
+  {"id":26,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":22,"ja":"コミュニケーションを通して体がこわばらないようにする。","en":"I make sure my body doesn't tense up when I communicate."},
   {id:27,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:22,ja:'いついかなる時も、もっと楽に声を出したいものだ。',en:'At all times, I want to use my voice with greater ease.'},
   {"id":28,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":25,"ja":"意味とは与えられるものではなく、自ら見出すものだ。","en":"Meaning is something we find for ourselves, rather than something given to us."},
   {id:29,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:27,ja:'力むと予測が働かない。',en:'When we tense up, our ability to predict stops working.'},
