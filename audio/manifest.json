@@ -2204,8 +2204,11 @@
     {
       "id": 369,
       "file": "q369.mp3",
-      "textSha256": "9303d8a5df12951fbb80ea999544da4e4909cb39c7ec6ed3a221078af707fe75",
-      "seconds": 11.08
+      "textSha256": "ef0848eab31437d03d82680a6fc56fe1fdcd20622fa11ac939b9c2485bb8cfc0",
+      "seconds": 7.75,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "d25abc6c59bd"
     },
     {
       "id": 370,
