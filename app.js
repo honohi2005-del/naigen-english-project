@@ -1,6 +1,7 @@
 (() => {
   'use strict';
   const items = window.MAXIMS || [];
+  const audioRevisions = { 224: '0cf10c28d861' };
   const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
   const sourceOrderedItems = [...items].sort((a, b) => Number(a.sourceImage) - Number(b.sourceImage) || Number(a.id) - Number(b.id));
   const $ = (id) => document.getElementById(id);
@@ -109,7 +110,8 @@
     stopSpeech();
     const version = speechVersion;
     const audio = quoteAudio ||= new Audio();
-    audio.src = `./audio/q${String(current.id).padStart(3, '0')}.mp3`;
+    const revision = audioRevisions[current.id];
+    audio.src = `./audio/q${String(current.id).padStart(3, '0')}.mp3${revision ? `?v=${revision}` : ''}`;
     audio.playbackRate = modelPlaybackRate;
     audio.onplaying = () => {
       if (version !== speechVersion) return;
@@ -511,7 +513,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=44').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=45').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
