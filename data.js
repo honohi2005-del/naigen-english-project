@@ -239,7 +239,7 @@ window.MAXIMS = [
   {id:242,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:241,ja:'文字は指先ではなくひじで書く',en:'Write with your elbow, not just your fingertips.'},
   {"id":243,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":241,"ja":"なぜ急ぐのか。もし急いでいるなら何かを見失っているね。","en":"If you are rushing, you have lost sight of something."},
   {"id":244,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":242,"ja":"いつまでも小指にこだわっていたら上達しませんよ。","en":"You cannot change if you keep clinging to the past."},
-  {"id":245,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":242,"ja":"技を使って話すのではなく、全身を使って話す。","en":"Speak with your whole body, not just your throat."},
+  {"id":245,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":242,"ja":"喉を使って話すのではなく、全身を使って話す。","en":"Speak with your whole body, not just your throat."},
   {id:246,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:243,ja:'力みは化石化した動きの癖となって表れる',en:'Tension appears as a movement habit that has become fixed like a fossil.'},
   {"id":248,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":244,"ja":"声は幹から出るので、とりあえず枝のことは考えないでおく。","en":"The voice comes from the trunk, so leave the branches aside for now."},
   {"id":249,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":244,"ja":"一音一文字の一画に相当する。","en":"A single sound is like one stroke of a written character."},
