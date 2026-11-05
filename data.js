@@ -312,7 +312,7 @@ window.MAXIMS = [
   {"id":328,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":309,"ja":"なんでもそうだが、簡単に予測できるものはつまらない。","en":"As with anything, what is easy to predict is boring."},
   {"id":329,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":313,"ja":"すべてのものには適切なタイミングがある。","en":"Everything has its proper timing."},
   {"id":330,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":317,"ja":"自分で自分の予想を裏切る技法を編み出したい。","en":"I want to develop techniques for surprising myself."},
-  {"id":331,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":321,"ja":"常に次の展開を予想して、間を前後にずらしなさい。","en":"Anticipate what is expected, then shift the pause earlier or later."},
+  {"id":331,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":321,"ja":"常に次の展開を予想して、間を前後にずらす。","en":"Anticipate what is expected, then shift the pause earlier or later."},
   {"id":332,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":323,"ja":"上手な語りというのは聞き手に展開を予想させつつそれを裏切る。一方、下手な語りは展開が予想通りすぎるか、そもそも予想させる工夫がない。","en":"Good storytelling invites the listener to anticipate what comes next, then surprises them. Poor storytelling is either too predictable or gives no reason to anticipate."},
   {"id":333,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":324,"ja":"言語表現を自分なりに進化させるには、記憶と実験という二つのステップが要る。","en":"To develop your own way of expressing yourself, you need two steps: memory and experimentation."},
   {id:334,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:338,ja:'変わらない我なんてない',en:'There is no self that never changes.'},
