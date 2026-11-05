@@ -36,10 +36,14 @@
         </div>
 
         <div class="random-picker" id="random-picker">
-          <div><strong>連続再生</strong><p class="hint">ランダム、または出典画像の先頭から順に一文ずつ再生します。</p></div>
+          <div><strong>連続再生</strong><p class="hint">ランダム、出典画像順、または指定した格言番号から再生します。番号順の再生は最後で停止します。</p></div>
           <div class="random-picker-actions">
             <button id="random-play" class="button button-dark" type="button">ランダム再生</button>
             <button id="ordered-play" class="button button-outline" type="button">順番に再生</button>
+            <button class="button button-outline" type="button" data-start-number="100">100から再生</button>
+            <button class="button button-outline" type="button" data-start-number="200">200から再生</button>
+            <button class="button button-outline" type="button" data-start-number="300">300から再生</button>
+            <button class="button button-outline" type="button" data-start-number="400">400から再生</button>
           </div>
         </div>
 
@@ -96,6 +100,6 @@
 
     </main>
     <script src="data.js?v=51"></script>
-    <script src="app.js?v=40"></script>
+    <script src="app.js?v=41"></script>
   </body>
 </html>

@@ -6,7 +6,7 @@
   const $ = (id) => document.getElementById(id);
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
-    total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
+    total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), numberedPlay: [...document.querySelectorAll('[data-start-number]')], picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'), orderedNext: $('ordered-next-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
@@ -49,11 +49,12 @@
   function topicItems() { return items.filter(item => item.topic === ui.topic.value); }
   function updatePreviousButton() {
     const historyMatchesCurrent = randomHistory[randomHistoryPos]?.id === current?.id;
-    ui.previous.disabled = series?.type === 'model' || series?.type === 'ordered' || series?.type === 'topic'
+    ui.previous.disabled = series?.type === 'model' || series?.type === 'ordered' || series?.type === 'numbered' || series?.type === 'topic'
       ? series.pos <= 1
       : !historyMatchesCurrent || randomHistoryPos <= 0;
   }
   function updateOrderedNextButton() {
+    if (series?.type === 'numbered') { ui.orderedNext.disabled = series.pos >= series.queue.length; return; }
     const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
     ui.orderedNext.disabled = index < 0 || index >= sourceOrderedItems.length - 1;
   }
@@ -61,7 +62,7 @@
     if (!series) return;
     const repeatLabel = series.repeatCount === 2 ? '（各格言を2回）' : '';
     const position = `${series.pos} / ${series.queue.length}`;
-    const label = { random: 'ランダム', ordered: '順番', topic: 'トピック' }[series.type] || '連続';
+    const label = { random: 'ランダム', ordered: '順番', numbered: '番号順', topic: 'トピック' }[series.type] || '連続';
     ui.seriesStatus.textContent = series.type === 'model'
       ? `モデル音声を連続再生中${repeatLabel} · ${position}`
       : `${label}連続再生${repeatLabel} · ${position}`;
@@ -180,7 +181,7 @@
       if (series.pos >= series.queue.length) {
         if (series.type === 'random') { series.queue = shuffledAfter(items, current?.id); series.pos = 0; }
         else if (series.type === 'model') { series.queue = shuffledAfter(series.pool, current?.id); series.pos = 0; }
-        else { stopSeries(); return; }
+        else { stopSeries(); ui.orderedNext.disabled = true; ui.speechStatus.textContent = '最後の格言まで再生しました。'; return; }
       }
       current = series.queue[series.pos++];
       if (series.type === 'random') rememberRandom(current);
@@ -200,10 +201,11 @@
     ui.series.hidden = true;
     ui.speechStatus.textContent = '';
     updatePreviousButton();
+    updateOrderedNextButton();
   }
   function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { rememberRandom(current); rememberRandom(next); renderItem(next); } }
   function nextInSourceOrder() {
-    if (series?.type === 'ordered') { advanceSeries(true); return; }
+    if (series?.type === 'ordered' || series?.type === 'numbered') { advanceSeries(true); return; }
     const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
     const next = sourceOrderedItems[index + 1];
     if (!next) return;
@@ -213,7 +215,7 @@
     renderItem(next);
   }
   function previousRandom() {
-    if (series?.type === 'model' || series?.type === 'ordered' || series?.type === 'topic') {
+    if (series?.type === 'model' || series?.type === 'ordered' || series?.type === 'numbered' || series?.type === 'topic') {
       if (series.pos <= 1) return;
       const activeSeries = series;
       window.clearTimeout(seriesTimer);
@@ -456,6 +458,7 @@
   ui.librarySearch.addEventListener('input', () => renderLibrary(ui.librarySearch.value));
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.orderedPlay.addEventListener('click', () => startSeries('ordered', sourceOrderedItems));
+  ui.numberedPlay.forEach(button => button.addEventListener('click', () => startSeries('numbered', orderedItems.filter(item => Number(item.id) >= Number(button.dataset.startNumber)))));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') { const selected = chooseRandom(topicItems()); if (selected) { rememberRandom(selected); renderItem(selected); } } });
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
@@ -508,7 +511,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=42').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=43').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
