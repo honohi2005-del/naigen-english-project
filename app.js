@@ -1,7 +1,8 @@
 (() => {
   'use strict';
   const items = window.MAXIMS || [];
-  const audioRevisions = { 224: '0cf10c28d861' };
+  const audioRevisions = { 224: '00cc1b8af3a9', 540: '1b8d3c6965b0', 541: '969a1e239627', 542: 'babdba593d32' };
+  const maxSourceImage = Math.max(...items.map(item => Number(item.sourceImage)));
   const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
   const sourceOrderedItems = [...items].sort((a, b) => Number(a.sourceImage) - Number(b.sourceImage) || Number(a.id) - Number(b.id));
   const $ = (id) => document.getElementById(id);
@@ -80,7 +81,7 @@
     current = item;
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
-    ui.source.textContent = `出典画像 ${item.sourceImage} / 603（ZIP内のファイル名順）`;
+    ui.source.textContent = `出典画像 ${item.sourceImage} / ${maxSourceImage}（ZIP内のファイル名順）`;
     renderEnglish(item.en);
     ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
@@ -513,7 +514,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=46').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=47').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();

@@ -1344,8 +1344,10 @@
       "id": 224,
       "file": "q224.mp3",
       "textSha256": "4fcfe53c1dadb7d004837a2eeaae0498e16f90bb316c6caf656c9702c097b234",
-      "seconds": 5.84,
-      "revision": "0cf10c28d861"
+      "seconds": 6.35,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "00cc1b8af3a9"
     },
     {
       "id": 225,
@@ -3220,6 +3222,33 @@
       "seconds": 6.65,
       "model": "gpt-4o-mini-tts",
       "voice": "onyx"
+    },
+    {
+      "id": 540,
+      "file": "q540.mp3",
+      "textSha256": "dcaffd6a5637529875ad78a821e7300dc0521a789dcfc6e6efd83ea935a61290",
+      "seconds": 7.75,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "1b8d3c6965b0"
+    },
+    {
+      "id": 541,
+      "file": "q541.mp3",
+      "textSha256": "5e2cbd2b8f07a21696d5f383a5ae3d2520e7dbcbd97aa0d4fdac8b18f54dc040",
+      "seconds": 7.15,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "969a1e239627"
+    },
+    {
+      "id": 542,
+      "file": "q542.mp3",
+      "textSha256": "5504cb2ce78568f311d23fb15327e49142c55bc833cfa36f2c44aee18e994c5a",
+      "seconds": 7.8,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "babdba593d32"
     }
   ]
 }

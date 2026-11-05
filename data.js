@@ -517,4 +517,7 @@ window.MAXIMS = [
   {"id":537,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"指導者の役割は、生徒が築いた「仮説」を見抜き、生徒の「仮説」の更なる検証とその修正のプロセスを手伝うことだ。","en":"A guide's role is to recognize the hypotheses students have formed, then help them test those hypotheses further and revise them."},
   {"id":538,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":606,"ja":"もうそろそろ、自分から世界にお返しをする頃合いだ。","en":"It is about time I started giving something back to the world."},
   {"id":539,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":605,"ja":"近視眼的な考えを捨てよ。3.11にもコロナ禍にも言及するな","en":"Set aside short-sighted thinking. Do not mention 3/11 or the COVID-19 pandemic."},
+  {"id":540,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":607,"ja":"すぐにわかったことにせず、まだわからないものがいつか意味を持つ余地を残しておく。","en":"Do not assume you have understood something right away; leave room for what you do not yet understand to become meaningful someday."},
+  {"id":541,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":607,"ja":"既存の説明や形式を当てはめて終わらず、具体的な対象とのやり取りに入り直す。","en":"Do not stop at applying existing explanations or forms; return to engaging with the concrete thing itself."},
+  {"id":542,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":607,"ja":"分かるとは説明を増やすことではなく、以前の見方が組み替わることだ。","en":"Understanding does not mean adding more explanations; it means that your previous way of seeing things is reorganized."},
 ];
