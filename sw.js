@@ -1,6 +1,6 @@
-const CACHE = 'naigen-en-project-v80';
+const CACHE = 'naigen-en-project-v81';
 const CACHE_PREFIX = 'naigen-en-project-';
-const CORE = ['./?v=71', './index.html?v=71', './styles.css?v=21', './app.js?v=47', './data.js?v=60', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './audio/manifest.json'];
+const CORE = ['./?v=72', './index.html?v=72', './styles.css?v=21', './app.js?v=48', './data.js?v=61', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './audio/manifest.json'];
 self.addEventListener('install', event => event.waitUntil((async () => {
   const cache = await caches.open(CACHE);
   await cache.addAll(CORE);
@@ -14,7 +14,7 @@ self.addEventListener('activate', event => event.waitUntil(caches.keys().then(ke
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
   if (event.request.mode === 'navigate') {
-    const fallback = new URL('./index.html?v=71', self.registration.scope).href;
+    const fallback = new URL('./index.html?v=72', self.registration.scope).href;
     event.respondWith(fetch(event.request).then(response => {
       if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put(fallback, copy)); }
       return response;

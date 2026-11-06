@@ -2933,8 +2933,11 @@
     {
       "id": 490,
       "file": "q490.mp3",
-      "textSha256": "a5aeb9d4344a3c57876096c94bc05e07cc6586561048b02abdcb9fa3df252710",
-      "seconds": 8.84
+      "textSha256": "72fa02148ddb4246c06afa2bb4a361b838df293779d04e83d58bbab30bf8e8e1",
+      "seconds": 8.7,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "28ff25d55e85"
     },
     {
       "id": 491,

@@ -471,7 +471,7 @@ window.MAXIMS = [
   {"id":487,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":582,"ja":"間を見られて（聞かれて）いる自覚を持て","en":"Stay mindful that even your pauses are being seen and heard."},
   {"id":488,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":585,"ja":"言葉には聞く側の責任がある","en":"The listener shares responsibility for the words spoken."},
   {"id":489,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":586,"ja":"客が見たいのは演者ののびのびとリラックスした身体である","en":"What the audience wants to see is a performer whose body is relaxed and free."},
-  {"id":490,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":586,"ja":"何事も「面白い／つまらない」の区別はない。あるのは「自然／不自然」の区別だけだ。","en":"Nothing is inherently amusing or dull; there is only the natural and the unnatural."},
+  {"id":490,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":586,"ja":"仕草に「面白い／つまらない」の区別はない。あるのは「自然／不自然」の区別だけだ。","en":"With gestures, there is no distinction between interesting and boring; the only distinction is between natural and unnatural."},
   {"id":491,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":587,"ja":"思考力（あるいは発想力、構想力）の正体はあなたの生まれつきのポテンシャルとあなたがこれまでの人生で経験してきた思考の積み重ねである。よって、それは後天的にある程度伸ばすことが個人差はあるものの可能である。","en":"Thinking power springs from natural potential and a lifetime of accumulated thought, meaning anyone can develop it further."},
   {"id":493,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":592,"ja":"プロは”間”から芸を逆算する","en":"A true professional shapes their craft backward from the pause."},
   {"id":494,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":593,"ja":"熟達すると改善のアイディアが勝手に浮かぶようになる","en":"With true mastery, ideas for improvement simply arise on their own."},
