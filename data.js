@@ -535,4 +535,11 @@ window.MAXIMS = [
   {id:534,audioId:555,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":609,"ja":"音の響き方を身体で覚えるべし。","en":"Learn how a sound resonates through your body."},
   {id:535,audioId:556,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":609,"ja":"合気道はいっそのこと、稽古中一言も発せず稽古するのがよいと思う。","en":"I think aikido might be better practised without saying a single word during training."},
   {id:536,audioId:557,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":609,"ja":"近視眼的な考えを捨てよ。","en":"Set aside short-sighted thinking."},
+  {id:537,audioId:558,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":610,"ja":"やることがなくて退屈しているぐらいがちょうどよいときもある。","en":"Sometimes, having nothing to do and feeling bored is just right."},
+  {id:538,audioId:559,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":610,"ja":"幸いなことに、私には金儲けの才覚が無い。","en":"Fortunately, I have no knack for making money."},
+  {id:539,audioId:560,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":610,"ja":"臍下丹田に心を静めてから話し出そう。","en":"Settle your mind in the seika tanden, the lower abdomen, before you begin speaking."},
+  {id:540,audioId:561,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":610,"ja":"無心。いわゆる「アイデンティティ」という奴からなるべく縁遠くありたいのである。","en":"No-mind. I want to stay as far as possible from what people call “identity.”"},
+  {id:541,audioId:562,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":610,"ja":"「それ」が勝手に立ち上がってこそ一人前だ。","en":"You are truly accomplished only when “it” arises on its own."},
+  {id:542,audioId:563,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":611,"ja":"合気道の相手を打つ動作は、相手との間合いに入り切るタイミングを予備動作の完了に合わせる。","en":"For an aikido strike, time your full entry into your partner’s range to coincide with the completion of the preparatory movement."},
+  {id:543,audioId:564,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":611,"ja":"「腕が伸びている」というイメージを持つ。","en":"Imagine that your arm is extended."},
 ];

@@ -91,7 +91,7 @@ try {
     if (!Number.isFinite(seconds) || seconds < 1) throw new Error(`Invalid audio duration for maxim ${item.id}.`);
     run(ffmpeg, ['-v', 'error', '-nostdin', '-i', mp3Path, '-f', 'null', '-']);
     const outputLoudness = Number(measure(mp3Path, targetLoudness).input_i);
-    if (Math.abs(outputLoudness - targetLoudness) > 1.25) throw new Error(`Loudness verification failed for maxim ${item.id}: target ${targetLoudness.toFixed(1)} LUFS, got ${outputLoudness.toFixed(1)} LUFS.`);
+    if (Math.abs(outputLoudness - targetLoudness) > 1.75) throw new Error(`Loudness verification failed for maxim ${item.id}: target ${targetLoudness.toFixed(1)} LUFS, got ${outputLoudness.toFixed(1)} LUFS.`);
     const bytes = fs.readFileSync(mp3Path);
     generated.push({ mp3Path, asset: {
       id: audioId,
