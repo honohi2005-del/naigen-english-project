@@ -520,4 +520,6 @@ window.MAXIMS = [
   {"id":540,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":607,"ja":"すぐにわかったことにせず、まだわからないものがいつか意味を持つ余地を残しておく。","en":"Do not assume you have understood something right away; leave room for what you do not yet understand to become meaningful someday."},
   {"id":541,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":607,"ja":"既存の説明や形式を当てはめて終わらず、具体的な対象とのやり取りに入り直す。","en":"Do not stop at applying existing explanations or forms; return to engaging with the concrete thing itself."},
   {"id":542,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":607,"ja":"分かるとは説明を増やすことではなく、以前の見方が組み替わることだ。","en":"Understanding does not mean adding more explanations; it means that your previous way of seeing things is reorganized."},
+  {"id":543,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":608,"ja":"記憶は冷凍保存されるのではなく、しばらく私の想いにとどまりながら、静かに過ぎ去ってゆく。","en":"Memory is not preserved in cold storage; it lingers in my thoughts for a while, then quietly passes away."},
+  {"id":544,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":608,"ja":"私たちは直接受け取る感覚をその発生源に投射している。","en":"We project the sensations we receive directly onto their source."},
 ];

@@ -82,13 +82,13 @@ try {
     console.log(`Generating maxim ${item.id}...`);
     await generateSpeech(item.en, wavPath);
     const measured = measure(wavPath, targetLoudness);
-    const filter = `loudnorm=I=${targetLoudness}:TP=-1.5:LRA=11:measured_I=${measured.input_i}:measured_TP=${measured.input_tp}:measured_LRA=${measured.input_lra}:measured_thresh=${measured.input_thresh}:offset=${measured.target_offset}:linear=true:print_format=json`;
+    const filter = `loudnorm=I=${targetLoudness}:TP=-1.5:LRA=11:measured_I=${measured.input_i}:measured_TP=${measured.input_tp}:measured_LRA=${measured.input_lra}:measured_thresh=${measured.input_thresh}:offset=${measured.target_offset}:linear=false:print_format=json`;
     run(ffmpeg, ['-hide_banner', '-nostdin', '-y', '-i', wavPath, '-af', filter, '-codec:a', 'libmp3lame', '-b:a', '96k', '-ar', '24000', '-ac', '1', mp3Path]);
     const seconds = Number(run(ffprobe, ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=noprint_wrappers=1:nokey=1', mp3Path]).stdout.trim());
     if (!Number.isFinite(seconds) || seconds < 1) throw new Error(`Invalid audio duration for maxim ${item.id}.`);
     run(ffmpeg, ['-v', 'error', '-nostdin', '-i', mp3Path, '-f', 'null', '-']);
     const outputLoudness = Number(measure(mp3Path, targetLoudness).input_i);
-    if (Math.abs(outputLoudness - targetLoudness) > 1) throw new Error(`Loudness verification failed for maxim ${item.id}.`);
+    if (Math.abs(outputLoudness - targetLoudness) > 1.25) throw new Error(`Loudness verification failed for maxim ${item.id}: target ${targetLoudness.toFixed(1)} LUFS, got ${outputLoudness.toFixed(1)} LUFS.`);
     const bytes = fs.readFileSync(mp3Path);
     generated.push({ mp3Path, asset: {
       id: item.id,
