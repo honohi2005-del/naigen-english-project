@@ -18,6 +18,7 @@ const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(root, 'data.js'), 'utf8'), context);
 const items = context.window.MAXIMS;
 if (!Array.isArray(items) || !items.length) throw new Error('No English text found in data.js.');
+const audioIdOf = item => Number(item.audioId ?? item.id);
 const onlyId = process.argv.find(arg => arg.startsWith('--id='))?.slice(5);
 const selected = onlyId ? items.filter(item => String(item.id) === onlyId) : items;
 if (!selected.length) throw new Error(`Unknown id: ${onlyId}`);
@@ -96,17 +97,18 @@ let failed = false;
 async function worker() {
   while (nextIndex < selected.length) {
     const item = selected[nextIndex++];
-    const file = fileFor(item.id);
+    const audioId = audioIdOf(item);
+    const file = fileFor(audioId);
     const target = path.join(audioDir, file);
     const textSha256 = crypto.createHash('sha256').update(item.en, 'utf8').digest('hex');
-    if (byId.get(item.id)?.textSha256 === textSha256 && fs.existsSync(target)) {
+    if (byId.get(audioId)?.textSha256 === textSha256 && fs.existsSync(target)) {
       console.log(`${file}: already current`);
       continue;
     }
     try {
       const wav = await requestAudio(item.en);
       const seconds = convertAndCheck(wav, target);
-      byId.set(item.id, { id: item.id, file, textSha256, seconds });
+      byId.set(audioId, { id: audioId, file, textSha256, seconds });
       writeManifest();
       console.log(`${file}: ${seconds}s`);
     } catch (error) {

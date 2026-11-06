@@ -12,10 +12,11 @@ const manifestPath = path.join(audioDir, 'manifest.json');
 const apiKey = process.env.OPENAI_API_KEY;
 if (!apiKey || !/^sk-[A-Za-z0-9_-]{20,}$/.test(apiKey)) throw new Error('A valid OPENAI_API_KEY environment variable is required.');
 const idsArgument = process.argv.find(argument => argument.startsWith('--ids='));
-if (!idsArgument || !/^--ids=\d+(,\d+)*$/.test(idsArgument)) throw new Error('Specify --ids=224,540,541,542.');
+if (!idsArgument || !/^--ids=\d+(,\d+)*$/.test(idsArgument)) throw new Error('Specify displayed maxim IDs, for example --ids=224,500,536.');
 const ids = [...new Set(idsArgument.slice(6).split(',').map(Number))];
 const context = { window: {} };
 vm.runInNewContext(fs.readFileSync(path.join(root, 'data.js'), 'utf8'), context);
+const audioIdOf = item => Number(item.audioId ?? item.id);
 const items = ids.map(id => {
   const item = context.window.MAXIMS.find(candidate => candidate.id === id);
   if (!item?.en) throw new Error(`No English text found for maxim ${id}.`);
@@ -70,16 +71,18 @@ async function generateSpeech(text, destination) {
 }
 
 try {
-  const referenceLevels = [1, 2, 3].map(id => Number(measure(path.join(audioDir, `q${String(id).padStart(3, '0')}.mp3`)).input_i)).sort((a, b) => a - b);
+  const referenceIds = context.window.MAXIMS.slice(0, 3).map(audioIdOf);
+  const referenceLevels = referenceIds.map(id => Number(measure(path.join(audioDir, `q${String(id).padStart(3, '0')}.mp3`)).input_i)).sort((a, b) => a - b);
   const targetLoudness = Math.round(referenceLevels[1] * 10) / 10;
   if (targetLoudness < -70 || targetLoudness > -5) throw new Error('Reference loudness is outside supported limits.');
   console.log(`Gemini reference loudness: ${targetLoudness.toFixed(1)} LUFS`);
   const generated = [];
   for (const item of items) {
-    const basename = `q${String(item.id).padStart(3, '0')}`;
+    const audioId = audioIdOf(item);
+    const basename = `q${String(audioId).padStart(3, '0')}`;
     const wavPath = path.join(tempDir, `${basename}.wav`);
     const mp3Path = path.join(tempDir, `${basename}.mp3`);
-    console.log(`Generating maxim ${item.id}...`);
+    console.log(`Generating maxim ${item.id} (audio ${audioId})...`);
     await generateSpeech(item.en, wavPath);
     const measured = measure(wavPath, targetLoudness);
     const filter = `loudnorm=I=${targetLoudness}:TP=-1.5:LRA=11:measured_I=${measured.input_i}:measured_TP=${measured.input_tp}:measured_LRA=${measured.input_lra}:measured_thresh=${measured.input_thresh}:offset=${measured.target_offset}:linear=false:print_format=json`;
@@ -91,7 +94,7 @@ try {
     if (Math.abs(outputLoudness - targetLoudness) > 1.25) throw new Error(`Loudness verification failed for maxim ${item.id}: target ${targetLoudness.toFixed(1)} LUFS, got ${outputLoudness.toFixed(1)} LUFS.`);
     const bytes = fs.readFileSync(mp3Path);
     generated.push({ mp3Path, asset: {
-      id: item.id,
+      id: audioId,
       file: `${basename}.mp3`,
       textSha256: hash(item.en),
       seconds: Math.round(seconds * 100) / 100,

@@ -2,6 +2,7 @@
   'use strict';
   const items = window.MAXIMS || [];
   const audioRevisions = { 224: '00cc1b8af3a9', 490: '28ff25d55e85', 540: '1b8d3c6965b0', 541: '969a1e239627', 542: 'babdba593d32', 543: '8635873410be', 544: 'a3046bab1f33' };
+  const audioIdOf = item => Number(item.audioId ?? item.id);
   const maxSourceImage = Math.max(...items.map(item => Number(item.sourceImage)));
   const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
   const sourceOrderedItems = [...items].sort((a, b) => Number(a.sourceImage) - Number(b.sourceImage) || Number(a.id) - Number(b.id));
@@ -111,8 +112,9 @@
     stopSpeech();
     const version = speechVersion;
     const audio = quoteAudio ||= new Audio();
-    const revision = audioRevisions[current.id];
-    audio.src = `./audio/q${String(current.id).padStart(3, '0')}.mp3${revision ? `?v=${revision}` : ''}`;
+    const audioId = audioIdOf(current);
+    const revision = audioRevisions[audioId];
+    audio.src = `./audio/q${String(audioId).padStart(3, '0')}.mp3${revision ? `?v=${revision}` : ''}`;
     audio.playbackRate = modelPlaybackRate;
     audio.onplaying = () => {
       if (version !== speechVersion) return;
@@ -393,7 +395,7 @@
     recordObjectUrls.forEach(url => URL.revokeObjectURL(url));
     recordObjectUrls = [];
     ui.recordList.replaceChildren();
-    const records = current ? allRecords.filter(record => record.id === current.id).sort((a, b) => a.createdAt - b.createdAt) : [];
+    const records = current ? allRecords.filter(record => Number(record.id) === audioIdOf(current)).sort((a, b) => a.createdAt - b.createdAt) : [];
     ui.recordStatus.textContent = records.length ? `この一文の録音 ${records.length}件 · この端末に保存` : 'この一文の録音はまだありません。';
     for (const record of records) {
       const row = document.createElement('div'); row.className = 'record-item';
@@ -411,9 +413,10 @@
     recordingStarting = true;
     updateRecordControls();
     try {
-      const recordingId = current.id;
+      const recordingQuoteId = current.id;
+      const recordingId = audioIdOf(current);
       recordStream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      if (!current || current.id !== recordingId) {
+      if (!current || current.id !== recordingQuoteId) {
         recordStream.getTracks().forEach(track => track.stop()); recordStream = null;
         ui.recordStatus.textContent = '文が切り替わったため、録音を開始しませんでした。';
         return;
@@ -514,7 +517,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=53').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=54').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
