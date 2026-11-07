@@ -4122,6 +4122,15 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "612c067f4f12"
+    },
+    {
+      "id": 639,
+      "file": "q639.mp3",
+      "textSha256": "d564be13a3237f4dd07b4917e75fdf65bb55b0483b798ba1f74dd07963f563ff",
+      "seconds": 4.9,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "0719f5df5537"
     }
   ]
 }

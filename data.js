@@ -616,4 +616,5 @@ window.MAXIMS = [
   {id:615,audioId:636,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:626,ja:'無意識のレベルまで引き上げられ、スタイル化された制作は、作家が素材や手法にとらわれずその先にある精神の領域に入っていくことを可能にする。',en:'Creative work, once brought to the level of the unconscious and stylized, allows the artist to move beyond materials and techniques and enter the spiritual realm beyond them.'},
   {id:616,audioId:637,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:626,ja:'表現におけるスタイル化は表現を制限するようにみえるが、実は作家の身体や思考を解放し、より自由な表現に導くものである。',en:'Stylistic form may seem to constrain expression, but in fact it frees the artist’s body and thought, leading to freer expression.'},
   {id:617,audioId:638,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:626,ja:'一見同じことを繰り返しているように見えても、そこでは意味が固定しておらず、新しい意味が生成し続けているということがある。',en:'Even when it seems that the same thing is being repeated, meaning may not be fixed; new meanings may continue to emerge.'},
+  {id:618,audioId:639,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:626,ja:'重心が落ち切っていれば、股関節は自ずと開く',en:'Once your center of gravity is fully lowered, your hips will naturally open.'},
 ];
