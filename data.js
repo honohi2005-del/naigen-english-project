@@ -617,4 +617,11 @@ window.MAXIMS = [
   {id:616,audioId:637,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:626,ja:'表現におけるスタイル化は表現を制限するようにみえるが、実は作家の身体や思考を解放し、より自由な表現に導くものである。',en:'Stylistic form may seem to constrain expression, but in fact it frees the artist’s body and thought, leading to freer expression.'},
   {id:617,audioId:638,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:626,ja:'一見同じことを繰り返しているように見えても、そこでは意味が固定しておらず、新しい意味が生成し続けているということがある。',en:'Even when it seems that the same thing is being repeated, meaning may not be fixed; new meanings may continue to emerge.'},
   {id:618,audioId:639,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:626,ja:'重心が落ち切っていれば、股関節は自ずと開く',en:'Once your center of gravity is fully lowered, your hips will naturally open.'},
+  {id:619,audioId:640,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:627,ja:'お前の言葉に嘘偽りがないのであれば、なぜお前の「作品」が美術館に展示されているのか。つまり、それが「作品」として存在していること自体に芸術の不徹底が感じられてならない。',en:'If your words are true, why is your “work” on display in a museum? In other words, I cannot help feeling that the very fact that it exists as a “work” shows that the art is incomplete.'},
+  {id:620,audioId:641,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:627,ja:'あらゆる感覚が立ち上がり消えてゆくこの身体こそがアートである。',en:'This very body, where every sensation arises and fades away, is art.'},
+  {id:621,audioId:642,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:627,ja:'インドで暮らしている心持で日本でものびのび暮らせばいい。',en:'In Japan, live freely and expansively as if you were living in India.'},
+  {id:622,audioId:643,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:627,ja:'人間はすぐ己の経験に特別な意味付けをしたがるが、その弊害としてトラウマが生じる。',en:'People are quick to assign special meaning to their experiences, and trauma arises as a consequence.'},
+  {id:623,audioId:644,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:627,ja:'誰の期待にも応えなくていい。',en:'You don’t have to meet anyone’s expectations.'},
+  {id:624,audioId:645,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:628,ja:'リズムこそが、声の次元における間主観性をさせている。',en:'Rhythm is what makes intersubjectivity possible in the realm of the voice.'},
+  {id:625,audioId:646,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:628,ja:'不慣れだったり、不快だったりする状況の到来を脳が感知すると、まず脳内にエラーが生じ、OCD症状が発現する。',en:'When the brain detects the onset of an unfamiliar or uncomfortable situation, an error first arises in the brain, and OCD symptoms emerge.'},
 ];
