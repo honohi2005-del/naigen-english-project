@@ -405,7 +405,7 @@ window.MAXIMS = [
   {id:404,audioId:421,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":461,"ja":"脱力している時、もっともパフォーマンスに自信が持てる","en":"When I am fully relaxed, I feel the greatest confidence in my performance."},
   {id:405,audioId:422,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":464,"ja":"アートとは成果物ではなく生それ自体である","en":"Art is not the finished product, but the act of emergence itself."},
   {id:406,audioId:423,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":465,"ja":"アートとは「あなた」との即興的なたわむれである","en":"Art is an improvisational play with you."},
-  {id:407,audioId:424,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":469,"ja":"言葉に身体性を与えるのは人々の仕事だ","en":"Giving words physical embodiment is the work of human beings."},
+  {id:407,audioId:424,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":469,"ja":"言葉に身体性を与えるのは人間の仕事だ","en":"Giving words physical embodiment is the work of human beings."},
   {id:408,audioId:425,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":471,"ja":"何をするのかよりも何をしないのかのほうがもっと大切だ","en":"What you choose not to do is far more important than what you do."},
   {id:409,audioId:426,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":477,"ja":"調子がよくないときというのは、自分の中の内なるリズムが感じられない状態のことだ","en":"Being off your game simply means you can no longer feel your inner rhythm."},
   {id:410,audioId:427,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":479,"ja":"字を書くことで瞬間瞬間の集中力の度合が如実に分かる。","en":"Writing by hand reveals your level of focus from one moment to the next."},
