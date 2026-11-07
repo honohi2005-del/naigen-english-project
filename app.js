@@ -2,6 +2,14 @@
   'use strict';
   const items = window.MAXIMS || [];
   const audioRevisions = { 224: '00cc1b8af3a9', 490: '28ff25d55e85', 540: '1b8d3c6965b0', 541: '969a1e239627', 542: 'babdba593d32', 543: '8635873410be', 544: 'a3046bab1f33', 629: 'f22496ed163f', 639: '0719f5df5537' };
+  Object.assign(audioRevisions, {
+    664: '6f8dc03d8483', 665: '93d35a8a7bc0', 666: '17938eb6514a', 667: 'aec64c8f9651', 668: 'f5c546894c61',
+    669: '3acf23743831', 670: '4d680e6574d7', 671: '05f6644a8fb2', 672: 'b88f5b5168f7', 673: '434f38b47935',
+    674: '4aac5d0ff74c', 675: 'b4bba6c178f0', 676: 'ed376ff3c43b', 677: 'cffa7c88fb5b', 678: '2b62d9ef1ebc',
+    679: 'e971be8aa38e', 680: '75b33451c3df', 681: 'a6a2966f9f73', 682: 'd66892d659d1', 683: 'a4fb2901ac0b',
+    684: '4c85137d79fb', 685: '37cdf21d7bb3', 686: '90e8eb1edb9e', 687: 'c16f78a8528d', 688: '0b9f33b3b711',
+    689: 'e3787a5a659f', 690: 'fb4b25035a9c', 691: '7f4fdc26d38f', 692: '95452f0cc4db', 693: '3d2509bb854d'
+  });
   const audioIdOf = item => Number(item.audioId ?? item.id);
   const maxSourceImage = Math.max(...items.map(item => Number(item.sourceImage)));
   const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
@@ -648,7 +656,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=76').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=77').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
