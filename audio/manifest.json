@@ -3164,8 +3164,11 @@
     {
       "id": 529,
       "file": "q529.mp3",
-      "textSha256": "70e960a105b789a83828e8f200afbd64ae7730e0ee035ffaf87ec1054c7f4029",
-      "seconds": 5.28
+      "textSha256": "72e6a3d35a06a8c5661dcacc4cd0ac675766c2a98c55dd99e9172b0a23c32f19",
+      "seconds": 3.65,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "54fa68020095"
     },
     {
       "id": 531,

@@ -507,7 +507,7 @@ window.MAXIMS = [
   {id:506,audioId:526,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":330,"ja":"予測誤差は客（学生）の眼の奥からあふれてくる。","en":"Prediction error wells up from the depths of the customer's (student's) eyes."},
   {id:507,audioId:527,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":327,"ja":"感覚の予測誤差が大きいとき、予測誤差を小さくするために、私は言葉に頼ろうとする。","en":"When sensory prediction error is high, I try to rely on words to reduce it."},
   {id:508,audioId:528,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":522,"ja":"意味を求めない反復に身を置く。","en":"Place yourself in repetition without seeking meaning."},
-  {id:509,audioId:529,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":510,"ja":"トライ＆エラーの多い、多い授業をデザインする。","en":"Design lessons with lots and lots of trial and error."},
+  {id:509,audioId:529,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":510,"ja":"トライ＆エラーの多い授業をデザインする。","en":"Design lessons with a lot of trial and error."},
   {id:510,audioId:531,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"今生きている時代を特殊・特別なものと思わず、二、三歩引いた地点から眺める。","en":"Do not regard the era we live in as unusual or exceptional; look at it from two or three steps back."},
   {id:511,audioId:532,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":603,"ja":"ナルシストとは潜在的な将来のニヒリスト候補である。","en":"A narcissist is a potential future nihilist."},
   {id:512,audioId:533,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":603,"ja":"何語であっても、言ってもしょうがないことは「言わぬが花」だ。","en":"Whatever the language, when something is not worth saying, silence is golden."},
