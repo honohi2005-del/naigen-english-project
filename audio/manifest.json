@@ -4036,11 +4036,11 @@
     {
       "id": 629,
       "file": "q629.mp3",
-      "textSha256": "3ba90423a5172dfe081449c691e6f37948907aad81967acaae842a5805de2dc1",
-      "seconds": 6.05,
+      "textSha256": "049f461b88513b4bc7a6f5b9867cf75290802bcd592ae6a2f3fd784b204e8141",
+      "seconds": 6.95,
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
-      "revision": "118cb4036357"
+      "revision": "f22496ed163f"
     },
     {
       "id": 630,

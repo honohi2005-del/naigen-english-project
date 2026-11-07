@@ -606,7 +606,7 @@ window.MAXIMS = [
   {id:605,audioId:626,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:625,ja:'調子がいいとき、コンマ数秒先の世界が見える。',en:'When I’m in good form, I can see the world a fraction of a second ahead.'},
   {id:606,audioId:627,topic:'行動と内省',topicLabel:'行動と内省',sourceImage:626,ja:'余裕を持って楽しめば、異常に興奮したりしない',en:'If you relax and enjoy yourself, you won’t get overly excited.'},
   {id:607,audioId:628,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:626,ja:'本当に脱力していたら、どれだけやっても疲れない',en:'If you are truly relaxed, you won’t tire no matter how much you do.'},
-  {id:608,audioId:629,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:626,ja:'合気道で反応が遅れるのは、過去の習慣の惰性に頼る傾向があるからだと思う。',en:'I think my reactions in aikido are slow because I tend to fall back on old habits instead of responding to my partner’s movements in the moment.'},
+  {id:608,audioId:629,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:626,ja:'合気道で反応が遅れるのは、過去の習慣の惰性に頼る傾向があるからだと思う。',en:'I think my movements in aikido tend to be a beat late because I rely on the inertia of past habits.'},
   {id:609,audioId:630,topic:'発音と身体',topicLabel:'発音と身体',sourceImage:626,ja:'過去の習慣の惰性で動かぬように動きに敢えて違和感を求め続ける',en:'Keep deliberately seeking a sense of unfamiliarity in your movements so you don’t move by the inertia of past habits.'},
   {id:610,audioId:631,topic:'意味と思索',topicLabel:'意味と思索',sourceImage:626,ja:'「顔のない私」でいればよい',en:'Just remain a “faceless self.”'},
   {id:611,audioId:632,topic:'表現と学習',topicLabel:'表現と学習',sourceImage:626,ja:'文字を書くときはひたすら書くことに集中するべし。',en:'When writing, focus entirely on the act of writing.'},
