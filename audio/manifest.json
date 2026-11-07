@@ -4284,6 +4284,69 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "05b08b426509"
+    },
+    {
+      "id": 657,
+      "file": "q657.mp3",
+      "textSha256": "2d078a181cde2986b0b5ae6708208a4e93e170cee413b738a241aa9d543be823",
+      "seconds": 9.75,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "5c4b3f435770"
+    },
+    {
+      "id": 658,
+      "file": "q658.mp3",
+      "textSha256": "2fd6a1f37e78eac752dd6e2128720b1c426cc948c03a5b29e010f6f0cf9386ba",
+      "seconds": 7.8,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "355c2b88976c"
+    },
+    {
+      "id": 659,
+      "file": "q659.mp3",
+      "textSha256": "b211df7dcb479aeeb67650c23eb3bdeb16c54b8b1232df97e2264f07beb4b683",
+      "seconds": 5.4,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "7345af10b82d"
+    },
+    {
+      "id": 660,
+      "file": "q660.mp3",
+      "textSha256": "bf0cae9b47688956e8f05a7602016984cb0845b843d8e3e6077a1099a5928ffa",
+      "seconds": 4.15,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "804d0925df4b"
+    },
+    {
+      "id": 661,
+      "file": "q661.mp3",
+      "textSha256": "edb2c2c655cf35371b36ac07f867bf0549665aad6b4f3370ad426b993acc77fa",
+      "seconds": 8.1,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "f60339c8bf54"
+    },
+    {
+      "id": 662,
+      "file": "q662.mp3",
+      "textSha256": "6a6d553b50e89c0e521816dd2ad6548b229ef5cb9fa39e8226e43531bcb2a72c",
+      "seconds": 10.9,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "f63cb41f58d8"
+    },
+    {
+      "id": 663,
+      "file": "q663.mp3",
+      "textSha256": "7ca80160608e346ebd363ea38304341e55fe24f0c57b66319cb517963924bcb8",
+      "seconds": 7.95,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "8f37328f2ff2"
     }
   ]
 }
