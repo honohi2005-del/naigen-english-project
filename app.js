@@ -11,9 +11,9 @@
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), numberedPlay: [...document.querySelectorAll('[data-start-number]')], picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), next: $('next-button'), orderedNext: $('ordered-next-button'),
-    series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
+    series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordTrio: $('record-model-trio'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
-  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
+  let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordPlaybackRun = null, trioPlayback = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
   let randomHistory = [], randomHistoryPos = -1;
   const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let modelPlaybackRate = 1;
@@ -135,7 +135,7 @@
       if (version !== speechVersion) return;
       quotePlaybackActive = false;
       updatePauseButton();
-      if (series) stopSeries();
+      if (series || trioPlayback) stopSeries();
       ui.speechStatus.textContent = 'Gemini音声を再生できませんでした。通信状態をご確認ください。';
     };
     audio.onerror = fail;
@@ -203,10 +203,13 @@
     seriesTimer = null;
     stopSpeech();
     series = null;
+    trioPlayback = null;
+    stopRecordPlayback();
     ui.series.hidden = true;
     ui.speechStatus.textContent = '';
     updatePreviousButton();
     updateOrderedNextButton();
+    updateRecordTrioButton();
   }
   function randomOne() { stopSeries(); const next = chooseRandom(mode === 'topic' ? topicItems() : items); if (next) { rememberRandom(current); rememberRandom(next); renderItem(next); } }
   function nextInSourceOrder() {
@@ -220,6 +223,7 @@
     renderItem(next);
   }
   function previousRandom() {
+    if (recordPlaybackRun || trioPlayback) stopSeries();
     if (series?.type === 'model' || series?.type === 'ordered' || series?.type === 'numbered' || series?.type === 'topic') {
       if (series.pos <= 1) return;
       const activeSeries = series;
@@ -341,6 +345,16 @@
     ui.recordAll.disabled = allRecords.length === 0 || recordDeletionPending;
     ui.recordClear.disabled = allRecords.length === 0 || recordingStarting || recorder?.state === 'recording' || recordSavePending || recordDeletionPending;
     ui.recordCount.textContent = allRecords.length ? `(${allRecords.length})` : '';
+    updateRecordTrioButton();
+  }
+  function currentRecordingRecords() {
+    return current ? allRecords.filter(record => Number(record.id) === audioIdOf(current)).sort((a, b) => a.createdAt - b.createdAt) : [];
+  }
+  function updateRecordTrioButton() {
+    if (!ui.recordTrio) return;
+    const active = trioPlayback?.item.id === current?.id;
+    ui.recordTrio.disabled = (!currentRecordingRecords().length && !active) || recordDeletionPending;
+    ui.recordTrio.textContent = active ? '再生を停止' : 'モデル→自分→モデル';
   }
   async function loadRecords() {
     try {
@@ -351,9 +365,11 @@
     renderCurrentRecords();
   }
   function stopRecordPlayback() {
+    recordPlaybackRun = null;
     if (playbackAudio) {
       playbackAudio.onended = null;
       playbackAudio.onerror = null;
+      playbackAudio.onplay = null;
       playbackAudio.pause();
       playbackAudio.removeAttribute('src');
       playbackAudio.load();
@@ -373,7 +389,7 @@
     recordDeletionPending = true;
     updateRecordControls();
     try {
-      stopRecordPlayback();
+      stopSeries();
       const db = await openDb();
       await new Promise((resolve, reject) => {
         const transaction = db.transaction('recordings', 'readwrite');
@@ -395,7 +411,7 @@
     recordObjectUrls.forEach(url => URL.revokeObjectURL(url));
     recordObjectUrls = [];
     ui.recordList.replaceChildren();
-    const records = current ? allRecords.filter(record => Number(record.id) === audioIdOf(current)).sort((a, b) => a.createdAt - b.createdAt) : [];
+    const records = currentRecordingRecords();
     ui.recordStatus.textContent = records.length ? `この一文の録音 ${records.length}件 · この端末に保存` : 'この一文の録音はまだありません。';
     for (const record of records) {
       const row = document.createElement('div'); row.className = 'record-item';
@@ -404,6 +420,7 @@
       const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = '削除'; remove.setAttribute('aria-label', '録音を削除'); remove.addEventListener('click', () => deleteRecord(record.key));
       row.append(time, audio, remove); ui.recordList.append(row);
     }
+    updateRecordTrioButton();
   }
   async function toggleRecording() {
     if (recordDeletionPending) return;
@@ -445,17 +462,129 @@
     } catch { ui.recordStatus.textContent = 'マイクを使えません。ブラウザのマイク許可をご確認ください。'; }
     finally { recordingStarting = false; updateRecordControls(); }
   }
-  async function playAllRecords() {
-    playbackAudio?.pause();
+  function showRecordingItem(record) {
+    const item = items.find(candidate => audioIdOf(candidate) === Number(record.id));
+    if (!item) return;
+    if (current?.id !== item.id) {
+      rememberRandom(current);
+      rememberRandom(item);
+      renderItem(item);
+    }
+  }
+  function finishRecordPlayback(run, message) {
+    if (recordPlaybackRun !== run) return;
+    if (playbackAudio) {
+      playbackAudio.onended = null;
+      playbackAudio.onerror = null;
+      playbackAudio.onplay = null;
+      playbackAudio = null;
+    }
     playbackQueue.forEach(url => URL.revokeObjectURL(url));
-    playbackQueue = allRecords.slice().sort((a, b) => a.createdAt - b.createdAt).map(record => URL.createObjectURL(record.blob));
-    if (!playbackQueue.length) return;
-    let index = 0;
-    const finish = () => { playbackQueue.forEach(url => URL.revokeObjectURL(url)); playbackQueue = []; playbackAudio = null; };
-    const audio = playbackAudio = new Audio();
-    audio.onended = () => { if (++index < playbackQueue.length) { audio.src = playbackQueue[index]; audio.play().catch(() => { finish(); }); } else { finish(); ui.recordStatus.textContent = '録音の連続再生が終わりました。'; } };
-    audio.onerror = () => { if (++index < playbackQueue.length) { audio.src = playbackQueue[index]; audio.play().catch(finish); } else finish(); };
-    audio.src = playbackQueue[index]; ui.recordStatus.textContent = '録音を連続再生中…'; audio.play().catch(() => { finish(); ui.recordStatus.textContent = '録音を再生できませんでした。'; });
+    playbackQueue = [];
+    recordPlaybackRun = null;
+    ui.series.hidden = true;
+    ui.speechStatus.textContent = message;
+    updateRecordTrioButton();
+  }
+  function playRecordQueueItem(run) {
+    if (recordPlaybackRun !== run) return;
+    if (run.index >= run.records.length) {
+      finishRecordPlayback(run, '録音の連続再生が終わりました。');
+      return;
+    }
+    const audio = playbackAudio = new Audio(playbackQueue[run.index]);
+    const record = run.records[run.index];
+    const showStatus = () => {
+      if (recordPlaybackRun !== run || playbackAudio !== audio) return;
+      showRecordingItem(record);
+      ui.series.hidden = false;
+      ui.seriesStatus.textContent = `録音を連続再生 · ${run.index + 1} / ${run.records.length}`;
+      ui.speechStatus.textContent = '自分の録音を再生中…';
+    };
+    const advance = () => {
+      if (recordPlaybackRun !== run || playbackAudio !== audio) return;
+      audio.onended = null;
+      audio.onerror = null;
+      audio.onplay = null;
+      playbackAudio = null;
+      run.index++;
+      playRecordQueueItem(run);
+    };
+    audio.onplay = showStatus;
+    audio.onended = advance;
+    audio.onerror = advance;
+    audio.play().catch(advance);
+  }
+  function playAllRecords() {
+    if (recordPlaybackRun) {
+      stopSeries();
+      ui.speechStatus.textContent = '録音の連続再生を停止しました。';
+      return;
+    }
+    const records = allRecords.slice().sort((a, b) => a.createdAt - b.createdAt);
+    if (!records.length) return;
+    stopSeries();
+    playbackQueue = records.map(record => URL.createObjectURL(record.blob));
+    recordPlaybackRun = { records, index: 0 };
+    ui.series.hidden = false;
+    ui.seriesStatus.textContent = `録音を連続再生 · 1 / ${records.length}`;
+    playRecordQueueItem(recordPlaybackRun);
+  }
+  function finishTrioPlayback(run) {
+    if (trioPlayback !== run) return;
+    trioPlayback = null;
+    ui.series.hidden = true;
+    ui.speechStatus.textContent = 'モデル→自分→モデルの再生が終わりました。';
+    updateRecordTrioButton();
+  }
+  function setTrioStage(run, stage, label) {
+    if (trioPlayback !== run) return;
+    run.stage = stage;
+    ui.series.hidden = false;
+    ui.seriesStatus.textContent = `モデル → 自分 → モデル · ${label}`;
+  }
+  function playTrioRecording(run) {
+    if (trioPlayback !== run) return;
+    setTrioStage(run, 'self', '2 / 3');
+    const url = URL.createObjectURL(run.record.blob);
+    playbackQueue = [url];
+    const audio = playbackAudio = new Audio(url);
+    audio.onended = () => {
+      if (trioPlayback !== run || playbackAudio !== audio) return;
+      audio.onended = null;
+      audio.onerror = null;
+      playbackAudio = null;
+      URL.revokeObjectURL(url);
+      playbackQueue = [];
+      setTrioStage(run, 'model-after', '3 / 3');
+      speakCurrent(() => finishTrioPlayback(run));
+    };
+    audio.onerror = () => {
+      if (trioPlayback !== run || playbackAudio !== audio) return;
+      stopSeries();
+      ui.speechStatus.textContent = '自分の録音を再生できませんでした。';
+    };
+    audio.play().catch(() => {
+      if (trioPlayback !== run || playbackAudio !== audio) return;
+      stopSeries();
+      ui.speechStatus.textContent = '自分の録音を再生できませんでした。';
+    });
+  }
+  function playModelSelfModel() {
+    if (!current) return;
+    if (trioPlayback?.item.id === current.id) {
+      stopSeries();
+      ui.speechStatus.textContent = 'モデル→自分→モデルの再生を停止しました。';
+      return;
+    }
+    const record = currentRecordingRecords().at(-1);
+    if (!record) return;
+    stopSeries();
+    const run = { item: current, record, stage: 'model-before' };
+    trioPlayback = run;
+    updateRecordTrioButton();
+    setTrioStage(run, 'model-before', '1 / 3');
+    speakCurrent(() => playTrioRecording(run));
   }
 
   ui.tabs.forEach(tab => tab.addEventListener('click', () => setMode(tab.dataset.mode)));
@@ -475,6 +604,7 @@
     catch { /* Keep the selected mode for the current session. */ }
   });
   ui.speak.addEventListener('click', () => {
+    if (recordPlaybackRun || trioPlayback) stopSeries();
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
     const activeSeries = series;
@@ -514,10 +644,11 @@
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
+  ui.recordTrio.addEventListener('click', playModelSelfModel);
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=75').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=76').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
