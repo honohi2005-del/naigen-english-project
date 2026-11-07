@@ -408,7 +408,7 @@ window.MAXIMS = [
   {id:407,audioId:424,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":469,"ja":"言葉に身体性を与えるのは人々の仕事だ","en":"Giving words physical embodiment is the work of human beings."},
   {id:408,audioId:425,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":471,"ja":"何をするのかよりも何をしないのかのほうがもっと大切だ","en":"What you choose not to do is far more important than what you do."},
   {id:409,audioId:426,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":477,"ja":"調子がよくないときというのは、自分の中の内なるリズムが感じられない状態のことだ","en":"Being off your game simply means you can no longer feel your inner rhythm."},
-  {id:410,audioId:427,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":479,"ja":"字を書くことで瞬間〳〵の集中力の度合が如実に分かる。","en":"Writing by hand reveals your level of focus from one moment to the next."},
+  {id:410,audioId:427,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":479,"ja":"字を書くことで瞬間瞬間の集中力の度合が如実に分かる。","en":"Writing by hand reveals your level of focus from one moment to the next."},
   {id:411,audioId:428,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":480,"ja":"文章がうまいとは、文章をいちいち教科書のようにわかりやすく説明しないで、ちょッとした言葉の言い回しで出来事を前に進められるということだ。","en":"Good writing does not explain everything like a textbook; it drives the action forward with a deft turn of phrase."},
   {id:412,audioId:429,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":481,"ja":"言葉は行為そのもの","en":"Words are action itself."},
   {id:413,audioId:430,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":481,"ja":"人前での稽古は緊張するから意味があるのであって、緊張しなかったら人前でする意味はない","en":"Rehearsing in front of others matters because it makes you nervous; without that tension, there is no point."},
