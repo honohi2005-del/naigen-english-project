@@ -4626,6 +4626,15 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "4efacf4395c0"
+    },
+    {
+      "id": 695,
+      "file": "q695.mp3",
+      "textSha256": "446cb73969f6b4ba98746c0b774505a4ce5d80c5d262508f01882c5c0538417a",
+      "seconds": 5.05,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "55e105065afb"
     }
   ]
 }
