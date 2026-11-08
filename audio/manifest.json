@@ -4635,6 +4635,24 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "55e105065afb"
+    },
+    {
+      "id": 696,
+      "file": "q696.mp3",
+      "textSha256": "6cdd13c59f90acde49f194cb553fef8269fb416ec0cb5357e5ccee5bd1ad9723",
+      "seconds": 7.95,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "26d04b543614"
+    },
+    {
+      "id": 697,
+      "file": "q697.mp3",
+      "textSha256": "c398fbe38dd1bfa8baa71f8d1f90adba9c5b8944551024832d15dead2263524e",
+      "seconds": 6.75,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "c60f508f15a5"
     }
   ]
 }

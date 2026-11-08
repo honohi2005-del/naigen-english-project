@@ -9,7 +9,7 @@
     679: 'e971be8aa38e', 680: '75b33451c3df', 681: 'a6a2966f9f73', 682: 'd66892d659d1', 683: 'a4fb2901ac0b',
     684: '4c85137d79fb', 685: '37cdf21d7bb3', 686: '90e8eb1edb9e', 687: 'c16f78a8528d', 688: '0b9f33b3b711',
     689: 'e3787a5a659f', 690: 'fb4b25035a9c', 691: '7f4fdc26d38f', 692: '95452f0cc4db', 693: '3d2509bb854d', 694: '4efacf4395c0',
-    695: '55e105065afb'
+    695: '55e105065afb', 696: '26d04b543614', 697: 'c60f508f15a5'
   });
   const audioIdOf = item => Number(item.audioId ?? item.id);
   const maxSourceImage = Math.max(...items.map(item => Number(item.sourceImage)));
@@ -657,7 +657,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=79').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=80').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
