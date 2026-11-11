@@ -70,11 +70,13 @@
             <label class="repeat-control" for="repeat-twice"><input id="repeat-twice" type="checkbox" />連続再生で各格言を2回読む</label>
             <button id="pause-button" class="button button-outline" type="button" disabled>一時停止</button>
             <button id="model-loop-button" class="button button-outline" type="button">モデル音声を連続再生</button>
+            <button id="previous-fifty-button" class="button button-quiet" type="button" disabled>50文戻す <span aria-hidden="true">←</span></button>
             <button id="previous-ten-button" class="button button-quiet" type="button" disabled>10文戻す <span aria-hidden="true">←</span></button>
             <button id="previous-button" class="button button-quiet" type="button" disabled>前の一文 <span aria-hidden="true">←</span></button>
             <button id="next-button" class="button button-quiet" type="button">別の一文 <span aria-hidden="true">→</span></button>
             <button id="ordered-next-button" class="button button-quiet" type="button">次の一文 <span aria-hidden="true">→</span></button>
             <button id="next-ten-button" class="button button-quiet" type="button" disabled>10文進める <span aria-hidden="true">→</span></button>
+            <button id="next-fifty-button" class="button button-quiet" type="button" disabled>50文進める <span aria-hidden="true">→</span></button>
           </div>
           <p class="speech-status" id="speech-status" aria-live="polite"></p>
           <div class="series-bar" id="series-bar" hidden>
@@ -104,6 +106,6 @@
 
     </main>
     <script src="data.js?v=86"></script>
-    <script src="app.js?v=66"></script>
+    <script src="app.js?v=67"></script>
   </body>
 </html>

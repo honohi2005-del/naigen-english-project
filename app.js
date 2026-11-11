@@ -19,7 +19,7 @@
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), numberedPlay: [...document.querySelectorAll('[data-start-number]')], picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), previousTen: $('previous-ten-button'), next: $('next-button'), orderedNext: $('ordered-next-button'), nextTen: $('next-ten-button'),
+    modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), previousTen: $('previous-ten-button'), previousFifty: $('previous-fifty-button'), next: $('next-button'), orderedNext: $('ordered-next-button'), nextTen: $('next-ten-button'), nextFifty: $('next-fifty-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordTrio: $('record-model-trio'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordPlaybackRun = null, trioPlayback = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
@@ -70,10 +70,17 @@
     const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
     ui.orderedNext.disabled = index < 0 || index >= sourceOrderedItems.length - 1;
   }
-  function updateTenStepButtons() {
-    const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
+  function stepNavigation() {
+    const inSeriesQueue = series?.type === 'ordered' || series?.type === 'numbered';
+    const queue = inSeriesQueue ? series.queue : sourceOrderedItems;
+    return { queue, index: queue.findIndex(item => item.id === current?.id), inSeriesQueue };
+  }
+  function updateStepButtons() {
+    const { index, queue } = stepNavigation();
     ui.previousTen.disabled = index < 10;
-    ui.nextTen.disabled = index < 0 || index + 10 >= sourceOrderedItems.length;
+    ui.nextTen.disabled = index < 0 || index + 10 >= queue.length;
+    ui.previousFifty.disabled = index < 50;
+    ui.nextFifty.disabled = index < 0 || index + 50 >= queue.length;
   }
   function updateSeriesStatus() {
     if (!series) return;
@@ -103,7 +110,7 @@
     renderCurrentRecords();
     updatePreviousButton();
     updateOrderedNextButton();
-    updateTenStepButtons();
+    updateStepButtons();
   }
   function updatePauseButton() {
     const canToggle = quotePlaybackActive && quoteAudio && !quoteAudio.ended;
@@ -237,22 +244,19 @@
     rememberRandom(next);
     renderItem(next);
   }
-  function moveByTen(direction) {
-    const index = sourceOrderedItems.findIndex(item => item.id === current?.id);
+  function moveBy(direction, distance) {
+    const { queue, index, inSeriesQueue } = stepNavigation();
     if (index < 0) return;
-    const targetIndex = index + direction * 10;
-    if (targetIndex < 0 || targetIndex >= sourceOrderedItems.length) return;
-    const target = sourceOrderedItems[targetIndex];
-    if (series?.type === 'ordered' || series?.type === 'numbered') {
+    const targetIndex = index + direction * distance;
+    if (targetIndex < 0 || targetIndex >= queue.length) return;
+    const target = queue[targetIndex];
+    if (inSeriesQueue) {
       const activeSeries = series;
-      const queueIndex = activeSeries.queue.findIndex(item => item.id === current?.id);
-      if (queueIndex < 0) return;
-      const nextQueueIndex = Math.max(0, Math.min(activeSeries.queue.length - 1, queueIndex + direction * 10));
       window.clearTimeout(seriesTimer);
       seriesTimer = null;
       stopSpeech();
-      current = activeSeries.queue[nextQueueIndex];
-      activeSeries.pos = nextQueueIndex + 1;
+      current = target;
+      activeSeries.pos = targetIndex + 1;
       activeSeries.currentItemId = current.id;
       activeSeries.currentReadCount = 1;
       renderItem(current);
@@ -682,10 +686,12 @@
     updatePauseButton();
   });
   ui.previous.addEventListener('click', previousRandom);
-  ui.previousTen.addEventListener('click', () => moveByTen(-1));
+  ui.previousTen.addEventListener('click', () => moveBy(-1, 10));
+  ui.previousFifty.addEventListener('click', () => moveBy(-1, 50));
   ui.next.addEventListener('click', () => series ? advanceSeries(true) : randomOne());
   ui.orderedNext.addEventListener('click', nextInSourceOrder);
-  ui.nextTen.addEventListener('click', () => moveByTen(1));
+  ui.nextTen.addEventListener('click', () => moveBy(1, 10));
+  ui.nextFifty.addEventListener('click', () => moveBy(1, 50));
   ui.stop.addEventListener('click', stopSeries);
   ui.record.addEventListener('click', toggleRecording);
   ui.recordAll.addEventListener('click', playAllRecords);
@@ -693,7 +699,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=81').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=82').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
