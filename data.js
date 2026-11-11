@@ -675,4 +675,5 @@ window.MAXIMS = [
   {"id":674,"audioId":695,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":640,"ja":"コツを教わったら、その先は自分で工夫する。","en":"Once someone has shown you the basics, you have to figure out the rest for yourself."},
   {"id":675,"audioId":696,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":641,"ja":"〈気〉とは身体実践と意味生成を往還させるプロセスである。","en":"Ki is a process that moves back and forth between bodily practice and the generation of meaning."},
   {"id":676,"audioId":697,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":641,"ja":"生命は場として存在し、また同時にその場に位置付けられた個物として存在している。","en":"Life exists as a field and, at the same time, as individual entities situated within that field."},
+  {"id":677,"audioId":698,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":642,"ja":"信頼とは、未来の偶発的結果に対するコントロールを放棄し、裏切られた場合の損害リスクを「自らのシステム内部の前提としてあらかじめ織り込むこと」によって、行動の選択肢を再拡張するメカニズムである。","en":"Trust is a mechanism that restores a wider range of possible actions by relinquishing control over contingent future outcomes and building the risk of harm from betrayal into our own system as an assumption in advance."},
 ];
