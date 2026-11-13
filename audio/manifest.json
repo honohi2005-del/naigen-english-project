@@ -4680,6 +4680,15 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "60ca078e9704"
+    },
+    {
+      "id": 701,
+      "file": "q701.mp3",
+      "textSha256": "29e7530c03c196fafa3daddeb8f1b7d1b8e9616a0d34a1e80e8c6d61dcd15fef",
+      "seconds": 12.95,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "959265a0dfe0"
     }
   ]
 }
