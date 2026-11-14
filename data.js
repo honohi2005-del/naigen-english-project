@@ -691,4 +691,8 @@ window.MAXIMS = [
   {"id":690,"audioId":711,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":647,"ja":"真実らしさは、ひとつひとつの小さく正確な行為に宿る。","en":"A sense of truth resides in each small, precise action."},
   {"id":691,"audioId":712,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":647,"ja":"想像上の状況にも具体的な理由を与えれば、身体が応じ始める。","en":"Give an imagined situation a concrete reason, and the body will begin to respond."},
   {"id":692,"audioId":713,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":647,"ja":"間や区切りを整えると、意味が聞き手に届きやすくなる。","en":"Shape the pauses and breaks, and the meaning will reach the listener more clearly."},
+  {"id":693,"audioId":714,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":648,"ja":"静けさの中で、心身は余分な緊張をほどき、生命の自然な流れへ戻っていく。","en":"In stillness, body and mind release unnecessary tension and return to the natural flow of life."},
+  {"id":694,"audioId":715,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":648,"ja":"生と死を大きな生命の波として捉えると、終わりもその自然な展開の一部となる。","en":"When we see life and death as a great wave of life, even an ending becomes part of its natural unfolding."},
+  {"id":695,"audioId":716,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":648,"ja":"夢と目覚めの境界は、身体の経験が深まるにつれて揺らぎはじめる。","en":"As bodily experience deepens, the boundary between dreaming and waking begins to blur."},
+  {"id":696,"audioId":717,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":648,"ja":"身体を規格に当てはめる力は、日常の細部に入り込み、人のふるまいを形づくっている。","en":"The power that presses bodies into prescribed norms reaches into everyday details and shapes how people behave."},
 ];
