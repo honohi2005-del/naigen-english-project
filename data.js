@@ -698,4 +698,6 @@ window.MAXIMS = [
   {"id":697,"audioId":718,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":648,"ja":"人の真似をすることは、学びと文化を受け渡す、人間の根源的な営みである。","en":"Imitating others is a fundamental human activity through which learning and culture are passed on."},
   {"id":698,"audioId":719,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":648,"ja":"演技の面白さは、観客の中にイメージが立ち上がることで生まれる。","en":"The appeal of acting comes from the images that take shape in the audience's mind."},
   {"id":699,"audioId":720,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":648,"ja":"他者を演じる選択の中に、「自分自身」が表れる。","en":"In choosing to portray someone else, we reveal ourselves."},
+  {"id":700,"audioId":721,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":649,"ja":"テストの価値は、結果の良し悪しよりも、その結果から学ぶことにある。","en":"The value of a test lies less in whether its result is good or bad than in what we learn from it."},
+  {"id":701,"audioId":722,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":649,"ja":"慣れた考えというコンフォートゾーンの外に出て新しい見方を試そうとする「姿勢」は、後天的に学ばれる。","en":"A willingness to step outside the comfort zone of familiar thinking and try new perspectives is something we learn."},
 ];

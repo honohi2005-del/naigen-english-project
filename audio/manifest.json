@@ -4912,6 +4912,24 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "a66dfef4d609"
+    },
+    {
+      "id": 721,
+      "file": "q721.mp3",
+      "textSha256": "158fefe54df42b7b1ba8fe3577ad79a435925cba99177d565f01e16dc6094e8c",
+      "seconds": 6.35,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "9715b1513b6d"
+    },
+    {
+      "id": 722,
+      "file": "q722.mp3",
+      "textSha256": "bcf94de20407b2d33ecf2b06d743f60f428ba2acae925171f974a15eb35cf87a",
+      "seconds": 6.8,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "bfeae6836503"
     }
   ]
 }
