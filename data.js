@@ -695,4 +695,7 @@ window.MAXIMS = [
   {"id":694,"audioId":715,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":648,"ja":"生と死を大きな生命の波として捉えると、終わりもその自然な展開の一部となる。","en":"When we see life and death as a great wave of life, even an ending becomes part of its natural unfolding."},
   {"id":695,"audioId":716,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":648,"ja":"夢と目覚めの境界は、身体の経験が深まるにつれて揺らぎはじめる。","en":"As bodily experience deepens, the boundary between dreaming and waking begins to blur."},
   {"id":696,"audioId":717,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":648,"ja":"身体を規格に当てはめる力は、日常の細部に入り込み、人のふるまいを形づくっている。","en":"The power that presses bodies into prescribed norms reaches into everyday details and shapes how people behave."},
+  {"id":697,"audioId":718,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":648,"ja":"人の真似をすることは、学びと文化を受け渡す、人間の根源的な営みである。","en":"Imitating others is a fundamental human activity through which learning and culture are passed on."},
+  {"id":698,"audioId":719,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":648,"ja":"演技の面白さは、観客の中にイメージが立ち上がることで生まれる。","en":"The appeal of acting comes from the images that take shape in the audience's mind."},
+  {"id":699,"audioId":720,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":648,"ja":"他者を演じる選択の中に、「自分自身」が表れる。","en":"In choosing to portray someone else, we reveal ourselves."},
 ];

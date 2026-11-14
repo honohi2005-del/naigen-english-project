@@ -4885,6 +4885,33 @@
       "model": "gpt-4o-mini-tts",
       "voice": "onyx",
       "revision": "f133332d3a68"
+    },
+    {
+      "id": 718,
+      "file": "q718.mp3",
+      "textSha256": "c29f3b309bcc1ff320b15a30dc5f26b7636308076915ec9f536bfa69ff88346e",
+      "seconds": 6.25,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "b40302fdaaea"
+    },
+    {
+      "id": 719,
+      "file": "q719.mp3",
+      "textSha256": "0592d33cefecde52d266103bde74ed9df6fa9dff03571c900f3d2dec15828122",
+      "seconds": 4.6,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "8d2bcab7aa92"
+    },
+    {
+      "id": 720,
+      "file": "q720.mp3",
+      "textSha256": "0dd7f2bd383e05b7aca61857d095e542c87f5f4ec06d00a9600e845ce3b94dc1",
+      "seconds": 4.35,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "a66dfef4d609"
     }
   ]
 }
