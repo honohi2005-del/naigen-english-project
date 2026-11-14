@@ -683,4 +683,12 @@ window.MAXIMS = [
   {"id":682,"audioId":703,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":645,"ja":"生くべきは生かし、死すべきは死なしむるのが治療の本道である。","en":"The proper course of treatment is to preserve what should live and let die what should die."},
   {"id":683,"audioId":704,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":646,"ja":"動きは、ピアノの澄んだ音のように一つひとつ明瞭でなければならない。","en":"Movements should be as distinct as the clear notes of a piano."},
   {"id":684,"audioId":705,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":646,"ja":"テンポとリズムを適切に選べば、感情や経験は自然に生まれる。","en":"Choose the tempo and rhythm well, and feelings and experiences will arise naturally."},
+  {"id":685,"audioId":706,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":647,"ja":"声は、練習と経験を重ねることで育っていく。","en":"A voice grows through practice and experience."},
+  {"id":686,"audioId":707,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":647,"ja":"集中するとは、力んで見つめることではなく、対象をよく観察することだ。","en":"Concentration means observing what you are attending to closely, not staring at it tensely."},
+  {"id":687,"audioId":708,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":647,"ja":"人と人とのつながりは、一方的に作るものではなく、互いの注意の間に育つ。","en":"Human connection is not made unilaterally; it grows through the attention people give one another."},
+  {"id":688,"audioId":709,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":647,"ja":"自分の魅力を見せること自体が目的になると、表現は単調になりうる。","en":"When showing off one's own appeal becomes the goal, expression can become monotonous."},
+  {"id":689,"audioId":710,"topic":"学びと思考","topicLabel":"学びと思考","sourceImage":647,"ja":"部分と全体の関係を見出せ。そうすれば、細部に魂が宿る。","en":"Find the relationship between the parts and the whole. Then the details will come alive."},
+  {"id":690,"audioId":711,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":647,"ja":"真実らしさは、ひとつひとつの小さく正確な行為に宿る。","en":"A sense of truth resides in each small, precise action."},
+  {"id":691,"audioId":712,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":647,"ja":"想像上の状況にも具体的な理由を与えれば、身体が応じ始める。","en":"Give an imagined situation a concrete reason, and the body will begin to respond."},
+  {"id":692,"audioId":713,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":647,"ja":"間や区切りを整えると、意味が聞き手に届きやすくなる。","en":"Shape the pauses and breaks, and the meaning will reach the listener more clearly."},
 ];
