@@ -20,12 +20,13 @@ const items = context.window.MAXIMS;
 if (!Array.isArray(items) || !items.length) throw new Error('No English text found in data.js.');
 const audioIdOf = item => Number(item.audioId ?? item.id);
 const onlyId = process.argv.find(arg => arg.startsWith('--id='))?.slice(5);
+const force = process.argv.includes('--force');
 const selected = onlyId ? items.filter(item => String(item.id) === onlyId) : items;
 if (!selected.length) throw new Error(`Unknown id: ${onlyId}`);
 fs.mkdirSync(audioDir, { recursive: true });
 
 let entries = [];
-if (fs.existsSync(manifestPath)) {
+if (!force && fs.existsSync(manifestPath)) {
   const previous = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
   if (previous.model === model && previous.voice === voice) entries = previous.assets || [];
 }
@@ -94,6 +95,7 @@ function convertAndCheck(wav, target) {
 
 let nextIndex = 0;
 let failed = false;
+let completed = 0;
 async function worker() {
   while (nextIndex < selected.length) {
     const item = selected[nextIndex++];
@@ -102,18 +104,22 @@ async function worker() {
     const target = path.join(audioDir, file);
     const textSha256 = crypto.createHash('sha256').update(item.en, 'utf8').digest('hex');
     if (byId.get(audioId)?.textSha256 === textSha256 && fs.existsSync(target)) {
-      console.log(`${file}: already current`);
+      completed++;
+      if (completed % 25 === 0 || completed === selected.length) console.log(`Progress: ${completed}/${selected.length}`);
       continue;
     }
     try {
       const wav = await requestAudio(item.en);
       const seconds = convertAndCheck(wav, target);
-      byId.set(audioId, { id: audioId, file, textSha256, seconds });
+      const revision = crypto.createHash('sha256').update(fs.readFileSync(target)).digest('hex').slice(0, 12);
+      byId.set(audioId, { id: audioId, file, textSha256, seconds, revision });
       writeManifest();
-      console.log(`${file}: ${seconds}s`);
+      completed++;
+      if (completed % 25 === 0 || completed === selected.length) console.log(`Progress: ${completed}/${selected.length}`);
     } catch (error) {
       failed = true;
       console.error(`${file}: ${error.message}`);
+      completed++;
     }
   }
 }
