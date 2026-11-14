@@ -4775,6 +4775,24 @@
       "textSha256": "a84b05a5598aadc8e1097ac21736f9b41180a57c921fb991560a51eab186ebe4",
       "seconds": 8.04,
       "revision": "9e70c567802b"
+    },
+    {
+      "id": 704,
+      "file": "q704.mp3",
+      "textSha256": "bc8d46b2cfa89d36315f87aa998e5b7280fbfa7a441c1a48e99af885753f1371",
+      "seconds": 4.25,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "50f0bd3025b4"
+    },
+    {
+      "id": 705,
+      "file": "q705.mp3",
+      "textSha256": "4abff7f201aa39fdbcb0d518a0a7aeaade0bf795bf8526e006118f750ee86b68",
+      "seconds": 5.25,
+      "model": "gpt-4o-mini-tts",
+      "voice": "onyx",
+      "revision": "113c10724fc9"
     }
   ]
 }

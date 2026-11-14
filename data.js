@@ -681,4 +681,6 @@ window.MAXIMS = [
   {"id":680,"audioId":701,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":644,"ja":"声かけと反応が一体となる瞬間や、場全体から分泌される「雰囲気」に双方が同調することで、客観的指標には表れない「通じ合い」が成立する。","en":"An unspoken connection that objective measures cannot capture emerges when a spoken cue and response become one, or when both people attune to the “atmosphere” emanating from the whole setting."},
   {"id":681,"audioId":702,"topic":"行動と内省","topicLabel":"行動と内省","sourceImage":645,"ja":"心を静め、雑念がなくなると、天心が現れる。","en":"When the mind is calm and free of stray thoughts, the mind of Heaven emerges."},
   {"id":682,"audioId":703,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":645,"ja":"生くべきは生かし、死すべきは死なしむるのが治療の本道である。","en":"The proper course of treatment is to preserve what should live and let die what should die."},
+  {"id":683,"audioId":704,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":646,"ja":"動きは、ピアノの澄んだ音のように一つひとつ明瞭でなければならない。","en":"Movements should be as distinct as the clear notes of a piano."},
+  {"id":684,"audioId":705,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":646,"ja":"テンポとリズムを適切に選べば、感情や経験は自然に生まれる。","en":"Choose the tempo and rhythm well, and feelings and experiences will arise naturally."},
 ];
