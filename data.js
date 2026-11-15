@@ -710,4 +710,5 @@ window.MAXIMS = [
   {"id":709,"audioId":730,"topic":"発音と身体","topicLabel":"発音と身体","sourceImage":650,"ja":"成長の段階が変われば、身体にふさわしい型も変わっていく。","en":"As you move through stages of growth, the form suited to your body changes too."},
   {"id":710,"audioId":731,"topic":"表現と学習","topicLabel":"表現と学習","sourceImage":650,"ja":"表現は、部分に分けきれない全身の働きとして立ち上がる。","en":"Expression emerges from the work of the whole body, which cannot be fully divided into parts."},
   {"id":711,"audioId":732,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":650,"ja":"身体の経験と結びついた言葉には、その人だけの意味が宿る。","en":"Words connected to bodily experience carry a meaning unique to each person."},
+  {"id":712,"audioId":733,"topic":"意味と思索","topicLabel":"意味と思索","ja":"人間の生はもともと不確かで、選択も意志も感情も、最後には一人で引き受けていくほかない。","en":"Human life is uncertain by nature; in the end, each of us must take responsibility for our choices, will, and feelings alone."},
 ];

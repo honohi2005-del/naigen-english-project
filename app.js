@@ -6,9 +6,11 @@
     .then(manifest => Object.fromEntries((manifest?.assets || []).map(asset => [Number(asset.id), asset.revision])))
     .catch(() => ({}));
   const audioIdOf = item => Number(item.audioId ?? item.id);
-  const maxSourceImage = Math.max(...items.map(item => Number(item.sourceImage)));
+  const sourceOrderOf = item => item.sourceImage == null || item.sourceImage === '' || !Number.isFinite(Number(item.sourceImage)) ? Number.POSITIVE_INFINITY : Number(item.sourceImage);
+  const sourceImages = items.map(sourceOrderOf).filter(Number.isFinite);
+  const maxSourceImage = sourceImages.length ? Math.max(...sourceImages) : 0;
   const orderedItems = [...items].sort((a, b) => Number(a.id) - Number(b.id));
-  const sourceOrderedItems = [...items].sort((a, b) => Number(a.sourceImage) - Number(b.sourceImage) || Number(a.id) - Number(b.id));
+  const sourceOrderedItems = [...items].sort((a, b) => sourceOrderOf(a) - sourceOrderOf(b) || Number(a.id) - Number(b.id));
   const $ = (id) => document.getElementById(id);
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
@@ -97,7 +99,7 @@
     current = item;
     ui.number.textContent = `NO. ${String(item.id).padStart(3, '0')}`;
     ui.topicLabel.textContent = item.topicLabel || item.topic;
-    ui.source.textContent = `出典画像 ${item.sourceImage} / ${maxSourceImage}（ZIP内のファイル名順）`;
+    ui.source.textContent = Number.isFinite(sourceOrderOf(item)) ? `出典画像 ${item.sourceImage} / ${maxSourceImage}（ZIP内のファイル名順）` : '出典画像なし';
     renderEnglish(item.en);
     ui.enJa.textContent = item.ja;
     ui.modeLabel.textContent = mode === 'topic' ? 'TOPIC PRACTICE' : 'RANDOM PRACTICE';
@@ -695,7 +697,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=85').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=86').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
