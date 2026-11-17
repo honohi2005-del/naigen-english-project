@@ -717,4 +717,5 @@ window.MAXIMS = [
   {"id":716,"audioId":737,"topic":"表現と学習","topicLabel":"表現と学習","ja":"集団や社会の中で既に確立されている慣習を改変し、別の用途に充てる能力も、独創性の一部である。","en":"The ability to adapt customs already established within a group or society and put them to a different use is also part of originality."},
   {"id":717,"audioId":738,"topic":"表現と学習","topicLabel":"表現と学習","ja":"ジェスチャーゲームの出題者は、相手が知っていそうなことだけでなく、どんな予測をしそうかにもアンテナを張る必要がある。","en":"The person giving clues in a gesture game needs to stay alert not only to what the other person may know, but also to what they are likely to predict."},
   {"id":718,"audioId":739,"topic":"表現と学習","topicLabel":"表現と学習","ja":"「即興」とは、創造の無限性を保証する言葉ではない。創作の有限性から目をそらさず、それでもなお、まだ生じていないことへの可能性に開き続けていられるかを問う言葉である。","en":"“Improvisation” does not promise boundless creativity. It asks whether, without turning away from the limits of creation, we can remain open to the possibility of what has yet to come into being."},
+  {"id":719,"audioId":740,"topic":"発音と身体","topicLabel":"発音と身体","ja":"身体の緊張を解いてくれる音楽を聴くのが好きだ。","en":"I like listening to music that eases tension in my body."},
 ];
