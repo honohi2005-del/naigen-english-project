@@ -718,4 +718,5 @@ window.MAXIMS = [
   {"id":717,"audioId":738,"topic":"表現と学習","topicLabel":"表現と学習","ja":"ジェスチャーゲームの出題者は、相手が知っていそうなことだけでなく、どんな予測をしそうかにもアンテナを張る必要がある。","en":"The person giving clues in a gesture game needs to stay alert not only to what the other person may know, but also to what they are likely to predict."},
   {"id":718,"audioId":739,"topic":"表現と学習","topicLabel":"表現と学習","ja":"「即興」とは、創造の無限性を保証する言葉ではない。創作の有限性から目をそらさず、それでもなお、まだ生じていないことへの可能性に開き続けていられるかを問う言葉である。","en":"“Improvisation” does not promise boundless creativity. It asks whether, without turning away from the limits of creation, we can remain open to the possibility of what has yet to come into being."},
   {"id":719,"audioId":740,"topic":"発音と身体","topicLabel":"発音と身体","ja":"身体の緊張を解いてくれる音楽を聴くのが好きだ。","en":"I like listening to music that eases tension in my body."},
+  {"id":720,"audioId":741,"topic":"発音と身体","topicLabel":"発音と身体","ja":"息を吐き切り、軽く吸ってから話し始めると、喉に力が入りにくくなる。","en":"If I exhale fully and then take a light breath before speaking, my throat is less likely to tense up."},
 ];
