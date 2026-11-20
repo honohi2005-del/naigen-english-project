@@ -719,4 +719,7 @@ window.MAXIMS = [
   {"id":718,"audioId":739,"topic":"表現と学習","topicLabel":"表現と学習","ja":"「即興」とは、創造の無限性を保証する言葉ではない。創作の有限性から目をそらさず、それでもなお、まだ生じていないことへの可能性に開き続けていられるかを問う言葉である。","en":"“Improvisation” does not promise boundless creativity. It asks whether, without turning away from the limits of creation, we can remain open to the possibility of what has yet to come into being."},
   {"id":719,"audioId":740,"topic":"発音と身体","topicLabel":"発音と身体","ja":"身体の緊張を解いてくれる音楽を聴くのが好きだ。","en":"I like listening to music that eases tension in my body."},
   {"id":720,"audioId":741,"topic":"発音と身体","topicLabel":"発音と身体","ja":"息を吐き切り、軽く吸ってから話し始めると、喉に力が入りにくくなる。","en":"If I exhale fully and then take a light breath before speaking, my throat is less likely to tense up."},
+  {"id":721,"audioId":742,"topic":"学びと思考","topicLabel":"学びと思考","ja":"人間が独力でどれほど学ぶことができるかということにとって決定的なのは、道具の構造である。","en":"The structure of a tool is decisive in determining how much a person can learn on their own."},
+  {"id":722,"audioId":743,"topic":"意味と思索","topicLabel":"意味と思索","ja":"私たちの想像力は、大規模生産の論理に適合し、工学的に体系化された社会的慣習の型にあてはまるもののみを頭に思い浮べるよう訓練されてしまっている。","en":"Our imagination has been trained to conceive only what fits the logic of mass production and the patterns of social custom systematized by engineering."},
+  {"id":723,"audioId":744,"topic":"学びと思考","topicLabel":"学びと思考","ja":"自立共生的な技術手段は、一定のレベルの権力や強制や計画化を排除する。","en":"Convivial tools rule out certain levels of power, coercion, and planning."},
 ];
