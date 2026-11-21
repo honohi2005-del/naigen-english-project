@@ -722,4 +722,5 @@ window.MAXIMS = [
   {"id":721,"audioId":742,"topic":"学びと思考","topicLabel":"学びと思考","ja":"人間が独力でどれほど学ぶことができるかということにとって決定的なのは、道具の構造である。","en":"The structure of a tool is decisive in determining how much a person can learn on their own."},
   {"id":722,"audioId":743,"topic":"意味と思索","topicLabel":"意味と思索","ja":"私たちの想像力は、大規模生産の論理に適合し、工学的に体系化された社会的慣習の型にあてはまるもののみを頭に思い浮べるよう訓練されてしまっている。","en":"Our imagination has been trained to conceive only what fits the logic of mass production and the patterns of social custom systematized by engineering."},
   {"id":723,"audioId":744,"topic":"学びと思考","topicLabel":"学びと思考","ja":"自立共生的な技術手段は、一定のレベルの権力や強制や計画化を排除する。","en":"Convivial tools rule out certain levels of power, coercion, and planning."},
+  {"id":724,"audioId":745,"topic":"学びと思考","topicLabel":"学びと思考","ja":"個人が行為を通じて社会と関わるということは、能動的に使いこなす道具を用いるか、受動的に道具によって働きかけられるか、そのいずれかである。","en":"A person engages with society through action either by actively using tools or by being passively acted upon by them."},
 ];
