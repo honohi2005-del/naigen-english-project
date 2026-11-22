@@ -729,4 +729,10 @@ window.MAXIMS = [
   {"id":728,"audioId":749,"topic":"意味と思索","topicLabel":"意味と思索","ja":"不明瞭さと薄暗さは視覚体験の根幹をなす要素だ。なぜならそれは、視覚、記憶の流れ、そして夢想の創造性との間にある境界にまたがるものであるからだ。","en":"Obscurity and dimness are fundamental elements of visual experience because they straddle the boundary between vision, the flow of memory, and the creativity of reverie."},
   {"id":729,"audioId":750,"topic":"発音と身体","topicLabel":"発音と身体","ja":"機械音声の技術が進むにつれ、私たちは生命のないシュミレーションされた音声と、ある人間の身体に根ざした発声とを区別する感性を失っていく。","en":"As speech-synthesis technology advances, we are losing our sensitivity to the distinction between lifeless simulated voices and speech rooted in a human body."},
   {"id":730,"audioId":751,"topic":"発音と身体","topicLabel":"発音と身体","ja":"対面での交流における人間の発話の意味は、その人の、呼吸のリズム、喉頭の粘膜や筋肉の動き、口や舌の動作などの身体的パフォーマンスに紐づいている。","en":"In face-to-face interaction, the meaning of a person’s speech is tied to their bodily performance: the rhythm of their breathing, the movements of the laryngeal mucosa and muscles, and the movements of the mouth and tongue."},
+  {"id":731,"audioId":752,"topic":"発音と身体","topicLabel":"発音と身体","ja":"世界を知りうるのは、世界に触れうる身体だけだ。","en":"Only a body that can touch the world can know the world."},
+  {"id":732,"audioId":753,"topic":"意味と思索","topicLabel":"意味と思索","ja":"環境は生命の方向を誘導し、生命は環境を変える。","en":"The environment guides life, and life changes the environment."},
+  {"id":733,"audioId":754,"topic":"意味と思索","topicLabel":"意味と思索","ja":"責任への応答は、一種の自己理解を前提とする。","en":"Responding to responsibility presupposes a form of self-understanding."},
+  {"id":734,"audioId":755,"topic":"意味と思索","topicLabel":"意味と思索","ja":"「責任を引き受ける」ことができるのは、「責任を引き受けない」こともまたできるときだ。","en":"We can take responsibility only when we are also capable of refusing it."},
+  {"id":735,"audioId":756,"topic":"意味と思索","topicLabel":"意味と思索","ja":"物語は、予測不可能な出来事を包摂し、再統合していく弾力性を持っている。","en":"A story has the resilience to absorb and reintegrate unpredictable events."},
+  {"id":736,"audioId":757,"topic":"発音と身体","topicLabel":"発音と身体","ja":"高いレベルの修行を積んだ者は、過度に動くことがほとんどなく、また、相手の攻撃の読み方も心得ている。","en":"Those who have trained to a high level rarely move excessively, and know how to read an opponent’s attack."},
 ];
