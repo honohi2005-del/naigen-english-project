@@ -15,15 +15,24 @@
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), numberedPlay: [...document.querySelectorAll('[data-start-number]')], picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
+    topicSpeechButtons: $('topic-speech-buttons'), topicSpeechCard: $('topic-speech-card'), topicSpeechTitle: $('topic-speech-title'), topicSpeechText: $('topic-speech-text'), topicSpeechWordCount: $('topic-speech-word-count'), topicSpeechPlay: $('topic-speech-play'), topicSpeechStatus: $('topic-speech-status'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), previousTen: $('previous-ten-button'), previousFifty: $('previous-fifty-button'), next: $('next-button'), orderedNext: $('ordered-next-button'), nextTen: $('next-ten-button'), nextFifty: $('next-fifty-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordTrio: $('record-model-trio'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordPlaybackRun = null, trioPlayback = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
   let randomHistory = [], randomHistoryPos = -1;
+  let topicSpeechActive = false, topicSpeechVersion = 0;
   const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let modelPlaybackRate = 1;
   let dbPromise;
   const functionWords = new Set(`a an the i me my you your yourself we our ourselves they them their themselves he him his she her it its this that these those who whom whose which what when where why how another each every either neither all no any some as at by for from in into of on onto out over under with within without after before against between beyond through to than like and or but so because if while although though unless until whether then instead rather not do does did can cannot could may might must shall should will would am is are was were be been being has had ought`.split(' '));
+  const topicSpeeches = {
+    '意味と思索': 'Meaning does not always arrive as a clear answer. Sometimes it takes shape when I meet an experience with my whole body and allow it to change me. If I stop forcing an explanation, I can notice what is happening between myself and the world. Uncertainty, then, is not simply a problem to solve; it keeps me open to possibilities I have not yet considered.',
+    '学びと思考': 'Learning is more than collecting correct answers. It develops when I make a prediction, compare it with what actually happens, and revise my understanding. A teacher can provide a useful structure, but each learner also needs time to explore beyond the lesson. When I connect new ideas with experience, knowledge becomes something I can use. Progress often begins with a better question, not a confident claim that I already understand.',
+    '行動と内省': 'Before I act, I can notice the habits already influencing my movement. A brief pause helps me decide whether I am responding to this moment or repeating a familiar pattern. Then I can try one small change, observe its effect, and adjust. I cannot control every outcome, and awkwardness is part of learning. What matters is remaining attentive enough to respond to what happens next.',
+    '発音と身体': 'My voice begins before I speak. Breath, posture, and attention all shape the sound that reaches another person. I can exhale fully, take an easy breath, and begin without tightening my throat. Listening matters just as much: rhythm is shared, not imposed. By noticing resonance in my body and making small adjustments through practice, I can speak clearly while remaining relaxed and responsive.',
+    '表現と学習': 'An expressive style is not a mask I put on; it is a way of responding that develops through practice. I can study a form carefully while staying curious about what each situation requires. A pause, a change of pace, or one precise gesture can make meaning visible. When I include the listener in my attention, even a familiar action can create something new.'
+  };
 
   function renderEnglish(text) {
     const fragment = document.createDocumentFragment();
@@ -113,6 +122,55 @@
     ui.pause.disabled = !canToggle;
     ui.pause.textContent = canToggle && quoteAudio.paused ? '再開' : '一時停止';
   }
+  function stopTopicSpeech(message = '') {
+    topicSpeechVersion++;
+    if (topicSpeechActive && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    topicSpeechActive = false;
+    ui.topicSpeechPlay.textContent = 'ブラウザ音声で読み上げ';
+    if (message) ui.topicSpeechStatus.textContent = message;
+  }
+  function renderTopicSpeech(topic) {
+    stopTopicSpeech();
+    const speech = topicSpeeches[topic];
+    ui.topicSpeechCard.hidden = !speech;
+    ui.topicSpeechTitle.textContent = topic || '';
+    ui.topicSpeechText.textContent = speech || '';
+    ui.topicSpeechWordCount.textContent = speech ? `${speech.trim().split(/\s+/).length} words · CEFR B2` : '';
+    ui.topicSpeechStatus.textContent = '';
+    ui.topicSpeechButtons.querySelectorAll('[data-speech-topic]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.speechTopic === topic));
+    });
+  }
+  function playTopicSpeech() {
+    if (topicSpeechActive) { stopTopicSpeech('読み上げを停止しました。'); return; }
+    if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) {
+      ui.topicSpeechStatus.textContent = 'このブラウザは音声読み上げに対応していません。';
+      return;
+    }
+    const text = ui.topicSpeechText.textContent.trim();
+    if (!text) return;
+    stopSeries();
+    const version = ++topicSpeechVersion;
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 1;
+    utterance.onend = () => {
+      if (version !== topicSpeechVersion) return;
+      topicSpeechActive = false;
+      ui.topicSpeechPlay.textContent = 'もう一度読み上げる';
+      ui.topicSpeechStatus.textContent = '読み上げが終わりました。';
+    };
+    utterance.onerror = () => {
+      if (version !== topicSpeechVersion) return;
+      topicSpeechActive = false;
+      ui.topicSpeechPlay.textContent = 'ブラウザ音声で読み上げ';
+      ui.topicSpeechStatus.textContent = 'ブラウザ音声を再生できませんでした。';
+    };
+    topicSpeechActive = true;
+    ui.topicSpeechPlay.textContent = '読み上げを停止';
+    ui.topicSpeechStatus.textContent = '英語スピーチを読み上げています…';
+    window.speechSynthesis.speak(utterance);
+  }
   function stopSpeech() {
     speechVersion++;
     quotePlaybackActive = false;
@@ -126,6 +184,7 @@
     updatePauseButton();
   }
   async function speakCurrent(onEnd) {
+    stopTopicSpeech();
     if (!current) return;
     stopSpeech();
     const version = speechVersion;
@@ -222,6 +281,7 @@
     window.clearTimeout(seriesTimer);
     seriesTimer = null;
     stopSpeech();
+    stopTopicSpeech();
     series = null;
     trioPlayback = null;
     stopRecordPlayback();
@@ -295,12 +355,12 @@
     else speakCurrent();
   }
   function setMode(nextMode, selectedItem = null) {
-    stopSeries(); mode = nextMode;
+    stopSeries(); stopTopicSpeech(); mode = nextMode;
     ui.tabs.forEach(tab => { const active = tab.dataset.mode === mode; tab.classList.toggle('active', active); tab.setAttribute('aria-selected', String(active)); });
     ui.picker.hidden = mode !== 'topic';
     ui.randomPicker.hidden = mode !== 'random';
     if (mode === 'random') { if (selectedItem) { rememberRandom(selectedItem); renderItem(selectedItem); } else randomOne(); ui.modeLabel.textContent = 'RANDOM PRACTICE'; }
-    else { const list = topicItems(); const selected = chooseRandom(list); if (selected) { rememberRandom(selected); renderItem(selected); } updateTopicCount(); }
+    else { const list = topicItems(); const selected = chooseRandom(list); if (selected) { rememberRandom(selected); renderItem(selected); } updateTopicCount(); renderTopicSpeech(ui.topic.value); }
   }
   function updateTopicCount() {
     const count = topicItems().length;
@@ -352,7 +412,7 @@
 
   function switchScreen(screen) {
     const showLibrary = screen === 'library';
-    if (showLibrary) stopSeries();
+    if (showLibrary) { stopSeries(); stopTopicSpeech(); }
     ui.practiceScreen.hidden = showLibrary;
     ui.libraryScreen.hidden = !showLibrary;
     ui.practiceScreenTab.classList.toggle('active', !showLibrary);
@@ -639,7 +699,8 @@
   ui.randomPlay.addEventListener('click', () => startSeries('random', items));
   ui.orderedPlay.addEventListener('click', () => startSeries('ordered', sourceOrderedItems));
   ui.numberedPlay.forEach(button => button.addEventListener('click', () => startSeries('numbered', orderedItems.filter(item => Number(item.id) >= Number(button.dataset.startNumber)))));
-  ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); if (mode === 'topic') { const selected = chooseRandom(topicItems()); if (selected) { rememberRandom(selected); renderItem(selected); } } });
+  ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); renderTopicSpeech(ui.topic.value); if (mode === 'topic') { const selected = chooseRandom(topicItems()); if (selected) { rememberRandom(selected); renderItem(selected); } } });
+  ui.topicSpeechPlay.addEventListener('click', playTopicSpeech);
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
   try { ui.repeatTwice.checked = localStorage.getItem('naigen-repeat-maxims-twice') === 'true'; }
@@ -697,7 +758,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=86').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=87').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
@@ -706,6 +767,20 @@
   [...counts.keys()].sort((a, b) => a.localeCompare(b, 'ja')).forEach(topic => {
     const option = document.createElement('option'); option.value = topic; option.textContent = `${topic} · ${counts.get(topic)}`; ui.topic.append(option);
   });
+  Object.keys(topicSpeeches).forEach((topic, index) => {
+    const button = document.createElement('button');
+    button.className = 'button button-outline topic-speech-topic';
+    button.type = 'button';
+    button.dataset.speechTopic = topic;
+    button.textContent = topic;
+    button.setAttribute('aria-pressed', 'false');
+    button.addEventListener('click', () => {
+      ui.topic.value = topic;
+      ui.topic.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    ui.topicSpeechButtons.append(button);
+  });
+  if (topicSpeeches[ui.topic.value]) renderTopicSpeech(ui.topic.value);
   updateTopicCount();
   updatePauseButton();
   const first = chooseRandom();

@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=21" />
+    <link rel="stylesheet" href="styles.css?v=22" />
     <title>備忘録</title>
   </head>
   <body>
@@ -54,6 +54,17 @@
           <label for="topic-select">テーマを選ぶ</label>
           <div class="topic-row"><select id="topic-select"></select><button id="topic-play" class="button button-dark" type="button">このテーマを連続再生</button></div>
           <p class="hint" id="topic-count"></p>
+          <section class="topic-speech" aria-labelledby="topic-speech-heading">
+            <h2 id="topic-speech-heading">テーマから広げるスピーチ練習</h2>
+            <p class="hint">テーマを選ぶと、そのテーマの格言に着想を得たCEFR B2相当の英語スピーチが表示されます。</p>
+            <div class="topic-speech-buttons" id="topic-speech-buttons" role="group" aria-label="スピーチのテーマ"></div>
+            <article class="topic-speech-card" id="topic-speech-card" aria-live="polite" hidden>
+              <div class="topic-speech-heading-row"><h3 id="topic-speech-title"></h3><span class="topic-speech-count" id="topic-speech-word-count"></span></div>
+              <p class="topic-speech-text" id="topic-speech-text" lang="en"></p>
+              <button id="topic-speech-play" class="button button-primary" type="button">ブラウザ音声で読み上げ</button>
+              <p class="topic-speech-status" id="topic-speech-status" aria-live="polite"></p>
+            </article>
+          </section>
         </div>
 
         <article class="quote-card" aria-live="polite">
@@ -107,6 +118,6 @@
 
     </main>
     <script src="data.js?v=109"></script>
-    <script src="app.js?v=74"></script>
+    <script src="app.js?v=75"></script>
   </body>
 </html>
