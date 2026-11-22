@@ -723,4 +723,6 @@ window.MAXIMS = [
   {"id":722,"audioId":743,"topic":"意味と思索","topicLabel":"意味と思索","ja":"私たちの想像力は、大規模生産の論理に適合し、工学的に体系化された社会的慣習の型にあてはまるもののみを頭に思い浮べるよう訓練されてしまっている。","en":"Our imagination has been trained to conceive only what fits the logic of mass production and the patterns of social custom systematized by engineering."},
   {"id":723,"audioId":744,"topic":"学びと思考","topicLabel":"学びと思考","ja":"自立共生的な技術手段は、一定のレベルの権力や強制や計画化を排除する。","en":"Convivial tools rule out certain levels of power, coercion, and planning."},
   {"id":724,"audioId":745,"topic":"学びと思考","topicLabel":"学びと思考","ja":"個人が行為を通じて社会と関わるということは、能動的に使いこなす道具を用いるか、受動的に道具によって働きかけられるか、そのいずれかである。","en":"A person engages with society through action either by actively using tools or by being passively acted upon by them."},
+  {"id":725,"audioId":746,"topic":"表現と学習","topicLabel":"表現と学習","ja":"対面での交流は人間の生活世界の基盤であり、規範的なコミュニケーションとは無関係な、予期しないものが立ち上がる可能性に満ちている。","en":"Face-to-face interaction is the foundation of the human lifeworld, full of possibilities for unexpected things to emerge independently of normative communication."},
+  {"id":726,"audioId":747,"topic":"表現と学習","topicLabel":"表現と学習","ja":"対面での交流とは没入であり、その場の雰囲気に浸ることであり、意識的か無意識的かに関わりなく、あらゆる感覚に働きかけることだ。","en":"Face-to-face interaction is immersion: soaking in the atmosphere of the moment and engaging every sense, consciously or unconsciously."},
 ];
