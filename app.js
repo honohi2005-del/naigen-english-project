@@ -258,11 +258,16 @@
       audio.loop = true;
       audio.onplaying = () => { if (version === topicSpeechVersion) ui.topicSpeechStatus.textContent = '英語スピーチを再生しています…'; };
       audio.onended = () => {
-        if (version !== topicSpeechVersion) return;
-        topicSpeechActive = false;
-        topicSpeechAudio = null;
-        ui.topicSpeechPlay.textContent = 'もう一度再生';
-        ui.topicSpeechStatus.textContent = '再生が終わりました。';
+        if (version !== topicSpeechVersion || !topicSpeechActive) return;
+        audio.currentTime = 0;
+        audio.play().catch(error => {
+          if (version !== topicSpeechVersion || !topicSpeechActive) return;
+          topicSpeechActive = false;
+          topicSpeechAudio = null;
+          ui.topicSpeechPlay.textContent = 'スピーチ音声を再生';
+          ui.topicSpeechStatus.textContent = 'スピーチ音声の再生を続けられませんでした。';
+          console.error('Topic speech audio loop failed:', error.message);
+        });
       };
       audio.onerror = () => {
         if (version !== topicSpeechVersion) return;
