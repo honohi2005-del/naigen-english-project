@@ -15,7 +15,7 @@
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), numberedPlay: [...document.querySelectorAll('[data-start-number]')], picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    topicSpeechButtons: $('topic-speech-buttons'), topicSpeechCard: $('topic-speech-card'), topicSpeechTitle: $('topic-speech-title'), topicSpeechText: $('topic-speech-text'), topicSpeechWordCount: $('topic-speech-word-count'), topicSpeechPlay: $('topic-speech-play'), topicSpeechStatus: $('topic-speech-status'),
+    topicSpeechButtons: $('topic-speech-buttons'), topicSpeechCard: $('topic-speech-card'), topicSpeechTitle: $('topic-speech-title'), topicSpeechText: $('topic-speech-text'), topicSpeechWordCount: $('topic-speech-word-count'), topicSpeechGenerate: $('topic-speech-generate'), topicSpeechPlay: $('topic-speech-play'), topicSpeechStatus: $('topic-speech-status'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), previousTen: $('previous-ten-button'), previousFifty: $('previous-fifty-button'), next: $('next-button'), orderedNext: $('ordered-next-button'), nextTen: $('next-ten-button'), nextFifty: $('next-fifty-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordTrio: $('record-model-trio'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
@@ -26,13 +26,39 @@
   let modelPlaybackRate = 1;
   let dbPromise;
   const functionWords = new Set(`a an the i me my you your yourself we our ourselves they them their themselves he him his she her it its this that these those who whom whose which what when where why how another each every either neither all no any some as at by for from in into of on onto out over under with within without after before against between beyond through to than like and or but so because if while although though unless until whether then instead rather not do does did can cannot could may might must shall should will would am is are was were be been being has had ought`.split(' '));
-  const topicSpeeches = {
-    '意味と思索': 'Meaning does not always arrive as a clear answer. Sometimes it takes shape when I meet an experience with my whole body and allow it to change me. If I stop forcing an explanation, I can notice what is happening between myself and the world. Uncertainty, then, is not simply a problem to solve; it keeps me open to possibilities I have not yet considered.',
-    '学びと思考': 'Learning is more than collecting correct answers. It develops when I make a prediction, compare it with what actually happens, and revise my understanding. A teacher can provide a useful structure, but each learner also needs time to explore beyond the lesson. When I connect new ideas with experience, knowledge becomes something I can use. Progress often begins with a better question, not a confident claim that I already understand.',
-    '行動と内省': 'Before I act, I can notice the habits already influencing my movement. A brief pause helps me decide whether I am responding to this moment or repeating a familiar pattern. Then I can try one small change, observe its effect, and adjust. I cannot control every outcome, and awkwardness is part of learning. What matters is remaining attentive enough to respond to what happens next.',
-    '発音と身体': 'My voice begins before I speak. Breath, posture, and attention all shape the sound that reaches another person. I can exhale fully, take an easy breath, and begin without tightening my throat. Listening matters just as much: rhythm is shared, not imposed. By noticing resonance in my body and making small adjustments through practice, I can speak clearly while remaining relaxed and responsive.',
-    '表現と学習': 'An expressive style is not a mask I put on; it is a way of responding that develops through practice. I can study a form carefully while staying curious about what each situation requires. A pause, a change of pace, or one precise gesture can make meaning visible. When I include the listener in my attention, even a familiar action can create something new.'
+  const topicSpeechSets = {
+    '意味と思索': [
+      ['Meaning often emerges through experience before I can explain clearly what has changed inside me.', 'An idea becomes meaningful when it meets daily life and alters the way I notice things.', 'I do not always discover meaning by thinking harder; sometimes patient attention reveals what reasoning misses.'],
+      ['When I pause before judging, unfamiliar details can connect with memories and reveal questions worth exploring further.', 'A conversation may change my view because another person makes an assumption visible that I had overlooked.', 'The world rarely offers a complete answer, but it gives me material for a more careful question.'],
+      ['Uncertainty can feel uncomfortable, yet it keeps one interpretation from closing every other path too soon.', 'If I name an experience too quickly, I may miss its changing details and reduce its complexity.', 'I try to remain curious when my first explanation feels convincing, because confidence can hide important evidence.'],
+      ['By letting ideas change through contact with the world, I can think deeply without demanding certainty.', 'This practice does not remove difficulty; it helps me meet complexity without pretending everything is settled.', 'Meaning grows through these encounters, giving my life direction while leaving room for questions to continue.']
+    ],
+    '学びと思考': [
+      ['Learning develops when I test an idea, notice the result, and adjust my understanding through experience.', 'Progress begins when I treat mistakes as information rather than proof that I cannot improve.', 'A useful lesson gives me a question to explore, not merely an answer to remember and repeat.'],
+      ['Practice becomes more effective when I receive feedback, observe its effect, and try the skill again.', 'Watching others can reveal details written instructions miss, especially when I compare their actions with my own.', 'I need time alone to connect new ideas with situations that matter in my everyday life.'],
+      ['Confusion does not always signal failure; it can show where my current explanation needs further attention.', 'If I stop after an attempt, I lose the chance to discover an approach that suits me better.', "A learner's progress depends partly on whether the environment makes experimentation safe and worthwhile over time."],
+      ['Skills become reliable when attention can move beyond basic steps toward fresh challenges and relationships.', 'The purpose of education is not simply arrival; it is learning to travel with different perspectives.', 'I learn more deeply when I take responsibility for exploring, while using support from teachers and peers.']
+    ],
+    '行動と内省': [
+      ['Before moving, I can notice the habit shaping my response and decide whether it fits this moment.', 'A brief pause gives my body time to release tension and register what the person is doing.', 'I make better choices when I observe my reactions without expecting perfect control over each outcome.'],
+      ['Experiments help me learn because each change produces evidence I can use to adjust my next action.', 'Instead of forcing a result, I can stay attentive and respond to what develops around me.', 'When movement feels awkward, I can slow down, notice its cause, and try a different approach.'],
+      ['Past habits provide comfort, but they may delay a response that requires attention to the present moment.', 'I cannot control every result, yet I can take responsibility for the next action I choose.', 'Reflection is useful when it guides a new attempt rather than becoming endless criticism of myself.'],
+      ['Over time, repeated attention can make a more natural response available without conscious effort during practice.', 'That process is not instant, but each honest observation gives me a clearer place to begin again.', 'I keep moving forward by combining patience with the courage to test what I have noticed.']
+    ],
+    '発音と身体': [
+      ['My voice is shaped by breath, posture, and attention before a single word reaches another person.', 'Speaking clearly begins with noticing the body, not with forcing every sound into perfect shape.', 'A relaxed voice can still be strong when its rhythm carries intention and leaves room for response.'],
+      ['I exhale fully, take an easy breath, and begin speaking before tension gathers in my throat.', 'Listening to resonance in my body helps me notice where a sound feels open and supported.', 'Small adjustments to pace and volume can make speech easier to follow without making it feel controlled.'],
+      ['Breath and silence shape a phrase together, giving listeners time to follow the meaning as it unfolds.', 'I do not need to push my voice toward someone; shared rhythm can invite attention more gently.', 'Practice helps me hear differences in sound, while patience keeps my body from tightening under pressure.'],
+      ['When breath remains free, the voice can respond to another person instead of repeating one fixed pattern.', 'This way of speaking grows slowly through listening, experimenting, and noticing how each phrase affects others.', 'The goal is not a perfect sound, but a living voice that can adapt and remain clear.']
+    ],
+    '表現と学習': [
+      ['An expressive style develops through practice, when familiar forms meet the needs of a particular moment.', 'A model can guide me, but copying it perfectly does not make the result meaningful for me.', 'Sometimes one precise gesture or pause reveals more than an explanation about what I intend to express.'],
+      ['I study a form carefully, then notice which parts support the response I want to create.', 'A familiar action can become fresh when I listen to the audience and adjust my timing.', 'What looks repeated from outside may still generate new meaning as circumstances and relationships continue to change.'],
+      ['If I focus only on displaying my skill, the expression may become predictable and lose its vitality.', 'Attending to another person gives my choices direction, because expression takes shape within a shared situation.', 'I can use limits creatively when I treat them as conditions for exploration rather than instructions to obey.'],
+      ['Small and accurate actions help the whole performance feel truthful, even when the situation is imagined.', 'By combining attention with play, I can respond freely without losing the structure that supports my work.', 'The value of practice appears when a technique opens space for choices I could not make before.']
+    ]
   };
+  const topicSpeechHistory = new Map();
 
   function renderEnglish(text) {
     const fragment = document.createDocumentFragment();
@@ -131,7 +157,7 @@
   }
   function renderTopicSpeech(topic) {
     stopTopicSpeech();
-    const speech = topicSpeeches[topic];
+    const speech = topicSpeechSets[topic] ? generateTopicSpeech(topic) : '';
     ui.topicSpeechCard.hidden = !speech;
     ui.topicSpeechTitle.textContent = topic || '';
     ui.topicSpeechText.textContent = speech || '';
@@ -140,6 +166,30 @@
     ui.topicSpeechButtons.querySelectorAll('[data-speech-topic]').forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.speechTopic === topic));
     });
+  }
+  function generateTopicSpeech(topic) {
+    const slots = topicSpeechSets[topic];
+    if (!slots) return '';
+    const combinations = slots.reduce((total, options) => total * options.length, 1);
+    let used = topicSpeechHistory.get(topic);
+    if (!used || used.size >= combinations) {
+      used = new Set();
+      topicSpeechHistory.set(topic, used);
+    }
+    let combination = Math.floor(Math.random() * combinations);
+    while (used.has(combination)) combination = (combination + 1) % combinations;
+    used.add(combination);
+
+    const selections = Array(slots.length);
+    let remainder = combination;
+    for (let index = slots.length - 1; index >= 0; index--) {
+      selections[index] = remainder % slots[index].length;
+      remainder = Math.floor(remainder / slots[index].length);
+    }
+    const speech = slots.map((options, index) => options[selections[index]]).join(' ');
+    const wordCount = speech.trim().split(/\s+/).length;
+    if (wordCount < 60 || wordCount > 70) throw new Error(`Topic speech must be 60–70 words; received ${wordCount}.`);
+    return speech;
   }
   function playTopicSpeech() {
     if (topicSpeechActive) { stopTopicSpeech('読み上げを停止しました。'); return; }
@@ -700,6 +750,7 @@
   ui.orderedPlay.addEventListener('click', () => startSeries('ordered', sourceOrderedItems));
   ui.numberedPlay.forEach(button => button.addEventListener('click', () => startSeries('numbered', orderedItems.filter(item => Number(item.id) >= Number(button.dataset.startNumber)))));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); renderTopicSpeech(ui.topic.value); if (mode === 'topic') { const selected = chooseRandom(topicItems()); if (selected) { rememberRandom(selected); renderItem(selected); } } });
+  ui.topicSpeechGenerate.addEventListener('click', () => renderTopicSpeech(ui.topic.value));
   ui.topicSpeechPlay.addEventListener('click', playTopicSpeech);
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
@@ -758,7 +809,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=87').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=88').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
@@ -767,7 +818,7 @@
   [...counts.keys()].sort((a, b) => a.localeCompare(b, 'ja')).forEach(topic => {
     const option = document.createElement('option'); option.value = topic; option.textContent = `${topic} · ${counts.get(topic)}`; ui.topic.append(option);
   });
-  Object.keys(topicSpeeches).forEach((topic, index) => {
+  Object.keys(topicSpeechSets).forEach(topic => {
     const button = document.createElement('button');
     button.className = 'button button-outline topic-speech-topic';
     button.type = 'button';
@@ -780,7 +831,7 @@
     });
     ui.topicSpeechButtons.append(button);
   });
-  if (topicSpeeches[ui.topic.value]) renderTopicSpeech(ui.topic.value);
+  if (topicSpeechSets[ui.topic.value]) renderTopicSpeech(ui.topic.value);
   updateTopicCount();
   updatePauseButton();
   const first = chooseRandom();
