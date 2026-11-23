@@ -22,6 +22,7 @@ const topicSlugs = {
   '行動と内省': 'action',
   '発音と身体': 'voice',
   '表現と学習': 'expression',
+  '社会と人との関係': 'society',
 };
 const source = fs.readFileSync(sourcePath, 'utf8');
 const marker = 'const topicSpeechSets = ';
@@ -39,8 +40,8 @@ const entries = Object.entries(speechSets).flatMap(([topic, speeches]) => {
     return { id: `${slug}-${String(index + 1).padStart(2, '0')}`, topic, text, wordCount, file: `${slug}-${String(index + 1).padStart(2, '0')}.mp3` };
   });
 });
-if (entries.length !== 75 || new Set(entries.map(entry => entry.text)).size !== entries.length) {
-  throw new Error(`Expected 75 unique topic speeches; found ${entries.length}.`);
+if (entries.length !== 90 || new Set(entries.map(entry => entry.text)).size !== entries.length) {
+  throw new Error(`Expected 90 unique topic speeches; found ${entries.length}.`);
 }
 
 fs.mkdirSync(outputDir, { recursive: true });

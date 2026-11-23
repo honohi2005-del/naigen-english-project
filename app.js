@@ -22,7 +22,7 @@
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordPlaybackRun = null, trioPlayback = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
   let randomHistory = [], randomHistoryPos = -1;
   let topicSpeechActive = false, topicSpeechVersion = 0, topicSpeechAudio = null, topicSpeechManifestPromise = null;
-  const topicSpeechSlugs = { '意味と思索': 'meaning', '学びと思考': 'learning', '行動と内省': 'action', '発音と身体': 'voice', '表現と学習': 'expression' };
+  const topicSpeechSlugs = { '意味と思索': 'meaning', '学びと思考': 'learning', '行動と内省': 'action', '発音と身体': 'voice', '表現と学習': 'expression', '社会と人との関係': 'society' };
   const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let modelPlaybackRate = 1;
   let dbPromise;
@@ -113,6 +113,23 @@
       `Some of my best conversations have started with a small misunderstanding. We explain what we meant, laugh a little, and end up talking about something neither of us planned. I like that the direction isn’t fixed from the start. Each person adds something, and the next idea grows from it. A conversation feels more interesting when we make it together.`,
       `I used to think having a personal style meant doing something completely original. Now I think it can come from repeating the basics until they feel natural, then making small choices that fit me. The structure gives me something steady to work with. I can change the timing, wording, or emphasis without losing the shape of what I’m trying to express.`,
       `When I explain an idea, I try to give one clear example and let people think about it for a moment. If I explain every detail, there’s no room for them to connect it to their own lives. I like when someone responds with a story I hadn’t considered. Sharing an idea is not only passing information along; it can start something new.`
+    ],
+    '社会と人との関係': [
+      `I moved to a new neighborhood last year and expected it to feel strange for a long time. Then the shop owner started remembering what I usually buy, and a neighbor waved to me every morning. Nothing dramatic happened, but those small moments changed how the street felt. A place becomes home through ordinary contact, not just by knowing the address.`,
+      `Trust isn’t the same as being sure nothing will go wrong. When I rely on someone, I know they might disappoint me, and I still decide the connection matters. That choice feels more honest than trying to control every outcome. I can set limits and speak up if something hurts, while leaving enough room for people to surprise me in a good way.`,
+      `I used to think a good meeting needed a clear agenda and quick decisions. Then I noticed how much we learn in the moments between the official points: someone pauses, another person changes their tone, and the room relaxes. Those details rarely appear in the notes, but they affect what people feel able to say. Sometimes the atmosphere is part of the conversation.`,
+      `I feel different around people who don’t turn every hobby into a competition. We can try something, get it wrong, and laugh without worrying about who is ahead. That kind of group gives me space to notice what I actually enjoy. It’s easier to keep showing up when I don’t have to prove that I’m improving every single time we meet.`,
+      `A phone can make it easier to stay in touch, but it also decides what gets my attention if I’m not careful. I’ve started turning off a few alerts and choosing when to check messages. It’s a small change, yet I feel less pulled around by other people’s timing. The tool is more useful when I’m the one deciding how to use it.`,
+      `I used to say yes whenever someone asked for help, even when I was already tired. Then I would feel resentful and blame them for asking. Now I try to answer honestly, including when I can’t take something on. Saying no is uncomfortable, but it makes my yes more meaningful. A relationship can handle a limit better than a promise I don’t want to keep.`,
+      `The way we act at work isn’t only about personality. The room, the schedule, and even where people sit can make some choices easier than others. When a team keeps missing the same detail, blaming one person may not help. We could first look at how the work is set up. Changing the setting can sometimes change what everyone is able to do.`,
+      `When someone seems tense, my first reaction is often to tense up too. I’m trying to notice that response before it takes over. If I keep my breathing easy and listen without rushing to fix things, the other person sometimes settles as well. I can’t control how they feel, but I can choose not to add more pressure to an already difficult moment.`,
+      `Some of my favorite stories about friends began with plans going wrong. We missed a train, found a small café, and ended up talking for hours. The original plan mattered less than what happened after it fell apart. I like remembering that a shared experience doesn’t have to follow a script. People can make something worthwhile from an unexpected turn together.`,
+      `Not every social gathering needs to be exciting to be worth attending. Sometimes I’m glad just to sit with people, eat something simple, and hear about their week. I used to worry that a quiet evening meant we had nothing in common. Now I think being comfortable without constant entertainment can be its own kind of connection, simply by being together.`,
+      `I learn a lot from watching how someone handles an ordinary problem. A teacher who admits a mistake or a colleague who asks a careful question gives others permission to do the same. Advice can be useful, but the way a person lives often makes a stronger impression. People notice what we do, especially when our actions match the values we talk about.`,
+      `Labels can help us describe patterns, but they can also make us stop being curious about a person. If I decide someone is “always difficult,” I may miss what is happening today. I’m trying to leave a little space between the label and the person. That doesn’t mean ignoring a problem; it means checking what is actually going on before I react.`,
+      `A neighborhood festival may look like a tradition that never changes, but every year people bring something new to it. Someone starts a different game, a family shares a new dish, and the old routine gets a fresh meaning. I like that communities can keep familiar things while adapting them. A tradition stays alive because people use it, not because it is frozen.`,
+      `In a conversation, I notice more than the words. A short pause, a glance toward the door, or a softer voice can tell me that the topic has changed for someone. I don’t always read those signs correctly, so I try to check instead of assuming. Paying attention makes it easier to adjust and lets the other person shape where the talk goes next.`,
+      `It’s easy to talk as if society were something far away, made only of laws and big institutions. But it also shows up in the hours we work, the tools we depend on, and the small ways we treat each other. I can’t change everything alone. Still, the choices I make with other people can support a more livable way of doing things.`
     ]
   };
   const topicSpeechHistory = new Map();
@@ -903,7 +920,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=90').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=91').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();

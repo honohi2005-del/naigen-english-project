@@ -2,7 +2,7 @@
   "model": "gemini-3.8-flash-tts",
   "voice": "Algieba",
   "style": "Calm, clear, unhurried General American English with a naturally low male speaking voice.",
-  "generatedAt": "2026-11-23T04:46:38.478Z",
+  "generatedAt": "2026-11-23T22:33:33.501Z",
   "assets": [
     {
       "id": "meaning-01",
@@ -678,6 +678,141 @@
       "wordCount": 63,
       "seconds": 27.28,
       "revision": "fbab7ef220bb"
+    },
+    {
+      "id": "society-01",
+      "topic": "社会と人との関係",
+      "file": "society-01.mp3",
+      "textSha256": "5122dd73401cc76cec4944205036dddaccffa189ea3c6a173660367ca7e1e54b",
+      "wordCount": 61,
+      "seconds": 27.24,
+      "revision": "cbfa3e1fb5de"
+    },
+    {
+      "id": "society-02",
+      "topic": "社会と人との関係",
+      "file": "society-02.mp3",
+      "textSha256": "83a0ac242c19ba8fb2eba1adfec3110a24e376e1e9a70fea0c721b433fe250c9",
+      "wordCount": 63,
+      "seconds": 26.6,
+      "revision": "73e66d7e635e"
+    },
+    {
+      "id": "society-03",
+      "topic": "社会と人との関係",
+      "file": "society-03.mp3",
+      "textSha256": "a49ec8d07d31494742e1264a0db31fbbce4bd8b2a96ef7f43685918ff2f87939",
+      "wordCount": 63,
+      "seconds": 28.56,
+      "revision": "8764d8399e59"
+    },
+    {
+      "id": "society-04",
+      "topic": "社会と人との関係",
+      "file": "society-04.mp3",
+      "textSha256": "84438230121963545088928ac4ee0382c7cb91406c0adee36bad381a7033da79",
+      "wordCount": 61,
+      "seconds": 27.36,
+      "revision": "992db269bd63"
+    },
+    {
+      "id": "society-05",
+      "topic": "社会と人との関係",
+      "file": "society-05.mp3",
+      "textSha256": "4970b85aa6f5cb408271d8b67f7aecd36aa4ccb3718fd67c80e6857f10c5b1ff",
+      "wordCount": 63,
+      "seconds": 24.72,
+      "revision": "767ea04aa240"
+    },
+    {
+      "id": "society-06",
+      "topic": "社会と人との関係",
+      "file": "society-06.mp3",
+      "textSha256": "d5ed60d1257e5dd64df9d3385dde4190763f627569de6a4d939feec2b9207ad3",
+      "wordCount": 65,
+      "seconds": 29.72,
+      "revision": "ff8c6ccb44b9"
+    },
+    {
+      "id": "society-07",
+      "topic": "社会と人との関係",
+      "file": "society-07.mp3",
+      "textSha256": "fe635ea0a428d0f2341f7410817bc1729a22b6176c443561fb6d04b60862f643",
+      "wordCount": 63,
+      "seconds": 29.88,
+      "revision": "6592b675d514"
+    },
+    {
+      "id": "society-08",
+      "topic": "社会と人との関係",
+      "file": "society-08.mp3",
+      "textSha256": "af6f72a2d8bea907396e6588eb373448133dc31bdce88c26f227e75327c253b0",
+      "wordCount": 63,
+      "seconds": 27.52,
+      "revision": "c72f77b1f54a"
+    },
+    {
+      "id": "society-09",
+      "topic": "社会と人との関係",
+      "file": "society-09.mp3",
+      "textSha256": "a1b33d39ba2607ac778a50ee4e0d3699593eb906834337022cd7ab7493a20960",
+      "wordCount": 61,
+      "seconds": 27.96,
+      "revision": "297db078d82a"
+    },
+    {
+      "id": "society-10",
+      "topic": "社会と人との関係",
+      "file": "society-10.mp3",
+      "textSha256": "e1f818fd350e4d8487beab97a6da4e6b6b1da4b31324084c934e6937efd9be73",
+      "wordCount": 61,
+      "seconds": 27.08,
+      "revision": "3b7446c17234"
+    },
+    {
+      "id": "society-11",
+      "topic": "社会と人との関係",
+      "file": "society-11.mp3",
+      "textSha256": "1ba7e448783295c601f58994144c763071b3e5d0d73a28b7b4e1dadb04e0d2b7",
+      "wordCount": 63,
+      "seconds": 28.24,
+      "revision": "85588afd1dca"
+    },
+    {
+      "id": "society-12",
+      "topic": "社会と人との関係",
+      "file": "society-12.mp3",
+      "textSha256": "7dd96835c8ad5a3d845db6d32d4ed57f29ac8d14e8e4fc3e8e1c1ef85023f607",
+      "wordCount": 62,
+      "seconds": 26.92,
+      "revision": "921282363a03"
+    },
+    {
+      "id": "society-13",
+      "topic": "社会と人との関係",
+      "file": "society-13.mp3",
+      "textSha256": "dbc51f269172ef0c74f1d4a62119d6961eb3699d14344a5e5be615a2b34d2151",
+      "wordCount": 63,
+      "seconds": 28.08,
+      "revision": "387478f17296"
+    },
+    {
+      "id": "society-14",
+      "topic": "社会と人との関係",
+      "file": "society-14.mp3",
+      "textSha256": "a28a67491eb2d13dd3fa9920ca6acb8613c9f255894ecff0ae35167d13f7b73d",
+      "wordCount": 64,
+      "seconds": 27.6,
+      "revision": "f51686ab1e64"
+    },
+    {
+      "id": "society-15",
+      "topic": "社会と人との関係",
+      "file": "society-15.mp3",
+      "textSha256": "66193d56897f0cbdebef825cb5ddad977ab6bacd0273cfb5d7d8098c5054777b",
+      "wordCount": 63,
+      "seconds": 27.44,
+      "revision": "52c653c38ca6"
     }
   ]
 }
