@@ -255,6 +255,7 @@
       if (!audioAsset) throw new Error('対応する音声ファイルがありません。');
       const audio = new Audio(`./audio/topic-speeches/${encodeURIComponent(audioAsset.file)}?v=${audioAsset.revision}`);
       topicSpeechAudio = audio;
+      audio.loop = true;
       audio.onplaying = () => { if (version === topicSpeechVersion) ui.topicSpeechStatus.textContent = '英語スピーチを再生しています…'; };
       audio.onended = () => {
         if (version !== topicSpeechVersion) return;
