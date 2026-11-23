@@ -735,4 +735,6 @@ window.MAXIMS = [
   {"id":734,"audioId":755,"topic":"意味と思索","topicLabel":"意味と思索","ja":"「責任を引き受ける」ことができるのは、「責任を引き受けない」こともまたできるときだ。","en":"We can take responsibility only when we are also capable of refusing it."},
   {"id":735,"audioId":756,"topic":"意味と思索","topicLabel":"意味と思索","ja":"物語は、予測不可能な出来事を包摂し、再統合していく弾力性を持っている。","en":"A story has the resilience to absorb and reintegrate unpredictable events."},
   {"id":736,"audioId":757,"topic":"発音と身体","topicLabel":"発音と身体","ja":"高いレベルの修行を積んだ者は、過度に動くことがほとんどなく、また、相手の攻撃の読み方も心得ている。","en":"Those who have trained to a high level rarely move excessively, and know how to read an opponent’s attack."},
+  {"id":737,"audioId":758,"topic":"意味と思索","topicLabel":"意味と思索","ja":"何も感じないのではなく、何も感じないと感じている。","en":"It is not that I feel nothing; I feel that I feel nothing."},
+  {"id":738,"audioId":759,"topic":"意味と思索","topicLabel":"意味と思索","ja":"人は老若男女を問わずみな儚く、直視に耐えぬ。それにひきかえ、自然や建造物を見るのは良い。","en":"People of every age and gender are fleeting, and difficult to face directly. By contrast, nature and buildings are good to look at."},
 ];
