@@ -21,7 +21,8 @@
   };
   let mode = 'random', current = null, series = null, seriesTimer = null, quoteAudio = null, quotePlaybackActive = false, speechVersion = 0, recorder = null, recordingParts = [], recordStream = null, allRecords = [], playbackQueue = [], playbackAudio = null, recordPlaybackRun = null, trioPlayback = null, recordObjectUrls = [], installPrompt = null, recordingStarting = false, recordSavePending = false, recordDeletionPending = false;
   let randomHistory = [], randomHistoryPos = -1;
-  let topicSpeechActive = false, topicSpeechVersion = 0;
+  let topicSpeechActive = false, topicSpeechVersion = 0, topicSpeechAudio = null, topicSpeechManifestPromise = null;
+  const topicSpeechSlugs = { '意味と思索': 'meaning', '学びと思考': 'learning', '行動と内省': 'action', '発音と身体': 'voice', '表現と学習': 'expression' };
   const playbackRates = [0.5, 0.75, 1, 1.25, 1.5, 2];
   let modelPlaybackRate = 1;
   let dbPromise;
@@ -181,10 +182,25 @@
   }
   function stopTopicSpeech(message = '') {
     topicSpeechVersion++;
-    if (topicSpeechActive && 'speechSynthesis' in window) window.speechSynthesis.cancel();
+    if (topicSpeechAudio) {
+      topicSpeechAudio.onended = null;
+      topicSpeechAudio.onerror = null;
+      topicSpeechAudio.onplaying = null;
+      topicSpeechAudio.pause();
+      topicSpeechAudio.currentTime = 0;
+      topicSpeechAudio = null;
+    }
     topicSpeechActive = false;
-    ui.topicSpeechPlay.textContent = 'ブラウザ音声で読み上げ';
+    ui.topicSpeechPlay.textContent = 'スピーチ音声を再生';
     if (message) ui.topicSpeechStatus.textContent = message;
+  }
+  function loadTopicSpeechManifest() {
+    if (!topicSpeechManifestPromise) {
+      topicSpeechManifestPromise = fetch('./audio/topic-speeches/manifest.json', { cache: 'no-cache' })
+        .then(response => { if (!response.ok) throw new Error(`音声一覧 HTTP ${response.status}`); return response.json(); })
+        .catch(error => { topicSpeechManifestPromise = null; throw error; });
+    }
+    return topicSpeechManifestPromise;
   }
   function renderTopicSpeech(topic) {
     stopTopicSpeech();
@@ -216,35 +232,53 @@
     if (wordCount < 60 || wordCount > 70) throw new Error(`Topic speech must be 60–70 words; received ${wordCount}.`);
     return speech;
   }
-  function playTopicSpeech() {
+  async function playTopicSpeech() {
     if (topicSpeechActive) { stopTopicSpeech('読み上げを停止しました。'); return; }
-    if (!('speechSynthesis' in window) || !('SpeechSynthesisUtterance' in window)) {
-      ui.topicSpeechStatus.textContent = 'このブラウザは音声読み上げに対応していません。';
-      return;
-    }
     const text = ui.topicSpeechText.textContent.trim();
     if (!text) return;
+    const topic = ui.topicSpeechTitle.textContent;
+    const speechIndex = topicSpeechSets[topic]?.indexOf(text) ?? -1;
+    const slug = topicSpeechSlugs[topic];
+    if (!slug || speechIndex < 0) {
+      ui.topicSpeechStatus.textContent = 'この英文に対応する音声が見つかりません。';
+      return;
+    }
     stopSeries();
     const version = ++topicSpeechVersion;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = 1;
-    utterance.onend = () => {
-      if (version !== topicSpeechVersion) return;
-      topicSpeechActive = false;
-      ui.topicSpeechPlay.textContent = 'もう一度読み上げる';
-      ui.topicSpeechStatus.textContent = '読み上げが終わりました。';
-    };
-    utterance.onerror = () => {
-      if (version !== topicSpeechVersion) return;
-      topicSpeechActive = false;
-      ui.topicSpeechPlay.textContent = 'ブラウザ音声で読み上げ';
-      ui.topicSpeechStatus.textContent = 'ブラウザ音声を再生できませんでした。';
-    };
     topicSpeechActive = true;
-    ui.topicSpeechPlay.textContent = '読み上げを停止';
-    ui.topicSpeechStatus.textContent = '英語スピーチを読み上げています…';
-    window.speechSynthesis.speak(utterance);
+    ui.topicSpeechPlay.textContent = '音声を停止';
+    ui.topicSpeechStatus.textContent = '事前生成したスピーチ音声を読み込んでいます…';
+    try {
+      const manifest = await loadTopicSpeechManifest();
+      if (version !== topicSpeechVersion) return;
+      const audioAsset = (manifest.assets || []).find(asset => asset.id === `${slug}-${String(speechIndex + 1).padStart(2, '0')}`);
+      if (!audioAsset) throw new Error('対応する音声ファイルがありません。');
+      const audio = new Audio(`./audio/topic-speeches/${encodeURIComponent(audioAsset.file)}?v=${audioAsset.revision}`);
+      topicSpeechAudio = audio;
+      audio.onplaying = () => { if (version === topicSpeechVersion) ui.topicSpeechStatus.textContent = '英語スピーチを再生しています…'; };
+      audio.onended = () => {
+        if (version !== topicSpeechVersion) return;
+        topicSpeechActive = false;
+        topicSpeechAudio = null;
+        ui.topicSpeechPlay.textContent = 'もう一度再生';
+        ui.topicSpeechStatus.textContent = '再生が終わりました。';
+      };
+      audio.onerror = () => {
+        if (version !== topicSpeechVersion) return;
+        topicSpeechActive = false;
+        topicSpeechAudio = null;
+        ui.topicSpeechPlay.textContent = 'スピーチ音声を再生';
+        ui.topicSpeechStatus.textContent = 'スピーチ音声を読み込めませんでした。';
+      };
+      await audio.play();
+    } catch (error) {
+      if (version !== topicSpeechVersion) return;
+      topicSpeechActive = false;
+      topicSpeechAudio = null;
+      ui.topicSpeechPlay.textContent = 'スピーチ音声を再生';
+      ui.topicSpeechStatus.textContent = 'スピーチ音声を再生できませんでした。通信状況を確認してください。';
+      console.error('Topic speech audio playback failed:', error.message);
+    }
   }
   function stopSpeech() {
     speechVersion++;
@@ -834,7 +868,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=89').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=90').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();

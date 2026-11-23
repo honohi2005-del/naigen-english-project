@@ -1,0 +1,458 @@
+{
+  "model": "gemini-3.8-flash-tts",
+  "voice": "Algieba",
+  "style": "Calm, clear, unhurried General American English with a naturally low male speaking voice.",
+  "generatedAt": "2026-11-23T01:02:37.832Z",
+  "assets": [
+    {
+      "id": "meaning-01",
+      "topic": "意味と思索",
+      "file": "meaning-01.mp3",
+      "textSha256": "a545353780c8afa53cc47c4b1010a0e2853b378a5dac95849261497bf327066d",
+      "wordCount": 64,
+      "seconds": 34.52,
+      "revision": "5989d04bcb1d"
+    },
+    {
+      "id": "meaning-02",
+      "topic": "意味と思索",
+      "file": "meaning-02.mp3",
+      "textSha256": "79ec39d97da437b987da0298652828971723e7d49327943c43fd4836151f7eab",
+      "wordCount": 66,
+      "seconds": 34.4,
+      "revision": "fb7947a0cdde"
+    },
+    {
+      "id": "meaning-03",
+      "topic": "意味と思索",
+      "file": "meaning-03.mp3",
+      "textSha256": "42d650d8c080246954ea38a0eca4030e1d425fd70d1499316a9542d290f3f49c",
+      "wordCount": 63,
+      "seconds": 34.56,
+      "revision": "c21638560e88"
+    },
+    {
+      "id": "meaning-04",
+      "topic": "意味と思索",
+      "file": "meaning-04.mp3",
+      "textSha256": "105d2ddf9e25a7ce9cf5c87380c61b48476574cecd37b110cc92ac66ddd11d52",
+      "wordCount": 63,
+      "seconds": 29.96,
+      "revision": "43102509b6db"
+    },
+    {
+      "id": "meaning-05",
+      "topic": "意味と思索",
+      "file": "meaning-05.mp3",
+      "textSha256": "11909f4c1301b4580fb0ab1a3899dedad1324a716aeca35dfcbe3c371258ee2b",
+      "wordCount": 66,
+      "seconds": 29.64,
+      "revision": "c4dfe8509ac7"
+    },
+    {
+      "id": "meaning-06",
+      "topic": "意味と思索",
+      "file": "meaning-06.mp3",
+      "textSha256": "91f3f1320798b56f7eca2a9ad816239634ad17d3ebe64d5a0381f8baccf88c13",
+      "wordCount": 64,
+      "seconds": 32.08,
+      "revision": "81a63c6ff3a4"
+    },
+    {
+      "id": "meaning-07",
+      "topic": "意味と思索",
+      "file": "meaning-07.mp3",
+      "textSha256": "02f9e45bb68bb3f0c93b84c14f5a67ab223db89327d7100cff60074f6f59704f",
+      "wordCount": 65,
+      "seconds": 28.6,
+      "revision": "aef019b932ed"
+    },
+    {
+      "id": "meaning-08",
+      "topic": "意味と思索",
+      "file": "meaning-08.mp3",
+      "textSha256": "6ed2254c98ad1a3d20a7e9ec5acd35c8bf5d821e7b31b8abe342953475570ef0",
+      "wordCount": 61,
+      "seconds": 33.56,
+      "revision": "440249823fcf"
+    },
+    {
+      "id": "meaning-09",
+      "topic": "意味と思索",
+      "file": "meaning-09.mp3",
+      "textSha256": "062cdb39d6c34c399feb00a04621e721081799b5fa3c04ab334c5e202f8bb851",
+      "wordCount": 64,
+      "seconds": 31.4,
+      "revision": "e27d88a00e1f"
+    },
+    {
+      "id": "meaning-10",
+      "topic": "意味と思索",
+      "file": "meaning-10.mp3",
+      "textSha256": "7237410377420a4018c7630508e46736e047fec89f149e3928acc465a0f61d2e",
+      "wordCount": 65,
+      "seconds": 29.32,
+      "revision": "78f29aceb1aa"
+    },
+    {
+      "id": "learning-01",
+      "topic": "学びと思考",
+      "file": "learning-01.mp3",
+      "textSha256": "a9533196bcb1f2ba8f161024f686cf30577e955949500b00d86e4e167ab3891c",
+      "wordCount": 67,
+      "seconds": 32.04,
+      "revision": "5b2f3c780e5e"
+    },
+    {
+      "id": "learning-02",
+      "topic": "学びと思考",
+      "file": "learning-02.mp3",
+      "textSha256": "216b6b0b8ad37de962c8803beac163cd7caf79abacd90930df982661fbb6739e",
+      "wordCount": 66,
+      "seconds": 29.2,
+      "revision": "4358eace5419"
+    },
+    {
+      "id": "learning-03",
+      "topic": "学びと思考",
+      "file": "learning-03.mp3",
+      "textSha256": "f478fbf1f2485a47e5a25049617d939dbfbb20dc0639d8b48d6ab4a9d166a027",
+      "wordCount": 65,
+      "seconds": 31.92,
+      "revision": "d06188e85c55"
+    },
+    {
+      "id": "learning-04",
+      "topic": "学びと思考",
+      "file": "learning-04.mp3",
+      "textSha256": "1281b46d2be210a4bbd0a5b11536bbc6e25f36f27e69b06238680567888cce01",
+      "wordCount": 65,
+      "seconds": 33.92,
+      "revision": "016727e4165b"
+    },
+    {
+      "id": "learning-05",
+      "topic": "学びと思考",
+      "file": "learning-05.mp3",
+      "textSha256": "db381b5761e48f9f9f90c6c4dd500b4e23291422021cea57901da28213e0cd31",
+      "wordCount": 61,
+      "seconds": 33,
+      "revision": "3a9b0b660c0b"
+    },
+    {
+      "id": "learning-06",
+      "topic": "学びと思考",
+      "file": "learning-06.mp3",
+      "textSha256": "f2950fd19fe8dc5c694d8d144e4841bb69bf6ce753d2349c4dc109b7a8f6e873",
+      "wordCount": 67,
+      "seconds": 30.12,
+      "revision": "1b77120200d1"
+    },
+    {
+      "id": "learning-07",
+      "topic": "学びと思考",
+      "file": "learning-07.mp3",
+      "textSha256": "fdc77ee518c6594bcb9f88ab7d7db1fb94f0c8d547136c8160b6968b365be0fc",
+      "wordCount": 66,
+      "seconds": 31.52,
+      "revision": "d040ef3e9f1a"
+    },
+    {
+      "id": "learning-08",
+      "topic": "学びと思考",
+      "file": "learning-08.mp3",
+      "textSha256": "e8e9a3348738198b8eb1ab660daa96d360ffcacb38558ae9cb8456ad51423c18",
+      "wordCount": 61,
+      "seconds": 28.92,
+      "revision": "9b926f134ad4"
+    },
+    {
+      "id": "learning-09",
+      "topic": "学びと思考",
+      "file": "learning-09.mp3",
+      "textSha256": "c76a91908de59e36c3c6534db099a7c2f7be13e1e466ab0fde70856e1671dabb",
+      "wordCount": 69,
+      "seconds": 29.76,
+      "revision": "f2a7fbcc4fc5"
+    },
+    {
+      "id": "learning-10",
+      "topic": "学びと思考",
+      "file": "learning-10.mp3",
+      "textSha256": "69655380daf084f1462cd786a5c016d19ae1aeab2d7f2d969f8feceab70e5bdd",
+      "wordCount": 67,
+      "seconds": 31.24,
+      "revision": "56cfa93a9572"
+    },
+    {
+      "id": "action-01",
+      "topic": "行動と内省",
+      "file": "action-01.mp3",
+      "textSha256": "2ad847faab086a3fab3540c38bbf27627363a83467c8f890da7bbb666cde12b1",
+      "wordCount": 66,
+      "seconds": 33.6,
+      "revision": "893c68674148"
+    },
+    {
+      "id": "action-02",
+      "topic": "行動と内省",
+      "file": "action-02.mp3",
+      "textSha256": "91d3d4fa2d33b62ba059d5406360d4b4734401ad7b3ebfa1db900a7c3a0bbc9d",
+      "wordCount": 63,
+      "seconds": 32.6,
+      "revision": "1c229a7a3822"
+    },
+    {
+      "id": "action-03",
+      "topic": "行動と内省",
+      "file": "action-03.mp3",
+      "textSha256": "2d0b502ee87ba675f679c6c3e6d881fa01bcedef68f0fbf0d12536c00df3f6b2",
+      "wordCount": 66,
+      "seconds": 30.48,
+      "revision": "54882c709ff8"
+    },
+    {
+      "id": "action-04",
+      "topic": "行動と内省",
+      "file": "action-04.mp3",
+      "textSha256": "24e1933d96aa8b26a9f09c31792e1bb886c79c15fbbc2f7d92a8150ab5773159",
+      "wordCount": 64,
+      "seconds": 33.4,
+      "revision": "0711b6287d5e"
+    },
+    {
+      "id": "action-05",
+      "topic": "行動と内省",
+      "file": "action-05.mp3",
+      "textSha256": "a06f5e5d878d9ca7b714d9857f0f373bd0d533ad556655d9e6cf0e0576ba4ccd",
+      "wordCount": 64,
+      "seconds": 35.36,
+      "revision": "d505705d256e"
+    },
+    {
+      "id": "action-06",
+      "topic": "行動と内省",
+      "file": "action-06.mp3",
+      "textSha256": "4196ebeea3c2d3e5d334d5b56d84e1a054388858f9b571cdd0247d0e21fc9e86",
+      "wordCount": 63,
+      "seconds": 32.92,
+      "revision": "1a73c1ae4b19"
+    },
+    {
+      "id": "action-07",
+      "topic": "行動と内省",
+      "file": "action-07.mp3",
+      "textSha256": "6d94b058c7c2dca079778df98beadc744b1af7734e73ea7889855f1c606b53af",
+      "wordCount": 61,
+      "seconds": 30.8,
+      "revision": "7736785fc986"
+    },
+    {
+      "id": "action-08",
+      "topic": "行動と内省",
+      "file": "action-08.mp3",
+      "textSha256": "34dc7dfc34e8106e132911a69c0270faae2f1c97512a1c670dc3f512aef371e4",
+      "wordCount": 68,
+      "seconds": 30.32,
+      "revision": "4e3cfdc47afe"
+    },
+    {
+      "id": "action-09",
+      "topic": "行動と内省",
+      "file": "action-09.mp3",
+      "textSha256": "51cd52323e90d6685c2873581a8140e42f3b2ce150640650f26f692521680032",
+      "wordCount": 64,
+      "seconds": 30,
+      "revision": "53baeb89ff6a"
+    },
+    {
+      "id": "action-10",
+      "topic": "行動と内省",
+      "file": "action-10.mp3",
+      "textSha256": "118e4df2e4d2b1d2308b3868a6dc8e1479211e92fcde0e6728012fc7b89e7d2e",
+      "wordCount": 63,
+      "seconds": 32.6,
+      "revision": "2c5f9a1b16ad"
+    },
+    {
+      "id": "voice-01",
+      "topic": "発音と身体",
+      "file": "voice-01.mp3",
+      "textSha256": "cedc524469834f547416c63a1bdbc7298cc096efaa36de005d211070116f8ca4",
+      "wordCount": 66,
+      "seconds": 32.52,
+      "revision": "ea0886e20885"
+    },
+    {
+      "id": "voice-02",
+      "topic": "発音と身体",
+      "file": "voice-02.mp3",
+      "textSha256": "302a9cdca63b9b679dac271fdf25d6483f3ab1122000d96323008324e9fec944",
+      "wordCount": 63,
+      "seconds": 30.72,
+      "revision": "3e3994e77c54"
+    },
+    {
+      "id": "voice-03",
+      "topic": "発音と身体",
+      "file": "voice-03.mp3",
+      "textSha256": "9637a40377aab11e4e78edf70651a82f7e6fc634dafb7574bca63062ea77fffa",
+      "wordCount": 65,
+      "seconds": 28.52,
+      "revision": "4283840b570c"
+    },
+    {
+      "id": "voice-04",
+      "topic": "発音と身体",
+      "file": "voice-04.mp3",
+      "textSha256": "3579987f1a6c862b1df5b81f0dbb515fe1bd29ea6c5c616bba2a05b304514847",
+      "wordCount": 65,
+      "seconds": 31.36,
+      "revision": "3e3b2f119c2a"
+    },
+    {
+      "id": "voice-05",
+      "topic": "発音と身体",
+      "file": "voice-05.mp3",
+      "textSha256": "1116be66d7399a9255877b4c3798f6b9c2ede0a4bd74968078e982b32bad5e47",
+      "wordCount": 67,
+      "seconds": 31.44,
+      "revision": "a51902e307c1"
+    },
+    {
+      "id": "voice-06",
+      "topic": "発音と身体",
+      "file": "voice-06.mp3",
+      "textSha256": "bf977690f009f8928be5f4316e2cc776af87252a39db60c87b5039a4c22b6e2f",
+      "wordCount": 61,
+      "seconds": 32.6,
+      "revision": "b200652518ba"
+    },
+    {
+      "id": "voice-07",
+      "topic": "発音と身体",
+      "file": "voice-07.mp3",
+      "textSha256": "7c218426218f7ba3688ba7147c692db8c028c5d67f0d55191e6cac954b1f415e",
+      "wordCount": 62,
+      "seconds": 27.84,
+      "revision": "40ddd836da45"
+    },
+    {
+      "id": "voice-08",
+      "topic": "発音と身体",
+      "file": "voice-08.mp3",
+      "textSha256": "f6750d1e19a643d29be02180710128aeb2819de589cda9a61fbc65b4d45db137",
+      "wordCount": 64,
+      "seconds": 30.24,
+      "revision": "48cd34afd8a2"
+    },
+    {
+      "id": "voice-09",
+      "topic": "発音と身体",
+      "file": "voice-09.mp3",
+      "textSha256": "4c5697caea2987ca21e118235f481eadb86b6ef776fe40f86fa49ef826274e02",
+      "wordCount": 65,
+      "seconds": 32.68,
+      "revision": "023b245bc409"
+    },
+    {
+      "id": "voice-10",
+      "topic": "発音と身体",
+      "file": "voice-10.mp3",
+      "textSha256": "6b20ec0def7f635b440f7951f67a35dcb17e257e60ee698c89525f89216c7029",
+      "wordCount": 64,
+      "seconds": 27.92,
+      "revision": "a19dd1013639"
+    },
+    {
+      "id": "expression-01",
+      "topic": "表現と学習",
+      "file": "expression-01.mp3",
+      "textSha256": "52d236e091967233f7b3adc96c453ccf411a40723ed30d9068ecfe7a4a5c3945",
+      "wordCount": 62,
+      "seconds": 33,
+      "revision": "952f777da5f8"
+    },
+    {
+      "id": "expression-02",
+      "topic": "表現と学習",
+      "file": "expression-02.mp3",
+      "textSha256": "46426b0377ea8028011a234cb13fcf92c55c1206707bfe70939b34240923f0d6",
+      "wordCount": 64,
+      "seconds": 30.24,
+      "revision": "f59049b173be"
+    },
+    {
+      "id": "expression-03",
+      "topic": "表現と学習",
+      "file": "expression-03.mp3",
+      "textSha256": "e28bf5209c182bd82794b70fe49bdfa4c185f54dc2910cc2d40ac1870a8b272f",
+      "wordCount": 65,
+      "seconds": 33.28,
+      "revision": "de8d24b02d9b"
+    },
+    {
+      "id": "expression-04",
+      "topic": "表現と学習",
+      "file": "expression-04.mp3",
+      "textSha256": "10496ec52c2518b5163020ef1616185aa8276c2831f04d5ceabd775e091a477a",
+      "wordCount": 65,
+      "seconds": 31.36,
+      "revision": "f5782bfa2b51"
+    },
+    {
+      "id": "expression-05",
+      "topic": "表現と学習",
+      "file": "expression-05.mp3",
+      "textSha256": "b47c3794e623c2219afdc77ee9e28fef092f466d4c29162bede6d3d3d404a1dd",
+      "wordCount": 63,
+      "seconds": 32.48,
+      "revision": "71106f77194b"
+    },
+    {
+      "id": "expression-06",
+      "topic": "表現と学習",
+      "file": "expression-06.mp3",
+      "textSha256": "fa673dd4d0c0123d0d712c158314be6bcc4e1472852d3c65efe711236fdd9d1c",
+      "wordCount": 65,
+      "seconds": 31.8,
+      "revision": "f45db31feb00"
+    },
+    {
+      "id": "expression-07",
+      "topic": "表現と学習",
+      "file": "expression-07.mp3",
+      "textSha256": "df556c7c994d53960c8efd19e8e0cc8619dee65f0e1d3ea2ad25e27508c5b578",
+      "wordCount": 62,
+      "seconds": 32.52,
+      "revision": "02efa76ec07a"
+    },
+    {
+      "id": "expression-08",
+      "topic": "表現と学習",
+      "file": "expression-08.mp3",
+      "textSha256": "8bfaa1b807f6736fe49003c7e7685f27549c4da4d99f8f81914c7a77ea1b9499",
+      "wordCount": 64,
+      "seconds": 33.08,
+      "revision": "14cb74f02b7f"
+    },
+    {
+      "id": "expression-09",
+      "topic": "表現と学習",
+      "file": "expression-09.mp3",
+      "textSha256": "cfcd4dcc01e7d2536fe08052697a47a75c615d969d52e34b780668d35eb7eaef",
+      "wordCount": 66,
+      "seconds": 32.84,
+      "revision": "f5470ddb32de"
+    },
+    {
+      "id": "expression-10",
+      "topic": "表現と学習",
+      "file": "expression-10.mp3",
+      "textSha256": "d774e0774b836889f6acedeb2429d84c41650e2336cbc1f34de027f71312904b",
+      "wordCount": 65,
+      "seconds": 30.04,
+      "revision": "46116fe8000e"
+    }
+  ]
+}
