@@ -737,4 +737,7 @@ window.MAXIMS = [
   {"id":736,"audioId":757,"topic":"発音と身体","topicLabel":"発音と身体","ja":"高いレベルの修行を積んだ者は、過度に動くことがほとんどなく、また、相手の攻撃の読み方も心得ている。","en":"Those who have trained to a high level rarely move excessively, and know how to read an opponent’s attack."},
   {"id":737,"audioId":758,"topic":"意味と思索","topicLabel":"意味と思索","ja":"何も感じないのではなく、何も感じないと感じている。","en":"It is not that I feel nothing; I feel that I feel nothing."},
   {"id":738,"audioId":759,"topic":"意味と思索","topicLabel":"意味と思索","ja":"人は老若男女を問わずみな儚く、直視に耐えぬ。それにひきかえ、自然や建造物を見るのは良い。","en":"People of every age and gender are fleeting, and difficult to face directly. By contrast, nature and buildings are good to look at."},
+  {"id":739,"audioId":760,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":651,"ja":"私に何某かという属性を付与できるというのは単なる幻想である。","en":"The idea that anyone can assign me some kind of identity is just an illusion."},
+  {"id":740,"audioId":761,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":651,"ja":"お金のことを一切考えずに生きていたい。","en":"I want to live without having to think about money at all."},
+  {"id":741,"audioId":762,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":651,"ja":"一切の属性を持たない空っぽの意識を想像してみて、あなたは何を与えられて生まれてきましたか？","en":"Imagine an empty awareness with no attributes at all. What were you given when you were born?"},
 ];
