@@ -861,7 +861,7 @@
   ui.orderedPlay.addEventListener('click', () => startSeries('ordered', sourceOrderedItems));
   ui.numberedPlay.forEach(button => button.addEventListener('click', () => startSeries('numbered', orderedItems.filter(item => Number(item.id) >= Number(button.dataset.startNumber)))));
   ui.topic.addEventListener('change', () => { stopSeries(); updateTopicCount(); renderTopicSpeech(ui.topic.value); if (mode === 'topic') { const selected = chooseRandom(topicItems()); if (selected) { rememberRandom(selected); renderItem(selected); } } });
-  ui.topicSpeechGenerate.addEventListener('click', () => renderTopicSpeech(ui.topic.value));
+  ui.topicSpeechGenerate.addEventListener('click', () => renderTopicSpeech(ui.topicSpeechTitle.textContent || ui.topic.value));
   ui.topicSpeechPlay.addEventListener('click', playTopicSpeech);
   ui.topicPlay.addEventListener('click', () => startSeries('topic', topicItems()));
   ui.modelLoop.addEventListener('click', () => { if (current) startSeries('model', mode === 'topic' ? topicItems() : items); });
@@ -920,7 +920,7 @@
   ui.recordClear.addEventListener('click', deleteAllRecords);
   window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; ui.install.hidden = false; });
   ui.install.addEventListener('click', async () => { if (!installPrompt) return; installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null; ui.install.hidden = true; });
-  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=91').catch(() => {});
+  if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js?v=92').catch(() => {});
 
   ui.total.textContent = `${items.length}件`;
   renderLibrary();
@@ -936,10 +936,7 @@
     button.dataset.speechTopic = topic;
     button.textContent = topic;
     button.setAttribute('aria-pressed', 'false');
-    button.addEventListener('click', () => {
-      ui.topic.value = topic;
-      ui.topic.dispatchEvent(new Event('change', { bubbles: true }));
-    });
+    button.addEventListener('click', () => renderTopicSpeech(topic));
     ui.topicSpeechButtons.append(button);
   });
   if (topicSpeechSets[ui.topic.value]) renderTopicSpeech(ui.topic.value);
