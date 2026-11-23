@@ -32,15 +32,15 @@ const literal = source.slice(start + marker.length, end).trim().replace(/;\s*$/,
 const speechSets = vm.runInNewContext(`(${literal})`);
 const entries = Object.entries(speechSets).flatMap(([topic, speeches]) => {
   const slug = topicSlugs[topic];
-  if (!slug || !Array.isArray(speeches) || speeches.length !== 10) throw new Error(`Unexpected topic speech set: ${topic}`);
+  if (!slug || !Array.isArray(speeches) || speeches.length !== 15) throw new Error(`Unexpected topic speech set: ${topic}`);
   return speeches.map((text, index) => {
     const wordCount = text.trim().split(/\s+/).length;
     if (wordCount < 60 || wordCount > 70) throw new Error(`${topic} speech ${index + 1} has ${wordCount} words.`);
     return { id: `${slug}-${String(index + 1).padStart(2, '0')}`, topic, text, wordCount, file: `${slug}-${String(index + 1).padStart(2, '0')}.mp3` };
   });
 });
-if (entries.length !== 50 || new Set(entries.map(entry => entry.text)).size !== entries.length) {
-  throw new Error(`Expected 50 unique topic speeches; found ${entries.length}.`);
+if (entries.length !== 75 || new Set(entries.map(entry => entry.text)).size !== entries.length) {
+  throw new Error(`Expected 75 unique topic speeches; found ${entries.length}.`);
 }
 
 fs.mkdirSync(outputDir, { recursive: true });
