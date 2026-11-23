@@ -8,7 +8,7 @@
     <link rel="manifest" href="manifest.webmanifest" />
     <link rel="icon" href="icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="icon-192.png" />
-    <link rel="stylesheet" href="styles.css?v=23" />
+    <link rel="stylesheet" href="styles.css?v=24" />
     <title>備忘録</title>
   </head>
   <body>
@@ -59,7 +59,7 @@
             <p class="hint">テーマを選ぶか「別の英文を生成」を押すたびに、格言に着想を得たCEFR B2相当・60〜70語の英文がすぐに表示されます。</p>
             <div class="topic-speech-buttons" id="topic-speech-buttons" role="group" aria-label="スピーチのテーマ"></div>
             <article class="topic-speech-card" id="topic-speech-card" aria-live="polite" hidden>
-              <div class="topic-speech-heading-row"><h3 id="topic-speech-title"></h3><span class="topic-speech-count" id="topic-speech-word-count"></span></div>
+              <div class="topic-speech-heading-row"><h3 id="topic-speech-title"></h3><div class="topic-speech-meta"><span class="topic-speech-index" id="topic-speech-index"></span><span class="topic-speech-count" id="topic-speech-word-count"></span></div></div>
               <p class="topic-speech-text" id="topic-speech-text" lang="en"></p>
               <div class="topic-speech-actions">
                 <button id="topic-speech-generate" class="button button-outline" type="button">別の英文を生成</button>
@@ -120,7 +120,7 @@
       </section>
 
     </main>
-    <script src="data.js?v=111"></script>
-    <script src="app.js?v=81"></script>
+    <script src="data.js?v=112"></script>
+    <script src="app.js?v=82"></script>
   </body>
 </html>

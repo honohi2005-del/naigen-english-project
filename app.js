@@ -15,7 +15,7 @@
   const ui = {
     practiceScreen: $('practice-screen'), libraryScreen: $('library-screen'), practiceScreenTab: $('practice-screen-tab'), libraryScreenTab: $('library-screen-tab'), libraryCount: $('library-count'), libraryResultCount: $('library-result-count'), librarySearch: $('library-search'), libraryList: $('library-list'), libraryEmpty: $('library-empty'),
     total: $('total-count'), tabs: [...document.querySelectorAll('.mode-tab')], randomPicker: $('random-picker'), randomPlay: $('random-play'), orderedPlay: $('ordered-play'), numberedPlay: [...document.querySelectorAll('[data-start-number]')], picker: $('topic-picker'), topic: $('topic-select'), topicPlay: $('topic-play'), topicCount: $('topic-count'),
-    topicSpeechButtons: $('topic-speech-buttons'), topicSpeechCard: $('topic-speech-card'), topicSpeechTitle: $('topic-speech-title'), topicSpeechText: $('topic-speech-text'), topicSpeechWordCount: $('topic-speech-word-count'), topicSpeechGenerate: $('topic-speech-generate'), topicSpeechPlay: $('topic-speech-play'), topicSpeechStatus: $('topic-speech-status'),
+    topicSpeechButtons: $('topic-speech-buttons'), topicSpeechCard: $('topic-speech-card'), topicSpeechTitle: $('topic-speech-title'), topicSpeechText: $('topic-speech-text'), topicSpeechIndex: $('topic-speech-index'), topicSpeechWordCount: $('topic-speech-word-count'), topicSpeechGenerate: $('topic-speech-generate'), topicSpeechPlay: $('topic-speech-play'), topicSpeechStatus: $('topic-speech-status'),
     modeLabel: $('mode-label'), number: $('item-number'), topicLabel: $('item-topic'), source: $('source-page'), en: $('english-quote'), enJa: $('english-japanese'), speak: $('speak-button'), pause: $('pause-button'), modelSpeed: $('model-speed'), repeatTwice: $('repeat-twice'), modelLoop: $('model-loop-button'), speechStatus: $('speech-status'), previous: $('previous-button'), previousTen: $('previous-ten-button'), previousFifty: $('previous-fifty-button'), next: $('next-button'), orderedNext: $('ordered-next-button'), nextTen: $('next-ten-button'), nextFifty: $('next-fifty-button'),
     series: $('series-bar'), seriesStatus: $('series-status'), stop: $('series-stop'), record: $('record-button'), recordStatus: $('record-status'), recordList: $('record-list'), recordAll: $('record-play-all'), recordTrio: $('record-model-trio'), recordClear: $('record-delete-all'), recordCount: $('record-count'), install: $('install-button')
   };
@@ -233,6 +233,10 @@
     ui.topicSpeechCard.hidden = !speech;
     ui.topicSpeechTitle.textContent = topic || '';
     ui.topicSpeechText.textContent = speech || '';
+    const library = topicSpeechSets[topic] || [];
+    const speechIndex = speech ? library.indexOf(speech) : -1;
+    ui.topicSpeechIndex.textContent = speechIndex >= 0 ? `${speechIndex + 1}/${library.length}` : '';
+    ui.topicSpeechIndex.setAttribute('aria-label', speechIndex >= 0 ? `スピーチ ${speechIndex + 1}/${library.length}` : '');
     ui.topicSpeechWordCount.textContent = speech ? `${speech.trim().split(/\s+/).length} words · CEFR B2` : '';
     ui.topicSpeechStatus.textContent = '';
     ui.topicSpeechButtons.querySelectorAll('[data-speech-topic]').forEach(button => {
