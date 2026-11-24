@@ -2,7 +2,7 @@
   "model": "gemini-3.8-flash-tts",
   "voice": "Algieba",
   "style": "Calm, clear, unhurried General American English with a naturally low male speaking voice.",
-  "generatedAt": "2026-11-23T22:33:33.501Z",
+  "generatedAt": "2026-11-24T00:50:07.519Z",
   "assets": [
     {
       "id": "meaning-01",
@@ -746,10 +746,10 @@
       "id": "society-08",
       "topic": "社会と人との関係",
       "file": "society-08.mp3",
-      "textSha256": "af6f72a2d8bea907396e6588eb373448133dc31bdce88c26f227e75327c253b0",
-      "wordCount": 63,
-      "seconds": 27.52,
-      "revision": "c72f77b1f54a"
+      "textSha256": "5389c7a533e34334c3035dce657a356d26acb42682763f612a3b21241ad128b9",
+      "wordCount": 67,
+      "seconds": 25.36,
+      "revision": "c8723a36625f"
     },
     {
       "id": "society-09",
