@@ -2,7 +2,7 @@
   "model": "gemini-3.8-flash-tts",
   "voice": "Algieba",
   "style": "Calm, clear, unhurried General American English with a naturally low male speaking voice.",
-  "generatedAt": "2026-11-24T00:50:07.519Z",
+  "generatedAt": "2026-11-24T01:00:34.390Z",
   "assets": [
     {
       "id": "meaning-01",
@@ -701,10 +701,10 @@
       "id": "society-03",
       "topic": "社会と人との関係",
       "file": "society-03.mp3",
-      "textSha256": "a49ec8d07d31494742e1264a0db31fbbce4bd8b2a96ef7f43685918ff2f87939",
-      "wordCount": 63,
-      "seconds": 28.56,
-      "revision": "8764d8399e59"
+      "textSha256": "4c2d2063d13091a11d6b9fc770fb399420df10c006b9866822af30215cb02adb",
+      "wordCount": 62,
+      "seconds": 24.84,
+      "revision": "abcc5680c9a7"
     },
     {
       "id": "society-04",
@@ -782,10 +782,10 @@
       "id": "society-12",
       "topic": "社会と人との関係",
       "file": "society-12.mp3",
-      "textSha256": "7dd96835c8ad5a3d845db6d32d4ed57f29ac8d14e8e4fc3e8e1c1ef85023f607",
-      "wordCount": 62,
-      "seconds": 26.92,
-      "revision": "921282363a03"
+      "textSha256": "9ba0865ddf6de68cf4cd1e085974c84aacad5824d8923dcb6b2cbd380a2f523f",
+      "wordCount": 64,
+      "seconds": 27.56,
+      "revision": "13fb0093a71d"
     },
     {
       "id": "society-13",
@@ -809,10 +809,10 @@
       "id": "society-15",
       "topic": "社会と人との関係",
       "file": "society-15.mp3",
-      "textSha256": "66193d56897f0cbdebef825cb5ddad977ab6bacd0273cfb5d7d8098c5054777b",
+      "textSha256": "82811ef792bd5a4a9c730819e7ae49cc557d851b9b294abdded35c43e89f543c",
       "wordCount": 63,
-      "seconds": 27.44,
-      "revision": "52c653c38ca6"
+      "seconds": 25.96,
+      "revision": "eaf9ef79d3e7"
     }
   ]
 }
