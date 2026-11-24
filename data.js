@@ -741,4 +741,6 @@ window.MAXIMS = [
   {"id":740,"audioId":761,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":651,"ja":"お金のことを一切考えずに生きていたい。","en":"I want to live without having to think about money at all."},
   {"id":741,"audioId":762,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":651,"ja":"一切の属性を持たない空っぽの意識を想像してみて","en":"Imagine an empty awareness with no attributes at all."},
   {"id":742,"audioId":763,"topic":"意味と思索","topicLabel":"意味と思索","sourceImage":651,"ja":"あなたは何を与えられて生まれてきましたか？","en":"What were you given when you were born?"},
+  {"id":743,"audioId":764,"topic":"発音と身体","topicLabel":"発音と身体","ja":"身体の緊張が抜けているところに力を入れると、過度に緊張していたところが緩み、偏りが解消される。","en":"When you put effort into a relaxed part of the body, the areas that were overly tense can loosen, restoring balance."},
+  {"id":744,"audioId":765,"topic":"意味と思索","topicLabel":"意味と思索","ja":"意識はすっきり覚醒しつつも、自分が何者であったかはすっかり忘却している境地で常にありたい。","en":"I want to remain fully awake and clear while completely forgetting who I used to be."},
 ];

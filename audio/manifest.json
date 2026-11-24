@@ -5195,6 +5195,20 @@
       "textSha256": "bf7773959b0ce5e83cc4eeac10d85bd7d554e8bd19c286ed4da533d5b3f9ae10",
       "seconds": 3.36,
       "revision": "32d2dbc26aec"
+    },
+    {
+      "id": 764,
+      "file": "q764.mp3",
+      "textSha256": "3b10baed09e30dc0b359ffc0a940daa59f008da9ef810bdfb7f9c58f11c1b468",
+      "seconds": 10.36,
+      "revision": "e0bb47c4e1f2"
+    },
+    {
+      "id": 765,
+      "file": "q765.mp3",
+      "textSha256": "6d7b3ed67c0e001133cc3f6ddeaa63cf543f8b183a67731437767e13e1b2adf2",
+      "seconds": 8.44,
+      "revision": "7369be9720ca"
     }
   ]
 }
