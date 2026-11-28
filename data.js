@@ -754,4 +754,5 @@ window.MAXIMS = [
   {"id":753,"audioId":774,"topic":"表現と学習","topicLabel":"表現と学習","ja":"「感動」は、完全に説明された瞬間に消えるものではなく、説明されてもなお残る余白によってむしろ深まる。","en":"Being moved does not disappear the moment it is fully explained; rather, it deepens through what remains open even after an explanation."},
   {"id":754,"audioId":775,"topic":"発音と身体","topicLabel":"発音と身体","ja":"身体が先に反応し、あとから物語が心によって作られる。","en":"The body responds first; afterward, the mind creates a story about it."},
   {"id":755,"audioId":776,"topic":"発音と身体","topicLabel":"発音と身体","ja":"音楽が作り出すリズムやゆらぎが身体の内側のリズムをずらし、そのあとに、そのズレを脳が感情の変化として読み取っている。","en":"The rhythms and subtle fluctuations created by music shift the body's inner rhythms; afterward, the brain interprets that shift as a change in emotion."},
+  {"id":756,"audioId":777,"topic":"表現と学習","topicLabel":"表現と学習","ja":"ある程度わかるのに、少しだけわからない。この小さな予測誤差が、心を動かす。","en":"We understand it to a point, yet something remains just beyond our grasp. This small prediction error moves us."},
 ];
