@@ -756,4 +756,5 @@ window.MAXIMS = [
   {"id":755,"audioId":776,"topic":"発音と身体","topicLabel":"発音と身体","ja":"音楽が作り出すリズムやゆらぎが身体の内側のリズムをずらし、そのあとに、そのズレを脳が感情の変化として読み取っている。","en":"The rhythms and subtle fluctuations created by music shift the body's inner rhythms; afterward, the brain interprets that shift as a change in emotion."},
   {"id":756,"audioId":777,"topic":"表現と学習","topicLabel":"表現と学習","ja":"ある程度わかるのに、少しだけわからない。この小さな予測誤差が、心を動かす。","en":"We understand it to a point, yet something remains just beyond our grasp. This small prediction error moves us."},
   {"id":757,"audioId":778,"topic":"社会と人との関係","topicLabel":"社会と人との関係","ja":"誰かの新しいアイディアや表現が「受け止める価値のあるもの」と感じられるとき、そこには共感の力が働いている。","en":"When we feel that a new idea or expression from someone is worth taking in, empathy is at work."},
+  {"id":758,"audioId":779,"topic":"学びと思考","topicLabel":"学びと思考","ja":"集中して英文を聞く習慣を持つべきなのは、それによって予測の力が高められるからである。","en":"We should make a habit of listening to English attentively because it strengthens our ability to predict what comes next."},
 ];
