@@ -755,4 +755,5 @@ window.MAXIMS = [
   {"id":754,"audioId":775,"topic":"発音と身体","topicLabel":"発音と身体","ja":"身体が先に反応し、あとから物語が心によって作られる。","en":"The body responds first; afterward, the mind creates a story about it."},
   {"id":755,"audioId":776,"topic":"発音と身体","topicLabel":"発音と身体","ja":"音楽が作り出すリズムやゆらぎが身体の内側のリズムをずらし、そのあとに、そのズレを脳が感情の変化として読み取っている。","en":"The rhythms and subtle fluctuations created by music shift the body's inner rhythms; afterward, the brain interprets that shift as a change in emotion."},
   {"id":756,"audioId":777,"topic":"表現と学習","topicLabel":"表現と学習","ja":"ある程度わかるのに、少しだけわからない。この小さな予測誤差が、心を動かす。","en":"We understand it to a point, yet something remains just beyond our grasp. This small prediction error moves us."},
+  {"id":757,"audioId":778,"topic":"社会と人との関係","topicLabel":"社会と人との関係","ja":"誰かの新しいアイディアや表現が「受け止める価値のあるもの」と感じられるとき、そこには共感の力が働いている。","en":"When we feel that a new idea or expression from someone is worth taking in, empathy is at work."},
 ];
